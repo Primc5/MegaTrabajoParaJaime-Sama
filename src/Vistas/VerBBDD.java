@@ -129,26 +129,46 @@ public class VerBBDD extends JFrame{
 			btnCopiarDatosAl.setForeground(Color.WHITE);
 			btnCopiarDatosAl.setFont(new Font("Tahoma", Font.PLAIN, 18));
 			btnCopiarDatosAl.setBackground(Color.GRAY);
+			
+			JScrollPane scrollPane_1 = new JScrollPane();
+			
+			JLabel lblVideojuegos = new JLabel("Videojuegos:");
+			lblVideojuegos.setFont(new Font("Tahoma", Font.PLAIN, 18));
+			
+			JLabel lblEmpresas = new JLabel("Empresas:");
+			lblEmpresas.setFont(new Font("Tahoma", Font.PLAIN, 18));
 			GroupLayout gl_panel = new GroupLayout(panel);
 			gl_panel.setHorizontalGroup(
 				gl_panel.createParallelGroup(Alignment.TRAILING)
 					.addGroup(gl_panel.createSequentialGroup()
-						.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-							.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
+						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+							.addGroup(Alignment.TRAILING, gl_panel.createParallelGroup(Alignment.TRAILING)
+								.addGroup(gl_panel.createSequentialGroup()
+									.addContainerGap()
+									.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 699, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+									.addGroup(Alignment.TRAILING, gl_panel.createParallelGroup(Alignment.TRAILING)
+										.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
+											.addContainerGap()
+											.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 699, Short.MAX_VALUE))
+										.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
+											.addContainerGap()
+											.addComponent(lblsubtitlepanel, GroupLayout.PREFERRED_SIZE, 326, GroupLayout.PREFERRED_SIZE)
+											.addPreferredGap(ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
+											.addComponent(btnCopiarDatosAl, GroupLayout.PREFERRED_SIZE, 233, GroupLayout.PREFERRED_SIZE))
+										.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
+											.addGap(29)
+											.addComponent(btnEliminarDato, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
+											.addGap(18)
+											.addComponent(btnVolver_CPAlumno, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
+											.addGap(18)
+											.addComponent(btnAadirDatos, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)))
+									.addGroup(gl_panel.createSequentialGroup()
+										.addContainerGap()
+										.addComponent(lblVideojuegos, GroupLayout.PREFERRED_SIZE, 326, GroupLayout.PREFERRED_SIZE))))
+							.addGroup(gl_panel.createSequentialGroup()
 								.addContainerGap()
-								.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 699, Short.MAX_VALUE))
-							.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
-								.addContainerGap()
-								.addComponent(lblsubtitlepanel, GroupLayout.PREFERRED_SIZE, 326, GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
-								.addComponent(btnCopiarDatosAl, GroupLayout.PREFERRED_SIZE, 233, GroupLayout.PREFERRED_SIZE))
-							.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
-								.addGap(29)
-								.addComponent(btnEliminarDato, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
-								.addGap(18)
-								.addComponent(btnVolver_CPAlumno, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
-								.addGap(18)
-								.addComponent(btnAadirDatos, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)))
+								.addComponent(lblEmpresas, GroupLayout.PREFERRED_SIZE, 326, GroupLayout.PREFERRED_SIZE)))
 						.addContainerGap())
 			);
 			gl_panel.setVerticalGroup(
@@ -161,8 +181,14 @@ public class VerBBDD extends JFrame{
 							.addGroup(gl_panel.createSequentialGroup()
 								.addContainerGap()
 								.addComponent(btnCopiarDatosAl, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)))
-						.addGap(11)
-						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 501, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(lblVideojuegos, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
+						.addGap(5)
+						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 217, GroupLayout.PREFERRED_SIZE)
+						.addGap(5)
+						.addComponent(lblEmpresas, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 234, GroupLayout.PREFERRED_SIZE)
 						.addGap(18)
 						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 							.addComponent(btnVolver_CPAlumno, GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
