@@ -1,0 +1,30 @@
+ID: 1  
+Nombre: The Last Of Us              
+Tipo: Aventura              
+Empresa: Naughty Dog              
+Creación: 2013-06-14  
+ID: 2  
+Nombre: Horizon Zero Dawn              
+Tipo: Aventura              
+Empresa: Guerrilla Games              
+Creación: 2017-02-28  
+ID: 3  
+Nombre: Uncharted 4              
+Tipo: Aventura              
+Empresa: Naughty Dog              
+Creación: 2016-05-10  
+ID: 4  
+Nombre: CupHead              
+Tipo: Arcade              
+Empresa: StudioMDHR              
+Creación: 2017-09-29  
+ID: 5 
+Nombre: Alberto 
+Tipo: PutoAmo 
+Empresa: PutoAmo 
+Creación: 2018-10-01 
+ID: 5 
+Nombre: Alberto 
+Tipo: PutoAmo 
+Empresa: PutoAmo 
+Creación: 2018-10-01 
