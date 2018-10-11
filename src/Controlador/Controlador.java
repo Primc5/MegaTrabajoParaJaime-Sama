@@ -4,12 +4,15 @@ import java.util.HashMap;
 
 import Modelo.BaseDeDatos;
 import Modelo.Fichero;
+import Objetos.Empresas;
 import Objetos.Videojuegos;
-import Vistas.AñadirBBDD;
+import Vistas.AñadirBBDDEmpresas;
+import Vistas.AñadirBBDDVideojuegos;
+import Vistas.AñadirFicheroEmpresas;
 import Vistas.Principal;
 import Vistas.VerBBDD;
 import Vistas.VerFichero;
-import Vistas.AñadirFichero;
+import Vistas.AñadirFicheroVideojuegos;
 import interfas.Interface;
 
 public class Controlador {
@@ -17,50 +20,94 @@ public class Controlador {
 	private BaseDeDatos modelo;
 	private Fichero fichero;
 	
-	private AñadirBBDD aBBDD;
+	private AñadirBBDDVideojuegos aBBDDVideojuegos;
+	private AñadirBBDDEmpresas aBBDDEmpresas;
 	private VerBBDD verbbdd;
 	private Principal principal;
 	private VerFichero verfichero;
-	private AñadirFichero aFichero;
+	private AñadirFicheroVideojuegos aFicheroVideojuegos;
+	private AñadirFicheroEmpresas aFicheroEmpresas;
 	
 	//pedida de datos de vista a modelo(base de datos)
-	public HashMap<Integer, Videojuegos> EliminarDatosBaseDeDatos(Integer clave) {
-		return modelo.EliminarDatos(modelo.LeerDatos(), clave);
+	public HashMap<Integer, Videojuegos> EliminarDatosBaseDeDatosVideojuegos(Integer clave) {
+		return modelo.EliminarDatosVideojuegos(modelo.LeerDatosVideojuegos(), clave);
 	}
-	public HashMap<Integer, Videojuegos> AñadirDatosBaseDeDatos(String id, String nombre, String tipo, String empresa, String Creacion) {
-		return modelo.AnadirDatos(modelo.LeerDatos(), id, nombre, tipo, empresa, Creacion);
+	public HashMap<Integer, Videojuegos> AñadirDatosBaseDeDatosVideojuegos(String id, String nombre, String tipo, String empresa, String Creacion) {
+		return modelo.AnadirDatosVideojuegos(modelo.LeerDatosVideojuegos(), id, nombre, tipo, empresa, Creacion);
+	}
+	
+	public HashMap<Integer, Empresas> EliminarDatosBaseDeDatosEmpresas(Integer clave) {
+		return modelo.EliminarDatosEmpresas(modelo.LeerDatosEmpresas(), clave);
+	}
+	public HashMap<Integer, Empresas> AñadirDatosBaseDeDatosEmpresas(String id, String nombre, String tamaño, String pais, String capital, String director) {
+		return modelo.AnadirDatosEmpresas(modelo.LeerDatosEmpresas(), id, nombre, tamaño, pais, capital, director);
 	}
 
 	
 	//pedida de datos de vista a modelo(fichero)
-	public HashMap<Integer, Videojuegos> AñadirDatos(String id, String nombre, String tipo, String empresa, String creacion){
-		return fichero.CopiarDatos(fichero.AnadirDatos(fichero.LeerDatos(), id, nombre, tipo, empresa, creacion));
+	public void VerDatosVideojuegos(){
+		fichero.MostrarDatosVideojuegos(fichero.LeerDatosVideojuegos());
 	}
-	public HashMap<Integer, Videojuegos> ObtenerDatosFichero() {
-		return fichero.LeerDatos();
+	public void VerDatosEmpresas(){
+		fichero.MostrarDatosEmpresas(fichero.LeerDatosEmpresas());
+	}
+	public HashMap<Integer, Videojuegos> AñadirDatosVideojuegos(String id, String nombre, String tipo, String empresa, String creacion){
+		return fichero.CopiarDatosVideojuegos(fichero.AnadirDatosVideojuegos(fichero.LeerDatosVideojuegos(), id, nombre, tipo, empresa, creacion));
+	}
+	public HashMap<Integer, Videojuegos> ObtenerDatosFicheroVideojuegos() {
+		return fichero.LeerDatosVideojuegos();
 	}
 	
-	public HashMap<Integer, Videojuegos> EliminarDatosFichero(Integer clave) {
-		return fichero.CopiarDatos(fichero.EliminarDatos(fichero.LeerDatos(), clave));
+	public HashMap<Integer, Videojuegos> EliminarDatosFicheroVideojuegos(Integer clave) {
+		return fichero.CopiarDatosVideojuegos(fichero.EliminarDatosVideojuegos(fichero.LeerDatosVideojuegos(), clave));
+		
+	}
+	
+	public HashMap<Integer, Empresas> AñadirDatosEmpresas(String id, String nombre, String tamaño, String pais, String capital, String director){
+		return fichero.CopiarDatosEmpresas(fichero.AnadirDatosEmpresas(fichero.LeerDatosEmpresas(), id, nombre, tamaño, pais, capital, director));
+	}
+	public HashMap<Integer, Empresas> ObtenerDatosFicheroEmpresas() {
+		return fichero.LeerDatosEmpresas();
+	}
+	
+	public HashMap<Integer, Empresas> EliminarDatosFicheroEmpresas(Integer clave) {
+		return fichero.CopiarDatosEmpresas(fichero.EliminarDatosEmpresas(fichero.LeerDatosEmpresas(), clave));
 		
 	}
 	
 	//intercambiar datos
-	public void PasarDatosFichero() {
+	public void PasarDatosFicheroVideojuegos() {
 		HashMap<Integer, Videojuegos> lista;
 		
 		Interface emisor = new BaseDeDatos();
 		Interface receptor = new Fichero();
-		lista = emisor.LeerDatos();
-		receptor.CopiarDatos(lista);
+		lista = emisor.LeerDatosVideojuegos();
+		receptor.CopiarDatosVideojuegos(lista);
 	}
-	public void PasarDatosBaseDeDatos() {
+	public void PasarDatosBaseDeDatosVideojuegos() {
 		HashMap<Integer, Videojuegos> lista;
 		
 		Interface emisor = new Fichero();
 		Interface receptor = new BaseDeDatos();
-		lista = emisor.LeerDatos();
-		receptor.CopiarDatos(lista);
+		lista = emisor.LeerDatosVideojuegos();
+		receptor.CopiarDatosVideojuegos(lista);
+	}
+	
+	public void PasarDatosFicheroEmpresas() {
+		HashMap<Integer, Empresas> lista;
+		
+		Interface emisor = new BaseDeDatos();
+		Interface receptor = new Fichero();
+		lista = emisor.LeerDatosEmpresas();
+		receptor.CopiarDatosEmpresas(lista);
+	}
+	public void PasarDatosBaseDeDatosEmpresas() {
+		HashMap<Integer, Empresas> lista;
+		
+		Interface emisor = new Fichero();
+		Interface receptor = new BaseDeDatos();
+		lista = emisor.LeerDatosEmpresas();
+		receptor.CopiarDatosEmpresas(lista);
 	}
 	
 	//cambios de vista
@@ -86,28 +133,44 @@ public class Controlador {
 	}
 	public void AñadirBase() {
 		verbbdd.setVisible(false);
-		aBBDD.setVisible(true);
+		aBBDDVideojuegos.setVisible(true);
 	}
 	public void AñadirFichero() {
 		verfichero.setVisible(false);
-		aFichero.setVisible(true);
+		aFicheroVideojuegos.setVisible(true);
 	}
 	public void VolverVerBase() {
-		aBBDD.setVisible(false);
+		aBBDDVideojuegos.setVisible(false);
 		verbbdd.setVisible(true);
 	}
 	public void VolverVerFichero() {
-		aFichero.setVisible(false);
+		aFicheroVideojuegos.setVisible(false);
 		verfichero.setVisible(true);
 	}
 	public void ComprobarFichero() {
 		verbbdd.setVisible(false);
 		verfichero.setVisible(true);
 	}
+	public void AñadirEmpresaBBDD() {
+		verbbdd.setVisible(false);
+		aBBDDEmpresas.setVisible(true);
+	}
+	public void VolverAñadirEmpresaBBDD() {
+		aBBDDEmpresas.setVisible(false);
+		verbbdd.setVisible(true);
+	}
+	public void AñadirEmpresaFichero() {
+		verfichero.setVisible(false);
+		aFicheroEmpresas.setVisible(true);
+	}
+	public void VolverAñadirEmpresaFichero() {
+		aFicheroEmpresas.setVisible(false);
+		verfichero.setVisible(true);
+	}
 	
 	//setters
-	public void setaBBDD(AñadirBBDD aBBDD) {
-		this.aBBDD = aBBDD;
+	public void setaBBDD(AñadirBBDDVideojuegos aBBDD) {
+		this.aBBDDVideojuegos = aBBDD;
 	}
 	public void setModelo(BaseDeDatos modelo) {
 		this.modelo = modelo;
@@ -124,8 +187,14 @@ public class Controlador {
 	public void setFichero(Fichero fichero) {
 		this.fichero = fichero;
 	}
-	public void setaFichero(AñadirFichero aFichero) {
-		this.aFichero = aFichero;
+	public void setaFichero(AñadirFicheroVideojuegos aFichero) {
+		this.aFicheroVideojuegos = aFichero;
+	}
+	public void setaBBDDEmpresas(AñadirBBDDEmpresas aBBDDEmpresas) {
+		this.aBBDDEmpresas = aBBDDEmpresas;
+	}
+	public void setaFicheroEmpresas(AñadirFicheroEmpresas aFicheroEmpresas) {
+		this.aFicheroEmpresas = aFicheroEmpresas;
 	}
 	
 	

@@ -25,6 +25,7 @@ import java.util.Map.Entry;
 
 import javax.swing.table.DefaultTableModel;
 
+import Objetos.Empresas;
 import Objetos.Videojuegos;
 import interfas.Interface;
 
@@ -32,11 +33,13 @@ public class BaseDeDatos implements Interface {
 
 	private DefaultTableModel miTabla;
 
-	private String bd, login, pwd, url, driver, nombre, tipo, empresa, creacion, id;
+	private String bd, login, pwd, url, driver, nombre, tipo, empresa, creacion, id, tamaño, pais, capital, director;
 	private Connection conexion;
 	private HashMap<String, String> consultas;
 	private Videojuegos v;
+	private Empresas e;
 	private HashMap<Integer, Videojuegos> vj = new HashMap<Integer, Videojuegos>();
+	private HashMap<Integer, Empresas> em = new HashMap<Integer, Empresas>();
 
 	public BaseDeDatos() {
 		getBBDDini();
@@ -53,13 +56,19 @@ public class BaseDeDatos implements Interface {
 		}
 
 		consultas = new HashMap<String, String>();
-		consultas.put("eliminarDeBBDD", "Delete From ficheritos where id = ?");
-		consultas.put("sincronize",
+		consultas.put("eliminarDeBBDD", "Delete From ficheritos where id = ? ");
+		consultas.put("eliminarDeBBDDEmpresas", "Delete From empresas where id_Empresa = ? ");
+		consultas.put("sincronizeVideojuegos",
 				"INSERT INTO ficheritos (id, nombre, tipo, Empresa, Creacion)" + "VALUES (?, ?, ?, ?, ?);");
+		consultas.put("sincronizeEmpresas",
+				"INSERT INTO empresas (id_Empresa, Nombre, Tamaño, Pais, Capital, Director)" + "VALUES (?, ?, ?, ?, ?, ?);");
 		consultas.put("LeerBBDD", "Select * from ficheritos");
-		consultas.put("eliminarTabla", "DROP TABLE ficheritos");
-		consultas.put("crearTabla",
+		consultas.put("LeerBBDDEmpresas", "Select * from empresas");
+		consultas.put("eliminarTabla", "DROP TABLE ?");
+		consultas.put("crearTablaFicheritos",
 				"Create TABLE ficheritos(id int primary key auto_increment, nombre varchar(45), tipo varchar(45), Empresa varchar(45), Creacion date)");
+		consultas.put("crearTablaEmpresas",
+				"Create TABLE empresas(id_Empresa int primary key auto_increment, Nombre varchar(45), Tamaño varchar(45), Pais varchar(45), Capital int(25), Director varchar(45)");
 	}
 
 	private void getBBDDini() {
@@ -104,16 +113,17 @@ public class BaseDeDatos implements Interface {
 		}
 	}
 
-	public HashMap<Integer, Videojuegos> CopiarDatos(HashMap<Integer, Videojuegos> datos) {
+	public HashMap<Integer, Videojuegos> CopiarDatosVideojuegos(HashMap<Integer, Videojuegos> datos) {
 		PreparedStatement stm;
 		int rset = 0;
 		try {
 		stm = conexion.prepareStatement(consultas.get("eliminarTabla"));
+		stm.setString(1, "ficheritos");
 		rset = stm.executeUpdate();
-		stm = conexion.prepareStatement(consultas.get("crearTabla"));
+		stm = conexion.prepareStatement(consultas.get("crearTablaFicheritos"));
 		rset = stm.executeUpdate();
 		for (Entry<Integer, Videojuegos> valor : datos.entrySet()) {
-			stm = conexion.prepareStatement(consultas.get("sincronize"));
+			stm = conexion.prepareStatement(consultas.get("sincronizeVideojuegos"));
 			stm.setString(1, valor.getValue().getId());
 			stm.setString(2, valor.getValue().getNombre());
 			stm.setString(3, valor.getValue().getTipo());
@@ -126,11 +136,35 @@ public class BaseDeDatos implements Interface {
 		}
 		return datos;
 	}
-
-	public HashMap<Integer, Videojuegos> AnadirDatos(HashMap<Integer, Videojuegos> datos, String id, String nombre, String tipo, String empresa, String creacion) {
+	public HashMap<Integer, Empresas> CopiarDatosEmpresas(HashMap<Integer, Empresas> datos) {
+		PreparedStatement stm;
+		int rset = 0;
+		try {
+		stm = conexion.prepareStatement(consultas.get("eliminarTabla"));
+		stm.setString(1, "empresas");
+		rset = stm.executeUpdate();
+		stm = conexion.prepareStatement(consultas.get("crearTablaEmpresas"));
+		rset = stm.executeUpdate();
+		for (Entry<Integer, Empresas> valor : datos.entrySet()) {
+			stm = conexion.prepareStatement(consultas.get("sincronizeEmpresas"));
+			stm.setString(1, valor.getValue().getId_Empresa());
+			stm.setString(2, valor.getValue().getNombre());
+			stm.setString(3, valor.getValue().getTamaño());
+			stm.setString(4, valor.getValue().getPais());
+			stm.setString(5, valor.getValue().getCapital());
+			stm.setString(6, valor.getValue().getDirector());
+			rset = stm.executeUpdate();
+		}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return datos;
+	}
+	
+	public HashMap<Integer, Videojuegos> AnadirDatosVideojuegos(HashMap<Integer, Videojuegos> datos, String id, String nombre, String tipo, String empresa, String creacion) {
 		try {
 			PreparedStatement stm;
-			stm = conexion.prepareStatement(consultas.get("sincronize"));
+			stm = conexion.prepareStatement(consultas.get("sincronizeVideojuegos"));
 			stm.setString(1, id);
 			// cambiamos el formato para la recogida en sql
 			stm.setString(2, nombre);
@@ -150,8 +184,33 @@ public class BaseDeDatos implements Interface {
 		}
 		return datos;
 	}
+	public HashMap<Integer, Empresas> AnadirDatosEmpresas(HashMap<Integer, Empresas> datos, String id, String nombre, String tamaño, String pais, String capital, String director) {
+		try {
+			PreparedStatement stm;
+			stm = conexion.prepareStatement(consultas.get("sincronizeEmpresas"));
+			stm.setString(1, id);
+			// cambiamos el formato para la recogida en sql
+			stm.setString(2, nombre);
+			stm.setString(3, tamaño);
+			stm.setString(4, pais);
+			stm.setString(5, capital);
+			stm.setString(6, director);
+			int rset = stm.executeUpdate();
+			e.setId_Empresa(id);
+			e.setNombre(nombre);
+			e.setTamaño(tamaño);
+			e.setPais(pais);
+			e.setCapital(capital);
+			e.setDirector(director);
+			datos.put(datos.size()+1, e);
 
-	public HashMap<Integer, Videojuegos> LeerDatos() {
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return datos;
+	}
+
+	public HashMap<Integer, Videojuegos> LeerDatosVideojuegos() {
 		PreparedStatement pstmt;
 		try {
 			pstmt = conexion.prepareStatement(consultas.get("LeerBBDD"));
@@ -175,6 +234,33 @@ public class BaseDeDatos implements Interface {
 		}
 		System.out.println(vj);
 		return vj;
+	}
+	public HashMap<Integer, Empresas> LeerDatosEmpresas() {
+		PreparedStatement pstmt;
+		try {
+			pstmt = conexion.prepareStatement(consultas.get("LeerBBDDEmpresas"));
+			ResultSet rset = pstmt.executeQuery();
+			while (rset.next()) {
+				e = new Empresas();
+				id = rset.getString("id_Empresa");
+				nombre = rset.getString("Nombre");
+				tamaño = rset.getString("Tamaño");
+				pais = rset.getString("Pais");
+				capital = rset.getString("Capital");
+				director = rset.getString("Director");
+				e.setNombre(nombre);
+				e.setId_Empresa(id);
+				e.setTamaño(tamaño);
+				e.setPais(pais);
+				e.setCapital(capital);
+				e.setDirector(director);
+				em.put(rset.getInt(1), e);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println(vj);
+		return em;
 	}
 
 	public void MostrarDatos(String tabla) {
@@ -237,11 +323,22 @@ public class BaseDeDatos implements Interface {
 		return miTabla;
 	}
 
-	@Override
-	public HashMap<Integer, Videojuegos> EliminarDatos(HashMap<Integer, Videojuegos> datos, Integer clave) {
+	public HashMap<Integer, Videojuegos> EliminarDatosVideojuegos(HashMap<Integer, Videojuegos> datos, Integer clave) {
 		try {
 			PreparedStatement stm;
 			stm = conexion.prepareStatement(consultas.get("eliminarDeBBDD"));
+			stm.setLong(1, clave);
+			int rset = stm.executeUpdate();
+			datos.remove(clave);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return datos;
+	}
+	public HashMap<Integer, Empresas> EliminarDatosEmpresas(HashMap<Integer, Empresas> datos, Integer clave) {
+		try {
+			PreparedStatement stm;
+			stm = conexion.prepareStatement(consultas.get("eliminarDeBBDDEmpresas"));
 			stm.setLong(1, clave);
 			int rset = stm.executeUpdate();
 			datos.remove(clave);

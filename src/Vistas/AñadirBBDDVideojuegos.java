@@ -13,6 +13,7 @@ import java.awt.event.WindowEvent;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -29,7 +30,7 @@ import Controlador.Controlador;
 import Modelo.BaseDeDatos;
 
 @SuppressWarnings("serial")
-public class AñadirFichero extends JFrame{	
+public class AñadirBBDDVideojuegos extends JFrame{	
 		private BaseDeDatos modelo;
 		private Controlador controlador;
 		private JTextField textField;
@@ -47,8 +48,9 @@ public class AñadirFichero extends JFrame{
 		private JTextField textField_4;
 		
 		final static String DATE_FORMAT = "yyyy-MM-dd";
+		private JLabel label;
 		
-		public AñadirFichero(){
+		public AñadirBBDDVideojuegos(){
 			initialize();
 		}
 		public static boolean isDateValid(String date) 
@@ -62,7 +64,6 @@ public class AñadirFichero extends JFrame{
 		            return false;
 		        }
 		}
-		
 		public static boolean isNumeric(String cadena) {
 
 			boolean resultado;
@@ -76,7 +77,7 @@ public class AñadirFichero extends JFrame{
 
 			return resultado;
 		}
-		
+
 		public void setModelo(BaseDeDatos modelo) {
 			this.modelo = modelo;
 		}
@@ -95,8 +96,8 @@ public class AñadirFichero extends JFrame{
 			setBounds(50, 100, 860, 660);
 			getContentPane().setBackground(new Color(102, 153, 204));
 			
-			lblEstadoEntrevista = new JLabel("A\u00D1ADIR DATOS");
-			lblEstadoEntrevista.setBounds(350, 84, 188, 34);
+			lblEstadoEntrevista = new JLabel("A\u00D1ADIR DATOS A VIDEOJUEGOS");
+			lblEstadoEntrevista.setBounds(254, 84, 377, 34);
 			lblEstadoEntrevista.setForeground(Color.WHITE);
 			lblEstadoEntrevista.setFont(new Font("Georgia", Font.PLAIN, 23));
 			
@@ -138,13 +139,13 @@ public class AñadirFichero extends JFrame{
 			btnAnadir.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					if(isNumeric(textField.getText()) && isDateValid(textField_4.getText())) {
-					controlador.AñadirDatos(textField.getText(), textField_1.getText(), textField_2.getText(), textField_3.getText(), textField_4.getText());
+					controlador.AñadirDatosBaseDeDatosVideojuegos(textField.getText(), textField_1.getText(), textField_2.getText(), textField_3.getText(), textField_4.getText());
 					textField.setText("");
 					textField_1.setText("");
 					textField_2.setText("");
 					textField_3.setText("");
 					textField_4.setText("");
-					controlador.VolverVerFichero();
+					controlador.VolverVerBase();
 					}else {
 						System.out.println("El id debe ser numérico y la creacion de tipo date (yyyy-MM-dd)");
 					}
@@ -160,7 +161,7 @@ public class AñadirFichero extends JFrame{
 					textField_2.setText("");
 					textField_3.setText("");
 					textField_4.setText("");
-					controlador.VolverVerFichero();
+					controlador.VolverVerBase();
 				}
 			});
 			
@@ -203,7 +204,7 @@ public class AñadirFichero extends JFrame{
 				}
 			});
 			
-			JLabel lblFormato = new JLabel("Formato: YYYY-MM-DD");
+			label = new JLabel("Formato: YYYY-MM-DD");
 			GroupLayout gl_panel = new GroupLayout(panel);
 			gl_panel.setHorizontalGroup(
 				gl_panel.createParallelGroup(Alignment.LEADING)
@@ -238,7 +239,7 @@ public class AñadirFichero extends JFrame{
 												.addComponent(textField_2, GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE))
 											.addComponent(textField_1, Alignment.LEADING, 227, 254, Short.MAX_VALUE)
 											.addComponent(textField_4, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
-											.addComponent(lblFormato, Alignment.LEADING))
+											.addComponent(label, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE))
 										.addGap(103))))))
 			);
 			gl_panel.setVerticalGroup(
@@ -261,7 +262,7 @@ public class AñadirFichero extends JFrame{
 							.addComponent(lblFechaCurso)
 							.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE))
 						.addGap(18)
-						.addComponent(lblFormato)
+						.addComponent(label)
 						.addGap(1)
 						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 							.addComponent(lblCaracteristica, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE)

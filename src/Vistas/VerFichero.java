@@ -45,11 +45,16 @@ import javax.swing.JScrollBar;
 public class VerFichero extends JFrame {
 
 	private Controlador controlador;
-	private JLabel lblVerCuestionariosRealizados;
+	private Fichero modelo;
+	
+	private JLabel lblTincas;
 	private JPanel panel;
-	private JLabel lblConsultaLosCuestionarios;
-	private JButton btnSalir;
-
+	private JLabel lblsubtitlepanel;
+	private JButton btnVolver_CPAlumno;
+	private JTable table;
+	private JLabel label;
+	private JTable table_1;
+	
 	public static boolean isNumeric(String cadena) {
 
 		boolean resultado;
@@ -63,20 +68,10 @@ public class VerFichero extends JFrame {
 
 		return resultado;
 	}
-
-	public String CargarFichero(HashMap<Integer, Videojuegos> datos) {
-		String texto = "";
-		for (Entry<Integer, Videojuegos> valor : datos.entrySet()) {
-			texto += "ID: " + valor.getValue().getId() + " \n";
-			texto += "Nombre: " + valor.getValue().getNombre() + " \n";
-			texto += "Tipo: " + valor.getValue().getTipo() + " \n";
-			texto += "Empresa: " + valor.getValue().getEmpresa() + " \n";
-			texto += "Creacion: " + valor.getValue().getCreación() + " \n";
-		}
-		return texto;
-
+	
+	public void setModelo(Fichero modelo) {
+		this.modelo = modelo;
 	}
-
 	public void setControlador(Controlador controlador) {
 		this.controlador = controlador;
 	}
@@ -86,83 +81,38 @@ public class VerFichero extends JFrame {
 	}
 
 	private void initialize() {
-		getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 15));
-		setBounds(50, 100, 860, 660);
+		setBounds(50, 100, 885, 801);
 		getContentPane().setBackground(new Color(102, 153, 204));
-
-		lblVerCuestionariosRealizados = new JLabel("Ver Fichero");
-		lblVerCuestionariosRealizados.setBounds(344, 31, 151, 28);
-		lblVerCuestionariosRealizados.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblVerCuestionariosRealizados.setForeground(Color.WHITE);
-
+		
+		lblTincas = new JLabel("Ver fichero");
+		lblTincas.setBounds(376, 38, 152, 37);
+		lblTincas.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblTincas.setForeground(Color.WHITE);
+		
 		panel = new JPanel();
-		panel.setBounds(53, 72, 738, 499);
-
-		lblConsultaLosCuestionarios = new JLabel("Estos son los datos del fichero");
-		lblConsultaLosCuestionarios.setFont(new Font("Tahoma", Font.PLAIN, 18));
-
-		btnSalir = new JButton("Volver al men\u00FA");
-		btnSalir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		panel.setBounds(63, 88, 723, 644);
+		
+		lblsubtitlepanel = new JLabel("Estos son los datos del fichero");
+		lblsubtitlepanel.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		
+		btnVolver_CPAlumno = new JButton("Volver al men\u00FA");
+		btnVolver_CPAlumno.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnVolver_CPAlumno.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
 				controlador.VolverPrincipal2();
 			}
 		});
-		btnSalir.setBackground(Color.RED);
-		btnSalir.setForeground(Color.WHITE);
-		btnSalir.setFont(new Font("Tahoma", Font.PLAIN, 15));
-
-		JButton btnAadirAlFichero = new JButton("A\u00F1adir al fichero");
-		btnAadirAlFichero.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				controlador.AñadirFichero();
-			}
-		});
-		btnAadirAlFichero.setForeground(Color.WHITE);
-		btnAadirAlFichero.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnAadirAlFichero.setBackground(Color.GREEN);
-
+		btnVolver_CPAlumno.setForeground(Color.WHITE);
+		btnVolver_CPAlumno.setBackground(Color.RED);
+		
 		JScrollPane scrollPane = new JScrollPane();
-		GroupLayout gl_panel = new GroupLayout(panel);
-
-		JTextPane textPane = new JTextPane();
-		textPane.setEditable(false);
-		scrollPane.setViewportView(textPane);
-		panel.setLayout(gl_panel);
-		getContentPane().setLayout(null);
-		getContentPane().add(lblVerCuestionariosRealizados);
-		getContentPane().add(panel);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowActivated(WindowEvent e) {
-				textPane.setText(CargarFichero(controlador.ObtenerDatosFichero()));
-			}
-		});
-		JButton btnEliminarDelFichero = new JButton("Eliminar de fichero");
-		btnEliminarDelFichero.addActionListener(new ActionListener() {
+		
+		JButton btnAadirDatos = new JButton("A\u00F1adir datos");
+		btnAadirDatos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int valor = 9;
-				JFrame frame = new JFrame("¿Introduzca la posicion que desea eliminar");
-				String name = JOptionPane.showInputDialog(frame, "¿Cual desea eliminar?");
-				if (isNumeric(name)) {
-					valor = Integer.parseInt(name);
-					textPane.setText(CargarFichero(controlador.EliminarDatosFichero(valor)));
-				}else {
-					System.out.println("El dato introducido no es un número");
-				}
-			}
-		});
-		btnEliminarDelFichero.setForeground(Color.WHITE);
-		btnEliminarDelFichero.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnEliminarDelFichero.setBackground(Color.ORANGE);
-
-		JButton btnCopiarabasededatos = new JButton("Copiar datos a la base de datos");
-		btnCopiarabasededatos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				controlador.PasarDatosBaseDeDatos();
-				Object[] options = {"Si, por favor", "luego"};
+				Object[] options = {"Videojuego", "Empresa"};
 				int n = JOptionPane.showOptionDialog(panel,
-				                "¿Quiéres ver como a quedado tu base de datos?",
+				                "¿A qué fichero deseas añadir datos?",
 				                "Elige una opción",
 				                JOptionPane.YES_NO_OPTION,
 				                JOptionPane.QUESTION_MESSAGE,
@@ -170,40 +120,185 @@ public class VerFichero extends JFrame {
 				                options,
 				                options[0]);
 				if (n == JOptionPane.YES_OPTION) {
-					controlador.ComprobarBaseDeDatos();
+					controlador.AñadirBase();
+				}else if(n == JOptionPane.NO_OPTION) {
+					controlador.AñadirEmpresaBBDD();
 				}
 			}
 		});
-		btnCopiarabasededatos.setForeground(Color.WHITE);
-		btnCopiarabasededatos.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnCopiarabasededatos.setBackground(Color.GRAY);
+		btnAadirDatos.setForeground(Color.BLACK);
+		btnAadirDatos.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnAadirDatos.setBackground(Color.GREEN);
+		
+		JButton btnEliminarDato = new JButton("Eliminar filas");
+		btnEliminarDato.setEnabled(false);
+		
+		btnEliminarDato.setForeground(Color.BLACK);
+		btnEliminarDato.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnEliminarDato.setBackground(Color.ORANGE);
+		
+		JButton btnCopiarDatosAl = new JButton("Copiar datos a la base de datos");
+		btnCopiarDatosAl.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+					controlador.PasarDatosFicheroVideojuegos();
+					Object[] options = {"Si, por favor", "luego"};
+					int n = JOptionPane.showOptionDialog(panel,
+					                "¿Quiéres ver como a quedado tu fichero?",
+					                "Elige una opción",
+					                JOptionPane.YES_NO_OPTION,
+					                JOptionPane.QUESTION_MESSAGE,
+					                null,
+					                options,
+					                options[0]);
+					if (n == JOptionPane.YES_OPTION) {
+						controlador.ComprobarFichero();
+					}
+			}
+		});
+		btnCopiarDatosAl.setForeground(Color.WHITE);
+		btnCopiarDatosAl.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnCopiarDatosAl.setBackground(Color.GRAY);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		
+		JLabel lblVideojuegos = new JLabel("Videojuegos:");
+		lblVideojuegos.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		
+		JLabel lblEmpresas = new JLabel("Empresas:");
+		lblEmpresas.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		GroupLayout gl_panel = new GroupLayout(panel);
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(Alignment.TRAILING, gl_panel.createParallelGroup(Alignment.TRAILING)
+							.addGroup(gl_panel.createSequentialGroup()
+								.addContainerGap()
+								.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 699, GroupLayout.PREFERRED_SIZE))
+							.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
+								.addContainerGap()
+								.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 699, Short.MAX_VALUE))
+							.addGroup(gl_panel.createSequentialGroup()
+								.addContainerGap()
+								.addComponent(lblsubtitlepanel)
+								.addPreferredGap(ComponentPlacement.RELATED, 177, Short.MAX_VALUE)
+								.addComponent(btnCopiarDatosAl))
+							.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
+								.addGap(29)
+								.addComponent(btnEliminarDato, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
+								.addGap(18)
+								.addComponent(btnVolver_CPAlumno, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
+								.addGap(18)
+								.addComponent(btnAadirDatos, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(lblVideojuegos, GroupLayout.PREFERRED_SIZE, 326, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(lblEmpresas, GroupLayout.PREFERRED_SIZE, 326, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap())
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(btnCopiarDatosAl, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(28)
+							.addComponent(lblsubtitlepanel)))
+					.addGap(12)
+					.addComponent(lblVideojuegos, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 217, GroupLayout.PREFERRED_SIZE)
+					.addGap(5)
+					.addComponent(lblEmpresas, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 234, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnVolver_CPAlumno, GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+						.addComponent(btnAadirDatos, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnEliminarDato, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap())
+		);
+		
+		table_1 = new JTable();
+		scrollPane_1.setViewportView(table_1);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		panel.setLayout(gl_panel);
+		getContentPane().setLayout(null);
+		getContentPane().add(lblTincas);
+		getContentPane().add(panel);
+		
+		label = new JLabel("");
+		label.setBounds(0, 0, 869, 762);
+		getContentPane().add(label);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowActivated(WindowEvent e) {
+				
+				controlador.VerDatosVideojuegos();
+				table.setModel(modelo.getTabla());
+				controlador.VerDatosEmpresas();
+				table_1.setModel(modelo.getTabla());
+			}
+		});
+		table.addMouseListener(new MouseAdapter() {
 
-		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.TRAILING).addGroup(gl_panel
-				.createSequentialGroup().addGap(68)
-				.addComponent(btnEliminarDelFichero, GroupLayout.PREFERRED_SIZE, 185, GroupLayout.PREFERRED_SIZE)
-				.addGap(18).addComponent(btnSalir, GroupLayout.PREFERRED_SIZE, 185, GroupLayout.PREFERRED_SIZE)
-				.addGap(18).addComponent(btnAadirAlFichero, GroupLayout.PREFERRED_SIZE, 185, GroupLayout.PREFERRED_SIZE)
-				.addContainerGap(79, Short.MAX_VALUE))
-				.addGroup(gl_panel.createSequentialGroup().addContainerGap().addComponent(lblConsultaLosCuestionarios)
-						.addPreferredGap(ComponentPlacement.RELATED, 187, Short.MAX_VALUE)
-						.addComponent(btnCopiarabasededatos).addGap(59))
-				.addGroup(gl_panel.createSequentialGroup().addContainerGap(39, Short.MAX_VALUE)
-						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 664, GroupLayout.PREFERRED_SIZE)
-						.addGap(35)));
-		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup().addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel.createSequentialGroup().addGap(22).addComponent(lblConsultaLosCuestionarios))
-						.addGroup(gl_panel.createSequentialGroup().addContainerGap().addComponent(btnCopiarabasededatos,
-								GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)))
-						.addGap(18)
-						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 307, GroupLayout.PREFERRED_SIZE)
-						.addGap(34)
-						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addComponent(btnSalir, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnAadirAlFichero, GroupLayout.PREFERRED_SIZE, 51,
-										GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnEliminarDelFichero, GroupLayout.PREFERRED_SIZE, 51,
-										GroupLayout.PREFERRED_SIZE))
-						.addContainerGap(25, Short.MAX_VALUE)));
+			@Override
+			public void mousePressed(MouseEvent e) {
+				String fila = (String) table.getValueAt(table.getSelectedRow(), 0);
+				btnEliminarDato.setEnabled(true);
+				btnEliminarDato.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent arg0) {
+						if (table.getSelectedRow() == -1) {
+							btnEliminarDato.setEnabled(false);
+						}
+						if(isNumeric(fila) && fila != null) {
+							int videojuego = Integer.parseInt(fila);
+							controlador.EliminarDatosBaseDeDatosVideojuegos(videojuego);
+							String tabla = "LeerBBDD";
+							controlador.VerDatosVideojuegos();
+							table.setModel(modelo.getTabla());
+						}else {
+							System.err.println("No se ha podido eliminar la fila");
+						}
+					}
+				});
+				
+			}
+		});
+		table_1.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				String fila = (String) table_1.getValueAt(table_1.getSelectedRow(), 0);
+				btnEliminarDato.setEnabled(true);
+				btnEliminarDato.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent arg0) {
+						if (table_1.getSelectedRow() == -1) {
+							btnEliminarDato.setEnabled(false);
+						}
+						if(isNumeric(fila) && fila != null) {
+							int empresa = Integer.parseInt(fila);
+							controlador.EliminarDatosBaseDeDatosEmpresas(empresa);
+							String tabla = "LeerBBDDEmpresas";
+							/*modelo.MostrarDatos(tabla);
+							table_1.setModel(modelo.getTabla());*/
+						}else {
+							System.err.println("No se ha podido eliminar la fila");
+						}
+					}
+				});
+				
+			}
+		});
 	}
 }

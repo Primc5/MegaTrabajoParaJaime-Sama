@@ -38,6 +38,7 @@ public class VerBBDD extends JFrame{
 		private JButton btnVolver_CPAlumno;
 		private JTable table;
 		private JLabel label;
+		private JTable table_1;
 		
 		public static boolean isNumeric(String cadena) {
 
@@ -94,7 +95,20 @@ public class VerBBDD extends JFrame{
 			JButton btnAadirDatos = new JButton("A\u00F1adir datos");
 			btnAadirDatos.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					controlador.AñadirBase();
+					Object[] options = {"Videojuego", "Empresa"};
+					int n = JOptionPane.showOptionDialog(panel,
+					                "¿A qué tabla deseas añadir datos?",
+					                "Elige una opción",
+					                JOptionPane.YES_NO_OPTION,
+					                JOptionPane.QUESTION_MESSAGE,
+					                null,
+					                options,
+					                options[0]);
+					if (n == JOptionPane.YES_OPTION) {
+						controlador.AñadirBase();
+					}else if(n == JOptionPane.NO_OPTION) {
+						controlador.AñadirEmpresaBBDD();
+					}
 				}
 			});
 			btnAadirDatos.setForeground(Color.BLACK);
@@ -111,19 +125,35 @@ public class VerBBDD extends JFrame{
 			JButton btnCopiarDatosAl = new JButton("Copiar datos al fichero");
 			btnCopiarDatosAl.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-						controlador.PasarDatosFichero();
-						Object[] options = {"Si, por favor", "luego"};
-						int n = JOptionPane.showOptionDialog(panel,
-						                "¿Quiéres ver como a quedado tu fichero?",
-						                "Elige una opción",
-						                JOptionPane.YES_NO_OPTION,
-						                JOptionPane.QUESTION_MESSAGE,
-						                null,
-						                options,
-						                options[0]);
-						if (n == JOptionPane.YES_OPTION) {
-							controlador.ComprobarFichero();
-						}
+					Object[] options = {"Videojuegos", "Empresas", "Ambas"};
+					int n = JOptionPane.showOptionDialog(panel,
+						               "¿Qué datos desea pasar al fichero?",
+						               "Elige una opción",
+						               JOptionPane.YES_NO_CANCEL_OPTION,
+						               JOptionPane.QUESTION_MESSAGE,
+						               null,
+						               options,
+						               options[0]);
+					if (n == JOptionPane.YES_OPTION) {
+						controlador.PasarDatosFicheroVideojuegos();
+					}else if(n == JOptionPane.NO_OPTION) {
+						controlador.PasarDatosFicheroEmpresas();
+					}else if(n == JOptionPane.CANCEL_OPTION) {
+						controlador.PasarDatosFicheroVideojuegos();
+						controlador.PasarDatosFicheroEmpresas();
+					}
+					Object[] comodidad = {"Si, por favor", "luego"};
+					int eleccion = JOptionPane.showOptionDialog(panel,
+						               "¿Quiéres ver como a quedado tu fichero?",
+						               "Elige una opción",
+						               JOptionPane.YES_NO_OPTION,
+						               JOptionPane.QUESTION_MESSAGE,
+						               null,
+						               comodidad,
+						               comodidad[0]);
+					if (eleccion == JOptionPane.YES_OPTION) {
+						controlador.ComprobarFichero();
+					}
 				}
 			});
 			btnCopiarDatosAl.setForeground(Color.WHITE);
@@ -197,6 +227,9 @@ public class VerBBDD extends JFrame{
 						.addContainerGap())
 			);
 			
+			table_1 = new JTable();
+			scrollPane_1.setViewportView(table_1);
+			
 			table = new JTable();
 			scrollPane.setViewportView(table);
 			panel.setLayout(gl_panel);
@@ -214,6 +247,9 @@ public class VerBBDD extends JFrame{
 					String tabla = "LeerBBDD";
 					modelo.MostrarDatos(tabla);
 					table.setModel(modelo.getTabla());
+					tabla = "LeerBBDDEmpresas";
+					modelo.MostrarDatos(tabla);
+					table_1.setModel(modelo.getTabla());
 				}
 			});
 			table.addMouseListener(new MouseAdapter() {
@@ -229,11 +265,37 @@ public class VerBBDD extends JFrame{
 								btnEliminarDato.setEnabled(false);
 							}
 							if(isNumeric(fila) && fila != null) {
-								int valor = Integer.parseInt(fila);
-								controlador.EliminarDatosBaseDeDatos(valor);
+								int videojuego = Integer.parseInt(fila);
+								controlador.EliminarDatosBaseDeDatosVideojuegos(videojuego);
 								String tabla = "LeerBBDD";
 								modelo.MostrarDatos(tabla);
 								table.setModel(modelo.getTabla());
+							}else {
+								System.err.println("No se ha podido eliminar la fila");
+							}
+						}
+					});
+					
+				}
+			});
+			table_1.addMouseListener(new MouseAdapter() {
+
+				@Override
+				public void mousePressed(MouseEvent e) {
+					String fila = (String) table_1.getValueAt(table_1.getSelectedRow(), 0);
+					btnEliminarDato.setEnabled(true);
+					btnEliminarDato.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseClicked(MouseEvent arg0) {
+							if (table_1.getSelectedRow() == -1) {
+								btnEliminarDato.setEnabled(false);
+							}
+							if(isNumeric(fila) && fila != null) {
+								int empresa = Integer.parseInt(fila);
+								controlador.EliminarDatosBaseDeDatosEmpresas(empresa);
+								String tabla = "LeerBBDDEmpresas";
+								modelo.MostrarDatos(tabla);
+								table_1.setModel(modelo.getTabla());
 							}else {
 								System.err.println("No se ha podido eliminar la fila");
 							}

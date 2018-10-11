@@ -13,7 +13,6 @@ import java.awt.event.WindowEvent;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -30,7 +29,7 @@ import Controlador.Controlador;
 import Modelo.BaseDeDatos;
 
 @SuppressWarnings("serial")
-public class AñadirBBDD extends JFrame{	
+public class AñadirFicheroEmpresas extends JFrame{	
 		private BaseDeDatos modelo;
 		private Controlador controlador;
 		private JTextField textField;
@@ -48,9 +47,8 @@ public class AñadirBBDD extends JFrame{
 		private JTextField textField_4;
 		
 		final static String DATE_FORMAT = "yyyy-MM-dd";
-		private JLabel label;
 		
-		public AñadirBBDD(){
+		public AñadirFicheroEmpresas(){
 			initialize();
 		}
 		public static boolean isDateValid(String date) 
@@ -64,6 +62,7 @@ public class AñadirBBDD extends JFrame{
 		            return false;
 		        }
 		}
+		
 		public static boolean isNumeric(String cadena) {
 
 			boolean resultado;
@@ -77,7 +76,7 @@ public class AñadirBBDD extends JFrame{
 
 			return resultado;
 		}
-
+		
 		public void setModelo(BaseDeDatos modelo) {
 			this.modelo = modelo;
 		}
@@ -139,13 +138,13 @@ public class AñadirBBDD extends JFrame{
 			btnAnadir.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					if(isNumeric(textField.getText()) && isDateValid(textField_4.getText())) {
-					controlador.AñadirDatosBaseDeDatos(textField.getText(), textField_1.getText(), textField_2.getText(), textField_3.getText(), textField_4.getText());
+					controlador.AñadirDatosVideojuegos(textField.getText(), textField_1.getText(), textField_2.getText(), textField_3.getText(), textField_4.getText());
 					textField.setText("");
 					textField_1.setText("");
 					textField_2.setText("");
 					textField_3.setText("");
 					textField_4.setText("");
-					controlador.VolverVerBase();
+					controlador.VolverVerFichero();
 					}else {
 						System.out.println("El id debe ser numérico y la creacion de tipo date (yyyy-MM-dd)");
 					}
@@ -161,7 +160,7 @@ public class AñadirBBDD extends JFrame{
 					textField_2.setText("");
 					textField_3.setText("");
 					textField_4.setText("");
-					controlador.VolverVerBase();
+					controlador.VolverVerFichero();
 				}
 			});
 			
@@ -204,7 +203,7 @@ public class AñadirBBDD extends JFrame{
 				}
 			});
 			
-			label = new JLabel("Formato: YYYY-MM-DD");
+			JLabel lblFormato = new JLabel("Formato: YYYY-MM-DD");
 			GroupLayout gl_panel = new GroupLayout(panel);
 			gl_panel.setHorizontalGroup(
 				gl_panel.createParallelGroup(Alignment.LEADING)
@@ -239,7 +238,7 @@ public class AñadirBBDD extends JFrame{
 												.addComponent(textField_2, GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE))
 											.addComponent(textField_1, Alignment.LEADING, 227, 254, Short.MAX_VALUE)
 											.addComponent(textField_4, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
-											.addComponent(label, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE))
+											.addComponent(lblFormato, Alignment.LEADING))
 										.addGap(103))))))
 			);
 			gl_panel.setVerticalGroup(
@@ -262,7 +261,7 @@ public class AñadirBBDD extends JFrame{
 							.addComponent(lblFechaCurso)
 							.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE))
 						.addGap(18)
-						.addComponent(label)
+						.addComponent(lblFormato)
 						.addGap(1)
 						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 							.addComponent(lblCaracteristica, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE)

@@ -18,3 +18,8 @@ Nombre: CupHead
 Tipo: Arcade               
 Empresa: 3            
 Creación: 2017-09-29 
+ID: 5 
+Nombre: fdas 
+Tipo: gagd 
+Empresa: 4 
+Creación: 2000-12-12 
