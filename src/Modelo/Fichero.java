@@ -53,7 +53,6 @@ public class Fichero implements Interface {
 				v = new Videojuegos();
 				int i = cadena.indexOf(':');
 				String minicadena = cadena.substring(i + 1);
-				v.setId(minicadena);
 				i = cadena.indexOf(' ');
 
 				minicadena = cadena.substring(i + 1);

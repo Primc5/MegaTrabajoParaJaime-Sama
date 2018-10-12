@@ -120,9 +120,9 @@ public class VerFichero extends JFrame {
 				                options,
 				                options[0]);
 				if (n == JOptionPane.YES_OPTION) {
-					controlador.AñadirBase();
+					controlador.AñadirFichero();
 				}else if(n == JOptionPane.NO_OPTION) {
-					controlador.AñadirEmpresaBBDD();
+					controlador.AñadirEmpresaFichero();
 				}
 			}
 		});
