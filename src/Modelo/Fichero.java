@@ -101,6 +101,7 @@ public class Fichero implements Interface {
 			}
 			br = new BufferedReader(fr);
 			int j = 1;
+			System.out.println("lol");
 			try {
 				cadena = br.readLine();
 				while (cadena != null) {
@@ -133,15 +134,20 @@ public class Fichero implements Interface {
 					e.setCapital(minicadena);
 					cadena = br.readLine();
 					
+					i = cadena.indexOf(' ');
+					minicadena = cadena.substring(i + 1);
 					e.setDirector(minicadena);
+					cadena = br.readLine();
 
 					empresas.put(j, e);
 					j++;
 				}
+				
 				// valores.remove(0);
 				br.close();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 			return empresas;
