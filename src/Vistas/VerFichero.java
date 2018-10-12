@@ -252,7 +252,8 @@ public class VerFichero extends JFrame {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				String fila = (String) table.getValueAt(table.getSelectedRow(), 0);
+				String fila = (String) table.getValueAt(table.getSelectedRow(), 3);
+				System.out.println(fila);
 				btnEliminarDato.setEnabled(true);
 				btnEliminarDato.addMouseListener(new MouseAdapter() {
 					@Override
@@ -262,7 +263,7 @@ public class VerFichero extends JFrame {
 						}
 						if(isNumeric(fila) && fila != null) {
 							int videojuego = Integer.parseInt(fila);
-							controlador.EliminarDatosBaseDeDatosVideojuegos(videojuego);
+							controlador.EliminarDatosFicheroVideojuegos(videojuego);
 							String tabla = "LeerBBDD";
 							controlador.VerDatosVideojuegos();
 							table.setModel(modelo.getTabla());
@@ -288,7 +289,7 @@ public class VerFichero extends JFrame {
 						}
 						if(isNumeric(fila) && fila != null) {
 							int empresa = Integer.parseInt(fila);
-							controlador.EliminarDatosBaseDeDatosEmpresas(empresa);
+							controlador.EliminarDatosFicheroEmpresas(empresa);
 							String tabla = "LeerBBDDEmpresas";
 							/*modelo.MostrarDatos(tabla);
 							table_1.setModel(modelo.getTabla());*/

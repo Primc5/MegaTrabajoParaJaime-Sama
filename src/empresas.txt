@@ -1,18 +1,24 @@
-id_Empresa: 1 
+ID: 1 
 Nombre: Naughty Dog 
 Tamaño: AAA 
 Pais: EEUU 
 Capital: 320000 
 Director: Neil Druckmann 
-id_Empresa: 2 
+ID: 2 
 Nombre: Guerrilla Games 
 Tamaño: AAA 
 Pais: Paises Bajos 
 Capital: 130000 
 Director:  Hermen Hulst 
-id_Empresa: 3 
+ID: 3 
 Nombre: StudioMDHR 
 Tamaño: Indie 
 Pais: EEUU 
 Capital: 10000 
 Director: Jared Moldenhauer 
+ID: 4 
+Nombre: fads 
+Tamaño: fads 
+Pais: fads 
+Capital: 300 
+Director: fdsa 

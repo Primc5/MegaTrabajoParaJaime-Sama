@@ -66,7 +66,7 @@ public class BaseDeDatos implements Interface {
 		consultas.put("LeerBBDDEmpresas", "Select * from empresas");
 		consultas.put("eliminarTabla", "DROP TABLE ?");
 		consultas.put("crearTablaFicheritos",
-				"Create TABLE ficheritos(id int primary key auto_increment, nombre varchar(45), tipo varchar(45), Empresa varchar(45), Creacion date)");
+				"Create TABLE ficheritos(id int primary key auto_increment, nombre varchar(45), tipo varchar(45), Empresa int(45) FOREIGN KEY references empresas(id_Empresa), Creacion date)");
 		consultas.put("crearTablaEmpresas",
 				"Create TABLE empresas(id_Empresa int primary key auto_increment, Nombre varchar(45), Tamaño varchar(45), Pais varchar(45), Capital int(25), Director varchar(45)");
 	}

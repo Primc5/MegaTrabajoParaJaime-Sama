@@ -125,23 +125,8 @@ public class VerBBDD extends JFrame{
 			JButton btnCopiarDatosAl = new JButton("Copiar datos al fichero");
 			btnCopiarDatosAl.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					Object[] options = {"Videojuegos", "Empresas", "Ambas"};
-					int n = JOptionPane.showOptionDialog(panel,
-						               "¿Qué datos desea pasar al fichero?",
-						               "Elige una opción",
-						               JOptionPane.YES_NO_CANCEL_OPTION,
-						               JOptionPane.QUESTION_MESSAGE,
-						               null,
-						               options,
-						               options[0]);
-					if (n == JOptionPane.YES_OPTION) {
-						controlador.PasarDatosFicheroVideojuegos();
-					}else if(n == JOptionPane.NO_OPTION) {
-						controlador.PasarDatosFicheroEmpresas();
-					}else if(n == JOptionPane.CANCEL_OPTION) {
-						controlador.PasarDatosFicheroVideojuegos();
-						controlador.PasarDatosFicheroEmpresas();
-					}
+					controlador.PasarDatosFicheroVideojuegos();
+					controlador.PasarDatosFicheroEmpresas();
 					Object[] comodidad = {"Si, por favor", "luego"};
 					int eleccion = JOptionPane.showOptionDialog(panel,
 						               "¿Quiéres ver como a quedado tu fichero?",
