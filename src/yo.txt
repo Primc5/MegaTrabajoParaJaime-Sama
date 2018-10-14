@@ -16,5 +16,10 @@ Creación: 2016-05-10
 ID: 4 
 Nombre: CupHead               
 Tipo: Arcade               
-Empresa: 3 
+Empresa: 3            
 Creación: 2017-09-29 
+ID: 6 
+Nombre: Darkest Dungeon 
+Tipo: RPG Dungeon crawl 
+Empresa: Red Hook Studios 
+Creación: 2016-01-19 
