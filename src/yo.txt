@@ -1,0 +1,25 @@
+ID: 1 
+Nombre: The Last Of Us               
+Tipo: Aventura               
+Empresa: 1 
+Creación: 2013-06-14 
+ID: 2 
+Nombre: Horizon Zero Dawn               
+Tipo: Aventura               
+Empresa: 2 
+Creación: 2017-02-28 
+ID: 3 
+Nombre: Uncharted 4               
+Tipo: Aventura               
+Empresa: 1 
+Creación: 2016-05-10 
+ID: 4 
+Nombre: CupHead               
+Tipo: Arcade               
+Empresa: 3            
+Creación: 2017-09-29 
+ID: 6 
+Nombre: Darkest Dungeon 
+Tipo: RPG Dungeon crawl 
+Empresa: Red Hook Studios 
+Creación: 2016-01-19 
