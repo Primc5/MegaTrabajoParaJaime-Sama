@@ -2,7 +2,8 @@ package Objetos;
 
 public class Videojuegos {
 
-	private String id, nombre, tipo, empresa, creación;
+	private String id, nombre, tipo, creación;
+	private Empresas empresa;
 	
 	public Videojuegos() {
 		
@@ -26,10 +27,10 @@ public class Videojuegos {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
-	public String getEmpresa() {
+	public Empresas getEmpresa() {
 		return empresa;
 	}
-	public void setEmpresa(String empresa) {
+	public void setEmpresa(Empresas empresa) {
 		this.empresa = empresa;
 	}
 	public String getCreación() {

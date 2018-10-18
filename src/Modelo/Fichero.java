@@ -47,7 +47,10 @@ public class Fichero implements Interface {
 		br = new BufferedReader(fr);
 		int j = 1;
 		try {
-			cadena = br.readLine();
+			for (Entry<Integer, Empresas> valor : LeerDatosEmpresas().entrySet()) {
+				v.setEmpresa(valor.getValue());
+			}
+			
 			while (cadena != null) {
 				v = new Videojuegos();
 				int i = cadena.indexOf(':');
@@ -68,10 +71,8 @@ public class Fichero implements Interface {
 				v.setTipo(minicadena);
 				cadena = br.readLine();
 				i = cadena.indexOf(' ');
-
 				minicadena = cadena.substring(i + 1);
-				v.setEmpresa(minicadena);
-				cadena = br.readLine();
+				
 
 				i = cadena.indexOf(' ');
 				minicadena = cadena.substring(i + 1);
@@ -224,7 +225,9 @@ public class Fichero implements Interface {
 		v.setId(id);
 		v.setNombre(nombre);
 		v.setTipo(tipo);
-		v.setEmpresa(empresa);
+		for (Entry<Integer, Empresas> valor : LeerDatosEmpresas().entrySet()) {
+			v.setEmpresa(valor.getValue());
+		}
 		v.setCreación(Creacion);
 		datos.put(datos.size()+1, v);
 		return datos;
@@ -260,7 +263,7 @@ public class Fichero implements Interface {
 			col++;
 			contenido[fila][col] = valor.getValue().getTipo();
 			col++;
-			contenido[fila][col] = valor.getValue().getEmpresa();
+			contenido[fila][col] = valor.getValue().getEmpresa().getId_Empresa();
 			col++;
 			contenido[fila][col] = valor.getValue().getCreación();
 			fila++;

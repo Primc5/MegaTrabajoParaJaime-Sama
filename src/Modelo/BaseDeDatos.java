@@ -126,7 +126,7 @@ public class BaseDeDatos implements Interface {
 			stm.setString(1, valor.getValue().getId());
 			stm.setString(2, valor.getValue().getNombre());
 			stm.setString(3, valor.getValue().getTipo());
-			stm.setString(4, valor.getValue().getEmpresa());
+			stm.setString(4, valor.getValue().getEmpresa().getId_Empresa());
 			stm.setString(5, valor.getValue().getCreación());
 			rset = stm.executeUpdate();
 		}
@@ -173,7 +173,9 @@ public class BaseDeDatos implements Interface {
 			v.setId(id);
 			v.setNombre(nombre);
 			v.setTipo(tipo);
-			v.setEmpresa(empresa);
+			for (Entry<Integer, Empresas> valor : LeerDatosEmpresas().entrySet()) {
+				v.setEmpresa(valor.getValue());
+			}
 			v.setCreación(creacion);
 			datos.put(datos.size()+1, v);
 
@@ -223,7 +225,9 @@ public class BaseDeDatos implements Interface {
 				v.setNombre(nombre);
 				v.setId(id);
 				v.setTipo(tipo);
-				v.setEmpresa(empresa);
+				for (Entry<Integer, Empresas> valor : LeerDatosEmpresas().entrySet()) {
+					v.setEmpresa(valor.getValue());
+				}
 				v.setCreación(creacion);
 				vj.put(rset.getInt(1), v);
 			}

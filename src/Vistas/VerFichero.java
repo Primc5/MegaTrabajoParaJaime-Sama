@@ -52,7 +52,6 @@ public class VerFichero extends JFrame {
 	private JLabel lblsubtitlepanel;
 	private JButton btnVolver_CPAlumno;
 	private JTable table;
-	private JLabel label;
 	private JTable table_1;
 	
 	public static boolean isNumeric(String cadena) {
@@ -234,19 +233,15 @@ public class VerFichero extends JFrame {
 		getContentPane().setLayout(null);
 		getContentPane().add(lblTincas);
 		getContentPane().add(panel);
-		
-		label = new JLabel("");
-		label.setBounds(0, 0, 869, 762);
-		getContentPane().add(label);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowActivated(WindowEvent e) {
 				
-				controlador.VerDatosVideojuegos();
-				table.setModel(modelo.getTabla());
 				controlador.VerDatosEmpresas();
 				table_1.setModel(modelo.getTabla());
+				controlador.VerDatosVideojuegos();
+				table.setModel(modelo.getTabla());
 			}
 		});
 		table.addMouseListener(new MouseAdapter() {
