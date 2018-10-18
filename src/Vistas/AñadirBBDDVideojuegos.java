@@ -138,7 +138,7 @@ public class AñadirBBDDVideojuegos extends JFrame{
 			btnAnadir.setFont(new Font("Georgia", Font.BOLD, 15));
 			btnAnadir.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					if(isNumeric(textField.getText()) && isDateValid(textField_4.getText())) {
+					if(isNumeric(textField.getText()) && isNumeric(textField_3.getText()) && isDateValid(textField_4.getText())) {
 					controlador.AñadirDatosBaseDeDatosVideojuegos(textField.getText(), textField_1.getText(), textField_2.getText(), textField_3.getText(), textField_4.getText());
 					textField.setText("");
 					textField_1.setText("");
@@ -147,7 +147,7 @@ public class AñadirBBDDVideojuegos extends JFrame{
 					textField_4.setText("");
 					controlador.VolverVerBase();
 					}else {
-						System.out.println("El id debe ser numérico y la creacion de tipo date (yyyy-MM-dd)");
+						System.out.println("El id y empresa deben ser numéricos y la creacion de tipo date (yyyy-MM-dd)");
 					}
 				}
 			});

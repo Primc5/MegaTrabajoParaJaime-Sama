@@ -4,6 +4,10 @@ public class Empresas {
 
 	private String id_Empresa, Nombre, Tamaño, Pais, Capital, Director;
 
+	public Empresas() {
+		
+	}
+	
 	public String getId_Empresa() {
 		return id_Empresa;
 	}

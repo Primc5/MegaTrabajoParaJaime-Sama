@@ -6,6 +6,7 @@ import java.util.Properties;
 import java.util.Scanner;
 
 import Controlador.Controlador;
+import Hibernate.AccesHibernate;
 import Modelo.BaseDeDatos;
 import Modelo.Fichero;
 import Objetos.Videojuegos;
@@ -13,9 +14,12 @@ import Vistas.AñadirBBDDEmpresas;
 import Vistas.AñadirBBDDVideojuegos;
 import Vistas.AñadirFicheroEmpresas;
 import Vistas.AñadirFicheroVideojuegos;
+import Vistas.AñadirHibernateEmpresas;
+import Vistas.AñadirHibernateVideojuegos;
 import Vistas.Principal;
 import Vistas.VerBBDD;
 import Vistas.VerFichero;
+import Vistas.VerHibernate;
 
 public class Main {
 
@@ -23,6 +27,7 @@ public class Main {
 		
 		BaseDeDatos baseDatos = new BaseDeDatos();
 		Fichero fichero = new Fichero();
+		AccesHibernate accesoh = new AccesHibernate();
 		
 		Controlador controlador = new Controlador();
 		
@@ -32,10 +37,17 @@ public class Main {
 		AñadirFicheroVideojuegos aFicheroVideojuegos = new AñadirFicheroVideojuegos();
 		AñadirFicheroEmpresas aFicheroEmpresas = new AñadirFicheroEmpresas();
 		AñadirBBDDEmpresas abbddEmpresas = new AñadirBBDDEmpresas();
+		AñadirHibernateVideojuegos ahibernateVideojuegos = new AñadirHibernateVideojuegos();
+		AñadirHibernateEmpresas ahibernateEmpresas = new AñadirHibernateEmpresas();
 		VerFichero verfichero = new VerFichero();
+		VerHibernate verhibernate = new VerHibernate();
 
+		ahibernateVideojuegos.setControlador(controlador);
+		ahibernateEmpresas.setControlador(controlador);
 		aFicheroVideojuegos.setControlador(controlador);
 		aFicheroEmpresas.setControlador(controlador);
+		verhibernate.setControlador(controlador);
+		verhibernate.setModelo(baseDatos);
 		verBase.setModelo(baseDatos);
 		verBase.setControlador(controlador);
 		prin.setControlador(controlador);
@@ -46,6 +58,9 @@ public class Main {
 		verfichero.setModelo(fichero);
 		verfichero.setControlador(controlador);
 
+		controlador.setVerhibernate(verhibernate);
+		controlador.setHibernateEmpresas(ahibernateEmpresas);
+		controlador.setHibernateVideojuegos(ahibernateVideojuegos);
 		controlador.setFichero(fichero);
 		controlador.setModelo(baseDatos);
 		controlador.setPrincipal(prin);

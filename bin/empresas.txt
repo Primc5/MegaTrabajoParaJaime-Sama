@@ -1,24 +1,24 @@
 ID: 1 
-Nombre: Naughty Dog 
-Tamaño: AAA 
-Pais: EEUU 
+Nombre: Naughty Dog  
+Tamaño: AAA  
+Pais: EEUU  
 Capital: 320000 
-Director: Neil Druckmann 
+Director: Neil Druckmann  
 ID: 2 
-Nombre: Guerrilla Games 
-Tamaño: AAA 
-Pais: Paises Bajos 
+Nombre: Guerrilla Games  
+Tamaño: AAA  
+Pais: Paises Bajos  
 Capital: 130000 
-Director:  Hermen Hulst 
+Director:  Hermen Hulst  
 ID: 3 
-Nombre: StudioMDHR 
-Tamaño: Indie 
-Pais: EEUU 
+Nombre: StudioMDHR  
+Tamaño: Indie  
+Pais: EEUU  
 Capital: 10000 
-Director: Jared Moldenhauer 
+Director: Jared Moldenhauer  
 ID: 4 
-Nombre: fads 
-Tamaño: fads 
-Pais: fads 
-Capital: 300 
-Director: fdsa 
+Nombre: fasd  
+Tamaño: fasd  
+Pais: afds  
+Capital: 320000 
+Director: fasd  

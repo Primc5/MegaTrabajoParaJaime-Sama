@@ -140,7 +140,8 @@ public class VerFichero extends JFrame {
 		JButton btnCopiarDatosAl = new JButton("Copiar datos a la base de datos");
 		btnCopiarDatosAl.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-					controlador.PasarDatosFicheroVideojuegos();
+					controlador.PasarDatosBaseDeDatosVideojuegos();
+					controlador.PasarDatosBaseDeDatosEmpresas();
 					Object[] options = {"Si, por favor", "luego"};
 					int n = JOptionPane.showOptionDialog(panel,
 					                "¿Quiéres ver como a quedado tu fichero?",
@@ -151,7 +152,7 @@ public class VerFichero extends JFrame {
 					                options,
 					                options[0]);
 					if (n == JOptionPane.YES_OPTION) {
-						controlador.ComprobarFichero();
+						controlador.ComprobarBaseDeDatos();
 					}
 			}
 		});

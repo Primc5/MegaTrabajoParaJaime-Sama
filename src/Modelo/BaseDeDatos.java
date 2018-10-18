@@ -44,7 +44,7 @@ public class BaseDeDatos implements Interface {
 	public BaseDeDatos() {
 		getBBDDini();
 		try {
-			driver = "com.mysql.cj.jdbc.Driver";
+			driver = "com.mysql.jdbc.Driver";
 			Class.forName(driver);
 			conexion = DriverManager.getConnection(url, login, pwd);
 
@@ -66,9 +66,9 @@ public class BaseDeDatos implements Interface {
 		consultas.put("LeerBBDDEmpresas", "Select * from empresas");
 		consultas.put("eliminarTabla", "DROP TABLE ?");
 		consultas.put("crearTablaFicheritos",
-				"Create TABLE ficheritos(id int primary key auto_increment, nombre varchar(45), tipo varchar(45), Empresa int(45) FOREIGN KEY references empresas(id_Empresa), Creacion date)");
+				"Create TABLE ficheritos(id int primary key auto_increment, nombre varchar(45), tipo varchar(45), Empresa int(45), Creacion date)");
 		consultas.put("crearTablaEmpresas",
-				"Create TABLE empresas(id_Empresa int primary key auto_increment, Nombre varchar(45), Tamaño varchar(45), Pais varchar(45), Capital int(25), Director varchar(45)");
+				"Create TABLE empresas(id_Empresa int primary key auto_increment, Nombre varchar(45), Tamaño varchar(45), Pais varchar(45), Capital int(25), Director varchar(45))");
 	}
 
 	private void getBBDDini() {
@@ -117,8 +117,7 @@ public class BaseDeDatos implements Interface {
 		PreparedStatement stm;
 		int rset = 0;
 		try {
-		stm = conexion.prepareStatement(consultas.get("eliminarTabla"));
-		stm.setString(1, "ficheritos");
+		stm = conexion.prepareStatement("Drop Table ficheritos");
 		rset = stm.executeUpdate();
 		stm = conexion.prepareStatement(consultas.get("crearTablaFicheritos"));
 		rset = stm.executeUpdate();
@@ -140,8 +139,7 @@ public class BaseDeDatos implements Interface {
 		PreparedStatement stm;
 		int rset = 0;
 		try {
-		stm = conexion.prepareStatement(consultas.get("eliminarTabla"));
-		stm.setString(1, "empresas");
+		stm = conexion.prepareStatement("Drop table empresas");
 		rset = stm.executeUpdate();
 		stm = conexion.prepareStatement(consultas.get("crearTablaEmpresas"));
 		rset = stm.executeUpdate();

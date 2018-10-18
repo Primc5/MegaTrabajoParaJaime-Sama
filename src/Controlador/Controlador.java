@@ -13,13 +13,19 @@ import Vistas.Principal;
 import Vistas.VerBBDD;
 import Vistas.VerFichero;
 import Vistas.AñadirFicheroVideojuegos;
+import Vistas.AñadirHibernateEmpresas;
+import Vistas.AñadirHibernateVideojuegos;
 import interfas.Interface;
+import Vistas.VerHibernate;
 
 public class Controlador {
 
 	private BaseDeDatos modelo;
 	private Fichero fichero;
 	
+	private VerHibernate verhibernate;
+	private AñadirHibernateVideojuegos aHibernateVideojuegos;
+	private AñadirHibernateEmpresas aHibernateEmpresas;
 	private AñadirBBDDVideojuegos aBBDDVideojuegos;
 	private AñadirBBDDEmpresas aBBDDEmpresas;
 	private VerBBDD verbbdd;
@@ -111,6 +117,30 @@ public class Controlador {
 	}
 	
 	//cambios de vista
+	public void VerHibernate() {
+		principal.setVisible(false);
+		verhibernate.setVisible(true);
+	}
+	public void VolverVerHibernate() {
+		verhibernate.setVisible(false);
+		principal.setVisible(true);
+	}
+	public void AñadirHibernateVideojuegos() {
+		verhibernate.setVisible(false);
+		aHibernateVideojuegos.setVisible(true);
+	}
+	public void VolverAñadirHibernateVideojuegos() {
+		aHibernateVideojuegos.setVisible(false);
+		verhibernate.setVisible(true);
+	}
+	public void AñadirHibernateEmpresas() {
+		verhibernate.setVisible(false);
+		aHibernateEmpresas.setVisible(true);
+	}
+	public void VolverAñadirHibernateEmpresas() {
+		aHibernateEmpresas.setVisible(false);
+		verhibernate.setVisible(true);
+	}
 	public void ComprobarBaseDeDatos() {
 		verfichero.setVisible(false);
 		verbbdd.setVisible(true);
@@ -195,6 +225,15 @@ public class Controlador {
 	}
 	public void setaFicheroEmpresas(AñadirFicheroEmpresas aFicheroEmpresas) {
 		this.aFicheroEmpresas = aFicheroEmpresas;
+	}
+	public void setVerhibernate(VerHibernate verhibernate) {
+		this.verhibernate = verhibernate;
+	}
+	public void setHibernateVideojuegos(AñadirHibernateVideojuegos aHibernateVideojuegos) {
+		this.aHibernateVideojuegos = aHibernateVideojuegos;
+	}
+	public void setHibernateEmpresas(AñadirHibernateEmpresas aHibernateEmpresas) {
+		this.aHibernateEmpresas = aHibernateEmpresas;
 	}
 	
 	

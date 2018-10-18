@@ -4,6 +4,10 @@ public class Videojuegos {
 
 	private String id, nombre, tipo, empresa, creación;
 	
+	public Videojuegos() {
+		
+	}
+	
 	public String getId() {
 		return id;
 	}

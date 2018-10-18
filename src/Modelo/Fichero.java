@@ -36,7 +36,6 @@ public class Fichero implements Interface {
 	private HashMap<Integer, Empresas> empresas = new HashMap<Integer, Empresas>();
 	private Videojuegos v = new Videojuegos();
 	private Empresas e = new Empresas();
-
 	// lee videojuegos del fichero 
 	public HashMap<Integer, Videojuegos> LeerDatosVideojuegos() {
 		try {
@@ -100,7 +99,6 @@ public class Fichero implements Interface {
 			}
 			br = new BufferedReader(fr);
 			int j = 1;
-			System.out.println("lol");
 			try {
 				cadena = br.readLine();
 				while (cadena != null) {
