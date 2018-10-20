@@ -148,7 +148,7 @@ public class Fichero implements Interface {
 		}
 
 	// mete en el fichero los valores que le pase por un hashmap de videojuegos
-	public HashMap<Integer, Videojuegos> CopiarDatosVideojuegos(HashMap<Integer, Videojuegos> datos) {
+	public HashMap<Integer, Videojuegos> CopiarDatosVideojuegos(HashMap<Integer, Videojuegos> datos, HashMap<Integer, Empresas> empresas) {
 		try {
 			fw = new FileWriter("src/yo.txt");
 			bw = new BufferedWriter(fw);
@@ -159,7 +159,7 @@ public class Fichero implements Interface {
 				bw.newLine();
 				bw.write("Tipo: " + valor.getValue().getTipo() + " ");
 				bw.newLine();
-				bw.write("Empresa: " + valor.getValue().getEmpresa() + " ");
+				bw.write("Empresa: " + valor.getValue().getEmpresa().getId_Empresa() + " ");
 				bw.newLine();
 				bw.write("Creación: " + valor.getValue().getCreación() + " ");
 				bw.newLine();
@@ -221,9 +221,7 @@ public class Fichero implements Interface {
 		v.setId(id);
 		v.setNombre(nombre);
 		v.setTipo(tipo);
-		for (Entry<Integer, Empresas> valor : LeerDatosEmpresas().entrySet()) {
-			v.setEmpresa(valor.getValue());
-		}
+		v.setEmpresa(empresas.get(Integer.parseInt(empresa)));
 		v.setCreación(Creacion);
 		datos.put(datos.size()+1, v);
 		return datos;

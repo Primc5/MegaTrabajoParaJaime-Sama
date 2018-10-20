@@ -113,7 +113,7 @@ public class BaseDeDatos implements Interface {
 		}
 	}
 
-	public HashMap<Integer, Videojuegos> CopiarDatosVideojuegos(HashMap<Integer, Videojuegos> datos) {
+	public HashMap<Integer, Videojuegos> CopiarDatosVideojuegos(HashMap<Integer, Videojuegos> datos,HashMap<Integer, Empresas> empresas) {
 		PreparedStatement stm;
 		int rset = 0;
 		try {

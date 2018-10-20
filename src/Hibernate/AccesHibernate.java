@@ -20,5 +20,22 @@ public class AccesHibernate {
 		session = util.getSessionFactory().openSession();
 		
 	}
+	public void borrarDatos(){
+    	System.out.println("Inicio Borrado");
+
+		session.beginTransaction();
+    	
+		Query q = session.createQuery("delete from JugadorPosicion");
+		q.executeUpdate();
+		q = session.createQuery("delete from Posicion");
+		q.executeUpdate();
+		q = session.createQuery("delete from Jugador");
+		q.executeUpdate();
+		q = session.createQuery("delete from Equipo");
+		q.executeUpdate();
+		
+		session.getTransaction().commit();
+		System.out.println("Fin Borrado");
+	}
 	
 }
