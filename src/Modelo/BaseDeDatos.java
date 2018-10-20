@@ -159,7 +159,7 @@ public class BaseDeDatos implements Interface {
 		return datos;
 	}
 	
-	public HashMap<Integer, Videojuegos> AnadirDatosVideojuegos(HashMap<Integer, Videojuegos> datos, String id, String nombre, String tipo, String empresa, String creacion) {
+	public HashMap<Integer, Videojuegos> AnadirDatosVideojuegos(HashMap<Integer, Videojuegos> datos,HashMap<Integer, Empresas> empresas, String id, String nombre, String tipo, String empresa, String creacion) {
 		try {
 			PreparedStatement stm;
 			stm = conexion.prepareStatement(consultas.get("sincronizeVideojuegos"));
@@ -173,9 +173,7 @@ public class BaseDeDatos implements Interface {
 			v.setId(id);
 			v.setNombre(nombre);
 			v.setTipo(tipo);
-			for (Entry<Integer, Empresas> valor : LeerDatosEmpresas().entrySet()) {
-				v.setEmpresa(valor.getValue());
-			}
+			v.setEmpresa(empresas.get(Integer.parseInt(empresa)));
 			v.setCreación(creacion);
 			datos.put(datos.size()+1, v);
 
@@ -210,7 +208,7 @@ public class BaseDeDatos implements Interface {
 		return datos;
 	}
 
-	public HashMap<Integer, Videojuegos> LeerDatosVideojuegos() {
+	public HashMap<Integer, Videojuegos> LeerDatosVideojuegos(HashMap<Integer, Empresas> datos) {
 		PreparedStatement pstmt;
 		try {
 			pstmt = conexion.prepareStatement(consultas.get("LeerBBDD"));
@@ -225,9 +223,7 @@ public class BaseDeDatos implements Interface {
 				v.setNombre(nombre);
 				v.setId(id);
 				v.setTipo(tipo);
-				for (Entry<Integer, Empresas> valor : LeerDatosEmpresas().entrySet()) {
-					v.setEmpresa(valor.getValue());
-				}
+				v.setEmpresa(datos.get(Integer.parseInt(empresa)));
 				v.setCreación(creacion);
 				vj.put(rset.getInt(1), v);
 			}

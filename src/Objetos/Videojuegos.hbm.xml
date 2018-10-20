@@ -16,9 +16,9 @@
 		<property name="tipo" type="string">
 			<column name="tipo" length="45" not-null="true" />
 		</property>
-		<many-to-one name="empresas" column="Empresa"
+		<many-to-one name="empresa" column="Empresa"
 			not-null="true" />
-		<property name="Creacion" type="int">
+		<property name="creación" type="date">
 			<column name="Creacion" not-null="true" />
 		</property>
 	</class>

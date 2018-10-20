@@ -36,10 +36,10 @@ public class Controlador {
 	
 	//pedida de datos de vista a modelo(base de datos)
 	public HashMap<Integer, Videojuegos> EliminarDatosBaseDeDatosVideojuegos(Integer clave) {
-		return modelo.EliminarDatosVideojuegos(modelo.LeerDatosVideojuegos(), clave);
+		return modelo.EliminarDatosVideojuegos(modelo.LeerDatosVideojuegos(modelo.LeerDatosEmpresas()), clave);
 	}
 	public HashMap<Integer, Videojuegos> AñadirDatosBaseDeDatosVideojuegos(String id, String nombre, String tipo, String empresa, String Creacion) {
-		return modelo.AnadirDatosVideojuegos(modelo.LeerDatosVideojuegos(), id, nombre, tipo, empresa, Creacion);
+		return modelo.AnadirDatosVideojuegos(modelo.LeerDatosVideojuegos(modelo.LeerDatosEmpresas()), modelo.LeerDatosEmpresas(), id, nombre, tipo, empresa, Creacion);
 	}
 	
 	public HashMap<Integer, Empresas> EliminarDatosBaseDeDatosEmpresas(Integer clave) {
@@ -52,20 +52,20 @@ public class Controlador {
 	
 	//pedida de datos de vista a modelo(fichero)
 	public void VerDatosVideojuegos(){
-		fichero.MostrarDatosVideojuegos(fichero.LeerDatosVideojuegos());
+		fichero.MostrarDatosVideojuegos(fichero.LeerDatosVideojuegos(fichero.LeerDatosEmpresas()));
 	}
 	public void VerDatosEmpresas(){
 		fichero.MostrarDatosEmpresas(fichero.LeerDatosEmpresas());
 	}
 	public HashMap<Integer, Videojuegos> AñadirDatosVideojuegos(String id, String nombre, String tipo, String empresa, String creacion){
-		return fichero.CopiarDatosVideojuegos(fichero.AnadirDatosVideojuegos(fichero.LeerDatosVideojuegos(), id, nombre, tipo, empresa, creacion));
+		return fichero.CopiarDatosVideojuegos(fichero.AnadirDatosVideojuegos(fichero.LeerDatosVideojuegos(fichero.LeerDatosEmpresas()),fichero.LeerDatosEmpresas(), id, nombre, tipo, empresa, creacion));
 	}
 	public HashMap<Integer, Videojuegos> ObtenerDatosFicheroVideojuegos() {
-		return fichero.LeerDatosVideojuegos();
+		return fichero.LeerDatosVideojuegos(fichero.LeerDatosEmpresas());
 	}
 	
 	public HashMap<Integer, Videojuegos> EliminarDatosFicheroVideojuegos(Integer clave) {
-		return fichero.CopiarDatosVideojuegos(fichero.EliminarDatosVideojuegos(fichero.LeerDatosVideojuegos(), clave));
+		return fichero.CopiarDatosVideojuegos(fichero.EliminarDatosVideojuegos(fichero.LeerDatosVideojuegos(fichero.LeerDatosEmpresas()), clave));
 		
 	}
 	
@@ -87,7 +87,7 @@ public class Controlador {
 		
 		Interface emisor = new BaseDeDatos();
 		Interface receptor = new Fichero();
-		lista = emisor.LeerDatosVideojuegos();
+		lista = emisor.LeerDatosVideojuegos(fichero.LeerDatosEmpresas());
 		receptor.CopiarDatosVideojuegos(lista);
 	}
 	public void PasarDatosBaseDeDatosVideojuegos() {
@@ -95,7 +95,7 @@ public class Controlador {
 		
 		Interface emisor = new Fichero();
 		Interface receptor = new BaseDeDatos();
-		lista = emisor.LeerDatosVideojuegos();
+		lista = emisor.LeerDatosVideojuegos(fichero.LeerDatosEmpresas());
 		receptor.CopiarDatosVideojuegos(lista);
 	}
 	

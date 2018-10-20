@@ -37,7 +37,7 @@ public class Fichero implements Interface {
 	private Videojuegos v = new Videojuegos();
 	private Empresas e = new Empresas();
 	// lee videojuegos del fichero 
-	public HashMap<Integer, Videojuegos> LeerDatosVideojuegos() {
+	public HashMap<Integer, Videojuegos> LeerDatosVideojuegos(HashMap<Integer, Empresas> datos) {
 		try {
 			fr = new FileReader("src/yo.txt");
 		} catch (FileNotFoundException e1) {
@@ -47,8 +47,7 @@ public class Fichero implements Interface {
 		br = new BufferedReader(fr);
 		int j = 1;
 		try {
-			cadena = br.readLine();
-			while (cadena != null) {
+			while ((cadena = br.readLine()) != null) {
 				v = new Videojuegos();
 				int i = cadena.indexOf(':');
 				String minicadena = cadena.substring(i + 1);
@@ -66,14 +65,15 @@ public class Fichero implements Interface {
 				cadena = br.readLine();
 				i = cadena.indexOf(' ');
 				
- 				minicadena = cadena.substring(i + 1);
- 				v.setEmpresa(LeerDatosEmpresas().get(j));
+ 				minicadena = cadena.substring(i+1);
+ 				minicadena = minicadena.replace(" ", "");
+ 				System.out.println(minicadena);
+ 				v.setEmpresa(datos.get(Integer.parseInt(minicadena)));
  				cadena = br.readLine();
  				i = cadena.indexOf(' ');
  				
 				minicadena = cadena.substring(i + 1);
 				v.setCreación(minicadena);
-				cadena = br.readLine();
 				
 				videojuegos.put(j, v);
 				j++;
@@ -217,7 +217,7 @@ public class Fichero implements Interface {
 		return datos;
 	}
 
-	public HashMap<Integer, Videojuegos> AnadirDatosVideojuegos(HashMap<Integer, Videojuegos> datos, String id, String nombre, String tipo, String empresa, String Creacion) {
+	public HashMap<Integer, Videojuegos> AnadirDatosVideojuegos(HashMap<Integer, Videojuegos> datos,HashMap<Integer, Empresas> empresas, String id, String nombre, String tipo, String empresa, String Creacion) {
 		v.setId(id);
 		v.setNombre(nombre);
 		v.setTipo(tipo);
