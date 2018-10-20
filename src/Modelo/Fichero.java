@@ -47,21 +47,15 @@ public class Fichero implements Interface {
 		br = new BufferedReader(fr);
 		int j = 1;
 		try {
-			for (Entry<Integer, Empresas> valor : LeerDatosEmpresas().entrySet()) {
-				v.setEmpresa(valor.getValue());
-			}
-			
+			cadena = br.readLine();
 			while (cadena != null) {
 				v = new Videojuegos();
 				int i = cadena.indexOf(':');
 				String minicadena = cadena.substring(i + 1);
-				i = cadena.indexOf(' ');
-
-				minicadena = cadena.substring(i + 1);
 				v.setId(minicadena);
+				
 				cadena = br.readLine();
 				i = cadena.indexOf(' ');
-
 				minicadena = cadena.substring(i + 1);
 				v.setNombre(minicadena);
 				cadena = br.readLine();
@@ -71,14 +65,16 @@ public class Fichero implements Interface {
 				v.setTipo(minicadena);
 				cadena = br.readLine();
 				i = cadena.indexOf(' ');
-				minicadena = cadena.substring(i + 1);
 				
-
-				i = cadena.indexOf(' ');
+ 				minicadena = cadena.substring(i + 1);
+ 				v.setEmpresa(LeerDatosEmpresas().get(j));
+ 				cadena = br.readLine();
+ 				i = cadena.indexOf(' ');
+ 				
 				minicadena = cadena.substring(i + 1);
 				v.setCreación(minicadena);
 				cadena = br.readLine();
-
+				
 				videojuegos.put(j, v);
 				j++;
 			}

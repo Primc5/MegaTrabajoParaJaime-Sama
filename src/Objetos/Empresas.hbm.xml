@@ -9,7 +9,6 @@
 			<column name="id_Empresa" />
 			<generator class="increment" />
 		</id>
-		
 		<property name="Nombre" type="string">
 			<column name="Nombre" length="45" not-null="true" />
 		</property>
