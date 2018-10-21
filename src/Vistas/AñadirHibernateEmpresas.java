@@ -118,14 +118,14 @@ public class AñadirHibernateEmpresas extends JFrame{
 		btnAnadir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(isNumeric(textField.getText()) && isNumeric(textField_4.getText())) {
-				controlador.AñadirDatosBaseDeDatosEmpresas(textField.getText(), textField_1.getText(), textField_2.getText(), textField_3.getText(), textField_4.getText(), textField_5.getText());
+				controlador.AñadirDatosHibernateEmpresas(textField.getText(), textField_1.getText(), textField_2.getText(), textField_3.getText(), textField_4.getText(), textField_5.getText());
 				textField.setText("");
 				textField_1.setText("");
 				textField_2.setText("");
 				textField_3.setText("");
 				textField_4.setText("");
 				textField_5.setText("");
-				controlador.VolverAñadirEmpresaBBDD();
+				controlador.VolverAñadirHibernateEmpresas();
 				}else {
 					System.out.println("El id y capital deben ser numéricos");
 				}
@@ -142,7 +142,7 @@ public class AñadirHibernateEmpresas extends JFrame{
 				textField_3.setText("");
 				textField_4.setText("");
 				textField_5.setText("");
-				controlador.VolverAñadirEmpresaBBDD();
+				controlador.VolverAñadirHibernateEmpresas();
 			}
 		});
 		

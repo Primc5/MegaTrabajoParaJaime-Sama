@@ -1,7 +1,9 @@
 package Controlador;
 
+import java.text.ParseException;
 import java.util.HashMap;
 
+import Hibernate.AccesHibernate;
 import Modelo.BaseDeDatos;
 import Modelo.Fichero;
 import Objetos.Empresas;
@@ -19,7 +21,7 @@ import interfas.Interface;
 import Vistas.VerHibernate;
 
 public class Controlador {
-
+	private AccesHibernate hibernate;
 	private BaseDeDatos modelo;
 	private Fichero fichero;
 	
@@ -34,6 +36,30 @@ public class Controlador {
 	private AñadirFicheroVideojuegos aFicheroVideojuegos;
 	private AñadirFicheroEmpresas aFicheroEmpresas;
 	
+	//pedida de datos de vista a modelo(hibernate)
+	public void VerDatosVideojuegosHibernate(){
+		hibernate.MostrarDatos("LeerVideojuegos");
+	}
+	public void VerDatosEmpresasHibernate(){
+		hibernate.MostrarDatosEmpresas("LeerEmpresa");
+	}
+	
+	public HashMap<Integer, Empresas> AñadirDatosHibernateEmpresas(String id, String nombre, String tamaño, String pais, String capital, String director) {
+		return hibernate.AnadirDatosEmpresas(hibernate.LeerDatosEmpresas(), id, nombre, tamaño, pais, capital, director);
+	}
+	public HashMap<Integer, Videojuegos> AñadirDatosHibernateVideojuegos(String id, String nombre, String tipo, String empresa, String Creacion) {
+		return hibernate.AnadirDatosVideojuegos(hibernate.LeerDatosVideojuegos(hibernate.LeerDatosEmpresas()), hibernate.LeerDatosEmpresas(), id, nombre, tipo, empresa, Creacion);
+	}
+	public void BorrarDatosHibernate() {
+		hibernate.borrarDatos();
+		try {
+			hibernate.IntroducirDatos();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		hibernate.cerrarSesion();
+	}
 	//pedida de datos de vista a modelo(base de datos)
 	public HashMap<Integer, Videojuegos> EliminarDatosBaseDeDatosVideojuegos(Integer clave) {
 		return modelo.EliminarDatosVideojuegos(modelo.LeerDatosVideojuegos(modelo.LeerDatosEmpresas()), clave);
@@ -82,6 +108,22 @@ public class Controlador {
 	}
 	
 	//intercambiar datos
+	public void PasarDatosFicheroVideojuegosHiberante() {
+		HashMap<Integer, Videojuegos> lista;
+		
+		Interface emisor = new BaseDeDatos();
+		Interface receptor = new Fichero();
+		lista = emisor.LeerDatosVideojuegos(fichero.LeerDatosEmpresas());
+		receptor.CopiarDatosVideojuegos(lista,fichero.LeerDatosEmpresas());
+	}
+	public void PasarDatosBBDDVideojuegosHiberante() {
+		HashMap<Integer, Videojuegos> lista;
+		
+		Interface emisor = new BaseDeDatos();
+		Interface receptor = new Fichero();
+		lista = emisor.LeerDatosVideojuegos(fichero.LeerDatosEmpresas());
+		receptor.CopiarDatosVideojuegos(lista,fichero.LeerDatosEmpresas());
+	}
 	public void PasarDatosFicheroVideojuegos() {
 		HashMap<Integer, Videojuegos> lista;
 		
@@ -234,6 +276,9 @@ public class Controlador {
 	}
 	public void setHibernateEmpresas(AñadirHibernateEmpresas aHibernateEmpresas) {
 		this.aHibernateEmpresas = aHibernateEmpresas;
+	}
+	public void setHibernate(AccesHibernate hibernate) {
+		this.hibernate = hibernate;
 	}
 	
 	

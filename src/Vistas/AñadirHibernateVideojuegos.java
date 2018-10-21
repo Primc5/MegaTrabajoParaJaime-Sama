@@ -132,13 +132,13 @@ public class AñadirHibernateVideojuegos extends JFrame{
 		btnAnadir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(isNumeric(textField.getText()) && isNumeric(textField_3.getText()) && isDateValid(textField_4.getText())) {
-				controlador.AñadirDatosBaseDeDatosVideojuegos(textField.getText(), textField_1.getText(), textField_2.getText(), textField_3.getText(), textField_4.getText());
+				controlador.AñadirDatosHibernateVideojuegos(textField.getText(), textField_1.getText(), textField_2.getText(), textField_3.getText(), textField_4.getText());
 				textField.setText("");
 				textField_1.setText("");
 				textField_2.setText("");
 				textField_3.setText("");
 				textField_4.setText("");
-				controlador.VolverVerBase();
+				controlador.VolverAñadirHibernateVideojuegos();
 				}else {
 					System.out.println("El id y empresa deben ser numéricos y la creacion de tipo date (yyyy-MM-dd)");
 				}
@@ -154,7 +154,7 @@ public class AñadirHibernateVideojuegos extends JFrame{
 				textField_2.setText("");
 				textField_3.setText("");
 				textField_4.setText("");
-				controlador.VolverVerBase();
+				controlador.VolverAñadirHibernateVideojuegos();
 			}
 		});
 		

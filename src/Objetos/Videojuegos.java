@@ -1,18 +1,21 @@
 package Objetos;
 
+import java.util.Date;
+
 public class Videojuegos {
 
-	private String id, nombre, tipo, creación;
+	private String nombre, tipo, creación;
+	private int id;
 	private Empresas empresa;
 	
 	public Videojuegos() {
 		
 	}
 	
-	public String getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getNombre() {
@@ -36,7 +39,7 @@ public class Videojuegos {
 	public String getCreación() {
 		return creación;
 	}
-	public void setCreación(String creación) {
-		this.creación = creación;
+	public void setCreación(String creacion) {
+		this.creación = creacion;
 	}
 }

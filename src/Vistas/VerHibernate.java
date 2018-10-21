@@ -25,12 +25,13 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import Controlador.Controlador;
+import Hibernate.AccesHibernate;
 import Modelo.BaseDeDatos;
 
 public class VerHibernate extends JFrame{
 
 		private Controlador controlador;
-		private BaseDeDatos modelo;
+		private AccesHibernate modelo;
 		
 		private JLabel lblTincas;
 		private JPanel panel;
@@ -54,7 +55,7 @@ public class VerHibernate extends JFrame{
 			return resultado;
 		}
 		
-		public void setModelo(BaseDeDatos modelo) {
+		public void setModelo(AccesHibernate modelo) {
 			this.modelo = modelo;
 		}
 		public void setControlador(Controlador controlador) {
@@ -69,15 +70,15 @@ public class VerHibernate extends JFrame{
 			setBounds(50, 100, 885, 801);
 			getContentPane().setBackground(new Color(102, 153, 204));
 			
-			lblTincas = new JLabel("Ver base de datos");
-			lblTincas.setBounds(288, 38, 253, 37);
+			lblTincas = new JLabel("Ver hibernate");
+			lblTincas.setBounds(334, 38, 207, 37);
 			lblTincas.setFont(new Font("Tahoma", Font.PLAIN, 30));
 			lblTincas.setForeground(Color.WHITE);
 			
 			panel = new JPanel();
 			panel.setBounds(63, 88, 723, 644);
 			
-			lblsubtitlepanel = new JLabel("Estos son los datos de la base de datos");
+			lblsubtitlepanel = new JLabel("Estos son los datos de la base de datos de hibernate");
 			lblsubtitlepanel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 			
 			btnVolver_CPAlumno = new JButton("Volver al men\u00FA");
@@ -105,9 +106,9 @@ public class VerHibernate extends JFrame{
 					                options,
 					                options[0]);
 					if (n == JOptionPane.YES_OPTION) {
-						controlador.AñadirBase();
+						controlador.AñadirHibernateVideojuegos();
 					}else if(n == JOptionPane.NO_OPTION) {
-						controlador.AñadirEmpresaBBDD();
+						controlador.AñadirHibernateEmpresas();
 					}
 				}
 			});
@@ -161,26 +162,24 @@ public class VerHibernate extends JFrame{
 								.addGroup(gl_panel.createSequentialGroup()
 									.addContainerGap()
 									.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 699, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-									.addGroup(Alignment.TRAILING, gl_panel.createParallelGroup(Alignment.TRAILING)
-										.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
-											.addContainerGap()
-											.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 699, Short.MAX_VALUE))
-										.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
-											.addContainerGap()
-											.addComponent(lblsubtitlepanel, GroupLayout.PREFERRED_SIZE, 326, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
-											.addComponent(btnCopiarDatosAl, GroupLayout.PREFERRED_SIZE, 233, GroupLayout.PREFERRED_SIZE))
-										.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
-											.addGap(29)
-											.addComponent(btnEliminarDato, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
-											.addGap(18)
-											.addComponent(btnVolver_CPAlumno, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
-											.addGap(18)
-											.addComponent(btnAadirDatos, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)))
-									.addGroup(gl_panel.createSequentialGroup()
-										.addContainerGap()
-										.addComponent(lblVideojuegos, GroupLayout.PREFERRED_SIZE, 326, GroupLayout.PREFERRED_SIZE))))
+								.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
+									.addContainerGap()
+									.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 699, Short.MAX_VALUE))
+								.addGroup(gl_panel.createSequentialGroup()
+									.addContainerGap()
+									.addComponent(lblsubtitlepanel, GroupLayout.PREFERRED_SIZE, 425, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+									.addComponent(btnCopiarDatosAl, GroupLayout.PREFERRED_SIZE, 233, GroupLayout.PREFERRED_SIZE))
+								.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
+									.addGap(29)
+									.addComponent(btnEliminarDato, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
+									.addGap(18)
+									.addComponent(btnVolver_CPAlumno, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
+									.addGap(18)
+									.addComponent(btnAadirDatos, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)))
+							.addGroup(gl_panel.createSequentialGroup()
+								.addContainerGap()
+								.addComponent(lblVideojuegos, GroupLayout.PREFERRED_SIZE, 326, GroupLayout.PREFERRED_SIZE))
 							.addGroup(gl_panel.createSequentialGroup()
 								.addContainerGap()
 								.addComponent(lblEmpresas, GroupLayout.PREFERRED_SIZE, 326, GroupLayout.PREFERRED_SIZE)))
@@ -191,14 +190,14 @@ public class VerHibernate extends JFrame{
 					.addGroup(gl_panel.createSequentialGroup()
 						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 							.addGroup(gl_panel.createSequentialGroup()
-								.addGap(28)
-								.addComponent(lblsubtitlepanel))
-							.addGroup(gl_panel.createSequentialGroup()
 								.addContainerGap()
-								.addComponent(btnCopiarDatosAl, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(lblVideojuegos, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnCopiarDatosAl, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE))
+							.addGroup(gl_panel.createSequentialGroup()
+								.addGap(28)
+								.addComponent(lblsubtitlepanel)))
 						.addGap(5)
+						.addComponent(lblVideojuegos, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
 						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 217, GroupLayout.PREFERRED_SIZE)
 						.addGap(5)
 						.addComponent(lblEmpresas, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
@@ -229,11 +228,9 @@ public class VerHibernate extends JFrame{
 			addWindowListener(new WindowAdapter() {
 				@Override
 				public void windowActivated(WindowEvent e) {
-					String tabla = "LeerBBDD";
-					modelo.MostrarDatos(tabla);
+					controlador.VerDatosVideojuegosHibernate();
 					table.setModel(modelo.getTabla());
-					tabla = "LeerBBDDEmpresas";
-					modelo.MostrarDatos(tabla);
+					controlador.VerDatosEmpresasHibernate();
 					table_1.setModel(modelo.getTabla());
 				}
 			});
@@ -246,6 +243,7 @@ public class VerHibernate extends JFrame{
 					btnEliminarDato.addMouseListener(new MouseAdapter() {
 						@Override
 						public void mouseClicked(MouseEvent arg0) {
+							controlador.BorrarDatosHibernate();
 							if (table.getSelectedRow() == -1) {
 								btnEliminarDato.setEnabled(false);
 							}

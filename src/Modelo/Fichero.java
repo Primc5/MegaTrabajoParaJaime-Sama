@@ -12,7 +12,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Map.Entry;
@@ -51,16 +55,19 @@ public class Fichero implements Interface {
 				v = new Videojuegos();
 				int i = cadena.indexOf(':');
 				String minicadena = cadena.substring(i + 1);
-				v.setId(minicadena);
+				minicadena = minicadena.replace(" ", "");
+				v.setId(Integer.parseInt(minicadena));
 				
 				cadena = br.readLine();
 				i = cadena.indexOf(' ');
 				minicadena = cadena.substring(i + 1);
+				minicadena = minicadena.replace(" ", "");
 				v.setNombre(minicadena);
 				cadena = br.readLine();
 				i = cadena.indexOf(' ');
 
 				minicadena = cadena.substring(i + 1);
+				minicadena = minicadena.replace(" ", "");
 				v.setTipo(minicadena);
 				cadena = br.readLine();
 				i = cadena.indexOf(' ');
@@ -73,6 +80,7 @@ public class Fichero implements Interface {
  				i = cadena.indexOf(' ');
  				
 				minicadena = cadena.substring(i + 1);
+				minicadena = minicadena.replace(" ", "");
 				v.setCreación(minicadena);
 				
 				videojuegos.put(j, v);
@@ -102,34 +110,41 @@ public class Fichero implements Interface {
 					e = new Empresas();
 					int i = cadena.indexOf(':');
 					String minicadena = cadena.substring(i + 1);
+					minicadena = minicadena.replace(" ", "");
 					i = cadena.indexOf(' ');
 
 					minicadena = cadena.substring(i + 1);
-					e.setId_Empresa(minicadena);
+					minicadena = minicadena.replace(" ", "");
+					e.setId_Empresa(Integer.parseInt(minicadena));
 					cadena = br.readLine();
 					i = cadena.indexOf(' ');
 
 					minicadena = cadena.substring(i + 1);
+					minicadena = minicadena.replace(" ", "");
 					e.setNombre(minicadena);
 					cadena = br.readLine();
 					i = cadena.indexOf(' ');
 
 					minicadena = cadena.substring(i + 1);
+					minicadena = minicadena.replace(" ", "");
 					e.setTamaño(minicadena);
 					cadena = br.readLine();
 					i = cadena.indexOf(' ');
 
 					minicadena = cadena.substring(i + 1);
+					minicadena = minicadena.replace(" ", "");
 					e.setPais(minicadena);
 					cadena = br.readLine();
 
 					i = cadena.indexOf(' ');
 					minicadena = cadena.substring(i + 1);
-					e.setCapital(minicadena);
+					minicadena = minicadena.replace(" ", "");
+					e.setCapital(Integer.parseInt(minicadena));
 					cadena = br.readLine();
 					
 					i = cadena.indexOf(' ');
 					minicadena = cadena.substring(i + 1);
+					minicadena = minicadena.replace(" ", "");
 					e.setDirector(minicadena);
 					cadena = br.readLine();
 
@@ -217,21 +232,21 @@ public class Fichero implements Interface {
 		return datos;
 	}
 
-	public HashMap<Integer, Videojuegos> AnadirDatosVideojuegos(HashMap<Integer, Videojuegos> datos,HashMap<Integer, Empresas> empresas, String id, String nombre, String tipo, String empresa, String Creacion) {
-		v.setId(id);
+	public HashMap<Integer, Videojuegos> AnadirDatosVideojuegos(HashMap<Integer, Videojuegos> datos,HashMap<Integer, Empresas> empresas, String id, String nombre, String tipo, String empresa, String creacion) {
+		v.setId(Integer.parseInt(id));
 		v.setNombre(nombre);
 		v.setTipo(tipo);
 		v.setEmpresa(empresas.get(Integer.parseInt(empresa)));
-		v.setCreación(Creacion);
+		v.setCreación(creacion);
 		datos.put(datos.size()+1, v);
 		return datos;
 	}
 	public HashMap<Integer, Empresas> AnadirDatosEmpresas(HashMap<Integer, Empresas> datos, String id, String nombre, String tamaño, String pais, String capital, String director) {
-		e.setId_Empresa(id);
+		e.setId_Empresa(Integer.parseInt(id));
 		e.setNombre(nombre);
 		e.setTamaño(tamaño);
 		e.setPais(pais);
-		e.setCapital(capital);
+		e.setCapital(Integer.parseInt(capital));
 		e.setDirector(director);
 		datos.put(datos.size()+1, e);
 		return datos;

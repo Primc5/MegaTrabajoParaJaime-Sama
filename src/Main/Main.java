@@ -47,7 +47,7 @@ public class Main {
 		aFicheroVideojuegos.setControlador(controlador);
 		aFicheroEmpresas.setControlador(controlador);
 		verhibernate.setControlador(controlador);
-		verhibernate.setModelo(baseDatos);
+		verhibernate.setModelo(accesoh);
 		verBase.setModelo(baseDatos);
 		verBase.setControlador(controlador);
 		prin.setControlador(controlador);
@@ -62,6 +62,7 @@ public class Main {
 		controlador.setHibernateEmpresas(ahibernateEmpresas);
 		controlador.setHibernateVideojuegos(ahibernateVideojuegos);
 		controlador.setFichero(fichero);
+		controlador.setHibernate(accesoh);
 		controlador.setModelo(baseDatos);
 		controlador.setPrincipal(prin);
 		controlador.setVerbbdd(verBase);

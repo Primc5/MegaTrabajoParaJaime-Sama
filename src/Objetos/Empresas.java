@@ -2,17 +2,18 @@ package Objetos;
 
 public class Empresas {
 
-	private String id_Empresa, Nombre, Tamaño, Pais, Capital, Director;
+	private String Nombre, Tamaño, Pais, Director;
+	private int id_Empresa, Capital;
 
 	public Empresas() {
 		
 	}
 	
-	public String getId_Empresa() {
+	public int getId_Empresa() {
 		return id_Empresa;
 	}
 
-	public void setId_Empresa(String id_Empresa) {
+	public void setId_Empresa(int id_Empresa) {
 		this.id_Empresa = id_Empresa;
 	}
 
@@ -40,11 +41,11 @@ public class Empresas {
 		Pais = pais;
 	}
 
-	public String getCapital() {
+	public int getCapital() {
 		return Capital;
 	}
 
-	public void setCapital(String capital) {
+	public void setCapital(int capital) {
 		Capital = capital;
 	}
 

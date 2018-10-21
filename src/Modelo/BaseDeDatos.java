@@ -12,11 +12,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Properties;
@@ -32,7 +36,6 @@ import interfas.Interface;
 public class BaseDeDatos implements Interface {
 
 	private DefaultTableModel miTabla;
-
 	private String bd, login, pwd, url, driver, nombre, tipo, empresa, creacion, id, tamaño, pais, capital, director;
 	private Connection conexion;
 	private HashMap<String, String> consultas;
@@ -123,10 +126,10 @@ public class BaseDeDatos implements Interface {
 		rset = stm.executeUpdate();
 		for (Entry<Integer, Videojuegos> valor : datos.entrySet()) {
 			stm = conexion.prepareStatement(consultas.get("sincronizeVideojuegos"));
-			stm.setString(1, valor.getValue().getId());
+			stm.setLong(1, valor.getValue().getId());
 			stm.setString(2, valor.getValue().getNombre());
 			stm.setString(3, valor.getValue().getTipo());
-			stm.setString(4, valor.getValue().getEmpresa().getId_Empresa());
+			stm.setLong(4, valor.getValue().getEmpresa().getId_Empresa());
 			stm.setString(5, valor.getValue().getCreación());
 			rset = stm.executeUpdate();
 		}
@@ -145,11 +148,11 @@ public class BaseDeDatos implements Interface {
 		rset = stm.executeUpdate();
 		for (Entry<Integer, Empresas> valor : datos.entrySet()) {
 			stm = conexion.prepareStatement(consultas.get("sincronizeEmpresas"));
-			stm.setString(1, valor.getValue().getId_Empresa());
+			stm.setLong(1, valor.getValue().getId_Empresa());
 			stm.setString(2, valor.getValue().getNombre());
 			stm.setString(3, valor.getValue().getTamaño());
 			stm.setString(4, valor.getValue().getPais());
-			stm.setString(5, valor.getValue().getCapital());
+			stm.setLong(5, valor.getValue().getCapital());
 			stm.setString(6, valor.getValue().getDirector());
 			rset = stm.executeUpdate();
 		}
@@ -170,7 +173,7 @@ public class BaseDeDatos implements Interface {
 			stm.setString(4, empresa);
 			stm.setString(5, creacion);
 			int rset = stm.executeUpdate();
-			v.setId(id);
+			v.setId(Integer.parseInt(id));
 			v.setNombre(nombre);
 			v.setTipo(tipo);
 			v.setEmpresa(empresas.get(Integer.parseInt(empresa)));
@@ -194,11 +197,11 @@ public class BaseDeDatos implements Interface {
 			stm.setString(5, capital);
 			stm.setString(6, director);
 			int rset = stm.executeUpdate();
-			e.setId_Empresa(id);
+			e.setId_Empresa(Integer.parseInt(id));
 			e.setNombre(nombre);
 			e.setTamaño(tamaño);
 			e.setPais(pais);
-			e.setCapital(capital);
+			e.setCapital(Integer.parseInt(capital));
 			e.setDirector(director);
 			datos.put(datos.size()+1, e);
 
@@ -221,7 +224,7 @@ public class BaseDeDatos implements Interface {
 				empresa = rset.getString("Empresa");
 				creacion = rset.getString("Creacion");
 				v.setNombre(nombre);
-				v.setId(id);
+				v.setId(Integer.parseInt(id));
 				v.setTipo(tipo);
 				v.setEmpresa(datos.get(Integer.parseInt(empresa)));
 				v.setCreación(creacion);
@@ -247,10 +250,10 @@ public class BaseDeDatos implements Interface {
 				capital = rset.getString("Capital");
 				director = rset.getString("Director");
 				e.setNombre(nombre);
-				e.setId_Empresa(id);
+				e.setId_Empresa(Integer.parseInt(id));
 				e.setTamaño(tamaño);
 				e.setPais(pais);
-				e.setCapital(capital);
+				e.setCapital(Integer.parseInt(capital));
 				e.setDirector(director);
 				em.put(rset.getInt(1), e);
 			}
@@ -262,6 +265,7 @@ public class BaseDeDatos implements Interface {
 	}
 
 	public void MostrarDatos(String tabla) {
+		System.out.println("hola");
 		int numColumnas = getNumColumnas(consultas.get(tabla));
 		int numFilas = getNumFilas(consultas.get(tabla));
 

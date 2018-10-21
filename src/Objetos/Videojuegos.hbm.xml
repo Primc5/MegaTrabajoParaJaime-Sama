@@ -18,7 +18,7 @@
 		</property>
 		<many-to-one name="empresa" column="Empresa"
 			not-null="true" />
-		<property name="creación" type="date">
+		<property name="creación" type="string">
 			<column name="Creacion" not-null="true" />
 		</property>
 	</class>
