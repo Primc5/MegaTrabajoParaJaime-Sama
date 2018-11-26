@@ -16,10 +16,14 @@ import Vistas.AñadirFicheroEmpresas;
 import Vistas.AñadirFicheroVideojuegos;
 import Vistas.AñadirHibernateEmpresas;
 import Vistas.AñadirHibernateVideojuegos;
+import Vistas.AñadirJsonEmpresas;
+import Vistas.AñadirJsonVideojuegos;
 import Vistas.Principal;
 import Vistas.VerBBDD;
 import Vistas.VerFichero;
 import Vistas.VerHibernate;
+import Vistas.VerJson;
+import json.AccesoJSONRemoto;
 
 public class Main {
 
@@ -28,7 +32,7 @@ public class Main {
 		BaseDeDatos baseDatos = new BaseDeDatos();
 		Fichero fichero = new Fichero();
 		AccesHibernate accesoh = new AccesHibernate();
-		
+		AccesoJSONRemoto accesoJ = new AccesoJSONRemoto();
 		Controlador controlador = new Controlador();
 		
 		Principal prin = new Principal();
@@ -41,7 +45,11 @@ public class Main {
 		AñadirHibernateEmpresas ahibernateEmpresas = new AñadirHibernateEmpresas();
 		VerFichero verfichero = new VerFichero();
 		VerHibernate verhibernate = new VerHibernate();
-
+		VerJson verjson = new VerJson();
+		AñadirJsonVideojuegos aJsonVideojuego = new AñadirJsonVideojuegos();
+		AñadirJsonEmpresas aJsonEmpresas = new AñadirJsonEmpresas();
+		
+		
 		ahibernateVideojuegos.setControlador(controlador);
 		ahibernateEmpresas.setControlador(controlador);
 		aFicheroVideojuegos.setControlador(controlador);
@@ -57,6 +65,11 @@ public class Main {
 		abbddEmpresas.setModelo(baseDatos);
 		verfichero.setModelo(fichero);
 		verfichero.setControlador(controlador);
+		aJsonVideojuego.setControlador(controlador);
+		aJsonEmpresas.setControlador(controlador);
+		verjson.setControlador(controlador);
+		verjson.setModelo(accesoJ);
+		
 
 		controlador.setVerhibernate(verhibernate);
 		controlador.setHibernateEmpresas(ahibernateEmpresas);
@@ -71,5 +84,6 @@ public class Main {
 		controlador.setVerfichero(verfichero);
 		controlador.setaFichero(aFicheroVideojuegos);
 		controlador.setaFicheroEmpresas(aFicheroEmpresas);
+		
 	}
 }

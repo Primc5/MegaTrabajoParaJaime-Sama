@@ -29,11 +29,12 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import Controlador.Controlador;
 import Hibernate.AccesHibernate;
 import Modelo.BaseDeDatos;
+import json.AccesoJSONRemoto;
 
 public class VerJson extends JFrame{
 
 		private Controlador controlador;
-		private AccesHibernate modelo;
+		private AccesoJSONRemoto modelo;
 		
 		private JLabel lblTincas;
 		private JPanel panel;
@@ -57,7 +58,7 @@ public class VerJson extends JFrame{
 			return resultado;
 		}
 		
-		public void setModelo(AccesHibernate modelo) {
+		public void setModelo(AccesoJSONRemoto modelo) {
 			this.modelo = modelo;
 		}
 		public void setControlador(Controlador controlador) {
