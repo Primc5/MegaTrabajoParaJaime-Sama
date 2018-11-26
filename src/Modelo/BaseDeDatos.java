@@ -64,14 +64,14 @@ public class BaseDeDatos implements Interface {
 		consultas.put("sincronizeVideojuegos",
 				"INSERT INTO ficheritos (id, nombre, tipo, Empresa, Creacion)" + "VALUES (?, ?, ?, ?, ?);");
 		consultas.put("sincronizeEmpresas",
-				"INSERT INTO empresas (id_Empresa, Nombre, Tamaño, Pais, Capital, Director)" + "VALUES (?, ?, ?, ?, ?, ?);");
+				"INSERT INTO empresas (id_Empresa, Nombre, Tamanno, Pais, Capital, Director)" + "VALUES (?, ?, ?, ?, ?, ?);");
 		consultas.put("LeerBBDD", "Select * from ficheritos");
 		consultas.put("LeerBBDDEmpresas", "Select * from empresas");
 		consultas.put("eliminarTabla", "DROP TABLE ?");
 		consultas.put("crearTablaFicheritos",
 				"Create TABLE ficheritos(id int primary key auto_increment, nombre varchar(45), tipo varchar(45), Empresa int(45), Creacion date)");
 		consultas.put("crearTablaEmpresas",
-				"Create TABLE empresas(id_Empresa int primary key auto_increment, Nombre varchar(45), Tamaño varchar(45), Pais varchar(45), Capital int(25), Director varchar(45))");
+				"Create TABLE empresas(id_Empresa int primary key auto_increment, Nombre varchar(45), Tamanno varchar(45), Pais varchar(45), Capital int(25), Director varchar(45))");
 	}
 
 	private void getBBDDini() {
