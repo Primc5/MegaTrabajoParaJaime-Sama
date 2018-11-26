@@ -1,7 +1,12 @@
 /Controlador/
+/Hibernate.cfg.xml
 /Hibernate/
 /Main/
 /Modelo/
 /Objetos/
 /Vistas/
+/empresas.txt
 /interfas/
+/jgoodies-forms-1.8.0-sources.jar
+/jgoodies-forms-1.8.0.jar
+/mysql-connector-java-8.0.11.jar
