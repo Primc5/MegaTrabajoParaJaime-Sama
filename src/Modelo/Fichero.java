@@ -169,13 +169,9 @@ public class Fichero implements Interface {
 			bw = new BufferedWriter(fw);
 			for (Entry<Integer, Videojuegos> valor : datos.entrySet()) {
 				bw.write("ID: " + valor.getValue().getId() + " ");
-				bw.newLine();
 				bw.write("Nombre: " + valor.getValue().getNombre() + " ");
-				bw.newLine();
 				bw.write("Tipo: " + valor.getValue().getTipo() + " ");
-				bw.newLine();
 				bw.write("Empresa: " + valor.getValue().getEmpresa().getId_Empresa() + " ");
-				bw.newLine();
 				bw.write("Creación: " + valor.getValue().getCreación() + " ");
 				bw.newLine();
 				bw.flush();

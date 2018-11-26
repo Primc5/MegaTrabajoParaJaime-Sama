@@ -52,12 +52,6 @@ public class Controlador {
 	}
 	public void BorrarDatosHibernate() {
 		hibernate.borrarDatos();
-		try {
-			hibernate.IntroducirDatos();
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		hibernate.cerrarSesion();
 	}
 	//pedida de datos de vista a modelo(base de datos)
