@@ -28,13 +28,13 @@ import json.AccesoJSONRemoto;
 public class Main {
 
 	public static void main(String[] args) throws IOException, SQLException {
-		
+
 		BaseDeDatos baseDatos = new BaseDeDatos();
 		Fichero fichero = new Fichero();
 		AccesHibernate accesoh = new AccesHibernate();
 		AccesoJSONRemoto accesoJ = new AccesoJSONRemoto();
 		Controlador controlador = new Controlador();
-		
+
 		Principal prin = new Principal();
 		VerBBDD verBase = new VerBBDD();
 		AñadirBBDDVideojuegos abbddVideojuegos = new AñadirBBDDVideojuegos();
@@ -46,10 +46,9 @@ public class Main {
 		VerFichero verfichero = new VerFichero();
 		VerHibernate verhibernate = new VerHibernate();
 		VerJson verjson = new VerJson();
-		AñadirJsonVideojuegos aJsonVideojuego = new AñadirJsonVideojuegos();
+		AñadirJsonVideojuegos aJsonVideojuegos = new AñadirJsonVideojuegos();
 		AñadirJsonEmpresas aJsonEmpresas = new AñadirJsonEmpresas();
-		
-		
+
 		ahibernateVideojuegos.setControlador(controlador);
 		ahibernateEmpresas.setControlador(controlador);
 		aFicheroVideojuegos.setControlador(controlador);
@@ -65,7 +64,7 @@ public class Main {
 		abbddEmpresas.setModelo(baseDatos);
 		verfichero.setModelo(fichero);
 		verfichero.setControlador(controlador);
-		aJsonVideojuego.setControlador(controlador);
+		aJsonVideojuegos.setControlador(controlador);
 		aJsonEmpresas.setControlador(controlador);
 		verjson.setControlador(controlador);
 		verjson.setModelo(accesoJ);
@@ -84,6 +83,9 @@ public class Main {
 		controlador.setVerfichero(verfichero);
 		controlador.setaFichero(aFicheroVideojuegos);
 		controlador.setaFicheroEmpresas(aFicheroEmpresas);
-		
+		controlador.setaJsonEmpresas(aJsonEmpresas);
+		controlador.setaJsonVideojuegos(aJsonVideojuegos);
+		controlador.setVerjson(verjson);
+		controlador.setJson(accesoJ);
 	}
 }

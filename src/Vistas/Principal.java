@@ -144,6 +144,11 @@ public class Principal extends JFrame{
 		panel_3.add(txtpnRealizarOperacionesDe);
 		
 		JButton btnJson = new JButton("Json");
+		btnJson.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controlador.VerJson();
+			}
+		});
 		btnJson.setForeground(Color.BLACK);
 		btnJson.setFont(new Font("Tahoma", Font.PLAIN, 42));
 		btnJson.setBackground(Color.ORANGE);

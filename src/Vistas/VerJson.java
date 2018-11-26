@@ -34,7 +34,7 @@ import json.AccesoJSONRemoto;
 public class VerJson extends JFrame{
 
 		private Controlador controlador;
-		private AccesoJSONRemoto modelo;
+		private AccesoJSONRemoto json;
 		
 		private JLabel lblTincas;
 		private JPanel panel;
@@ -59,7 +59,7 @@ public class VerJson extends JFrame{
 		}
 		
 		public void setModelo(AccesoJSONRemoto modelo) {
-			this.modelo = modelo;
+			this.json = json;
 		}
 		public void setControlador(Controlador controlador) {
 			this.controlador = controlador;

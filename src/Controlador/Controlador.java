@@ -17,14 +17,23 @@ import Vistas.VerFichero;
 import Vistas.AñadirFicheroVideojuegos;
 import Vistas.AñadirHibernateEmpresas;
 import Vistas.AñadirHibernateVideojuegos;
+import Vistas.AñadirJsonEmpresas;
+import Vistas.AñadirJsonVideojuegos;
 import interfas.Interface;
+import json.AccesoJSONRemoto;
 import Vistas.VerHibernate;
+import Vistas.VerJson;
 
 public class Controlador {
 	private AccesHibernate hibernate;
 	private BaseDeDatos modelo;
 	private Fichero fichero;
+	private AccesoJSONRemoto json;
 	
+	
+	private VerJson verjson; 
+	private AñadirJsonVideojuegos aJsonVideojuegos;
+	private AñadirJsonEmpresas aJsonEmpresas;
 	private VerHibernate verhibernate;
 	private AñadirHibernateVideojuegos aHibernateVideojuegos;
 	private AñadirHibernateEmpresas aHibernateEmpresas;
@@ -153,6 +162,10 @@ public class Controlador {
 	}
 	
 	//cambios de vista
+	public void VerJson() {
+		principal.setVisible(false);
+	verjson.setVisible(true);
+	}
 	public void VerHibernate() {
 		principal.setVisible(false);
 		verhibernate.setVisible(true);
@@ -273,6 +286,20 @@ public class Controlador {
 	}
 	public void setHibernate(AccesHibernate hibernate) {
 		this.hibernate = hibernate;
+	}
+	public void setJson(AccesoJSONRemoto json) {
+		this.json = json;
+	}
+	public void setVerjson(VerJson verjson) {
+		this.verjson = verjson;
+	}
+	
+	public void setaJsonVideojuegos(AñadirJsonVideojuegos aJsonVideojuegos) {
+		this.aJsonVideojuegos = aJsonVideojuegos;
+	}
+	
+	public void setaJsonEmpresas(AñadirJsonEmpresas aJsonEmpresas) {
+		this.aJsonEmpresas = aJsonEmpresas;
 	}
 	
 	
