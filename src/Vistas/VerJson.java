@@ -30,12 +30,14 @@ import Controlador.Controlador;
 import Hibernate.AccesHibernate;
 import Modelo.BaseDeDatos;
 import Modelo.Fichero;
+import auxiliares.MontarTablas;
 import json.AccesoJSONRemoto;
 
 public class VerJson extends JFrame{
 
 		private Controlador controlador;
 		private Fichero modelo;
+		private MontarTablas mTablas;
 		
 		private JLabel lblTincas;
 		private JPanel panel;
@@ -58,7 +60,9 @@ public class VerJson extends JFrame{
 
 			return resultado;
 		}
-		
+		public void setmTablas(MontarTablas mTablas) {
+			this.mTablas = mTablas;
+		}
 		public void setModelo(Fichero modelo) {
 			this.modelo = modelo;
 		}
@@ -233,9 +237,9 @@ public class VerJson extends JFrame{
 				@Override
 				public void windowActivated(WindowEvent e) {
 					controlador.VerDatosVideojuegos();
-					table.setModel(modelo.getTabla());
+					table.setModel(mTablas.getTabla());
 					controlador.VerDatosEmpresas();
-					table_1.setModel(modelo.getTabla());
+					table_1.setModel(mTablas.getTabla());
 				}
 			});
 			table.addMouseListener(new MouseAdapter() {
@@ -256,7 +260,7 @@ public class VerJson extends JFrame{
 								controlador.EliminarDatosFicheroVideojuegos(videojuego);
 								String tabla = "LeerBBDD";
 								controlador.VerDatosVideojuegos();
-								table.setModel(modelo.getTabla());
+								table.setModel(mTablas.getTabla());
 							}else {
 								System.err.println("No se ha podido eliminar la fila");
 							}

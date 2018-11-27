@@ -30,6 +30,7 @@ import Controlador.Controlador;
 import Modelo.BaseDeDatos;
 import Modelo.Fichero;
 import Objetos.Videojuegos;
+import auxiliares.MontarTablas;
 
 import javax.swing.JTextPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -46,6 +47,7 @@ public class VerFichero extends JFrame {
 
 	private Controlador controlador;
 	private Fichero modelo;
+	private MontarTablas mTablas;
 	
 	private JLabel lblTincas;
 	private JPanel panel;
@@ -68,6 +70,10 @@ public class VerFichero extends JFrame {
 		return resultado;
 	}
 	
+	public void setmTablas(MontarTablas mTablas) {
+		this.mTablas = mTablas;
+	}
+
 	public void setModelo(Fichero modelo) {
 		this.modelo = modelo;
 	}
@@ -239,9 +245,9 @@ public class VerFichero extends JFrame {
 			public void windowActivated(WindowEvent e) {
 				
 				controlador.VerDatosEmpresas();
-				table_1.setModel(modelo.getTabla());
+				table_1.setModel(mTablas.getTabla());
 				controlador.VerDatosVideojuegos();
-				table.setModel(modelo.getTabla());
+				table.setModel(mTablas.getTabla());
 			}
 		});
 		table.addMouseListener(new MouseAdapter() {
@@ -262,7 +268,7 @@ public class VerFichero extends JFrame {
 							controlador.EliminarDatosFicheroVideojuegos(videojuego);
 							String tabla = "LeerBBDD";
 							controlador.VerDatosVideojuegos();
-							table.setModel(modelo.getTabla());
+							table.setModel(mTablas.getTabla());
 						}else {
 							System.err.println("No se ha podido eliminar la fila");
 						}

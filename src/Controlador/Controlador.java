@@ -23,6 +23,7 @@ import interfas.Interface;
 import json.AccesoJSONRemoto;
 import Vistas.VerHibernate;
 import Vistas.VerJson;
+import auxiliares.MontarTablas;
 
 public class Controlador {
 	private AccesHibernate hibernate;
@@ -44,6 +45,7 @@ public class Controlador {
 	private VerFichero verfichero;
 	private AñadirFicheroVideojuegos aFicheroVideojuegos;
 	private AñadirFicheroEmpresas aFicheroEmpresas;
+	private MontarTablas montarTablas;
 	
 	//pedida de datos de vista a modelo(hibernate)
 	public void VerDatosVideojuegosHibernate(){
@@ -81,10 +83,10 @@ public class Controlador {
 	
 	//pedida de datos de vista a modelo(fichero)
 	public void VerDatosVideojuegos(){
-		fichero.MostrarDatosVideojuegos(fichero.LeerDatosVideojuegos(fichero.LeerDatosEmpresas()));
+		montarTablas.MostrarDatosVideojuegos(fichero.LeerDatosVideojuegos(fichero.LeerDatosEmpresas()));
 	}
 	public void VerDatosEmpresas(){
-		fichero.MostrarDatosEmpresas(fichero.LeerDatosEmpresas());
+		montarTablas.MostrarDatosEmpresas(fichero.LeerDatosEmpresas());
 	}
 	public HashMap<Integer, Videojuegos> AñadirDatosVideojuegos(String id, String nombre, String tipo, String empresa, String creacion){
 		return fichero.CopiarDatosVideojuegos(fichero.AnadirDatosVideojuegos(fichero.LeerDatosVideojuegos(fichero.LeerDatosEmpresas()),fichero.LeerDatosEmpresas(), id, nombre, tipo, empresa, creacion),fichero.LeerDatosEmpresas());
@@ -299,6 +301,9 @@ public class Controlador {
 	
 	public void setaJsonEmpresas(AñadirJsonEmpresas aJsonEmpresas) {
 		this.aJsonEmpresas = aJsonEmpresas;
+	}
+	public void setMontarTablas(MontarTablas montarTablas) {
+		this.montarTablas = montarTablas;
 	}
 	
 	

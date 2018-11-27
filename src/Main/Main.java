@@ -23,6 +23,7 @@ import Vistas.VerBBDD;
 import Vistas.VerFichero;
 import Vistas.VerHibernate;
 import Vistas.VerJson;
+import auxiliares.MontarTablas;
 import json.AccesoJSONRemoto;
 
 public class Main {
@@ -34,6 +35,7 @@ public class Main {
 		AccesHibernate accesoh = new AccesHibernate();
 		AccesoJSONRemoto accesoJ = new AccesoJSONRemoto();
 		Controlador controlador = new Controlador();
+		MontarTablas montarTablas = new MontarTablas();
 
 		Principal prin = new Principal();
 		VerBBDD verBase = new VerBBDD();
@@ -64,10 +66,12 @@ public class Main {
 		abbddEmpresas.setModelo(baseDatos);
 		verfichero.setModelo(fichero);
 		verfichero.setControlador(controlador);
+		verfichero.setmTablas(montarTablas);
 		aJsonVideojuegos.setControlador(controlador);
 		aJsonEmpresas.setControlador(controlador);
 		verjson.setControlador(controlador);
 		verjson.setModelo(fichero);
+		verjson.setmTablas(montarTablas);
 		
 
 		controlador.setVerhibernate(verhibernate);
@@ -87,5 +91,6 @@ public class Main {
 		controlador.setaJsonVideojuegos(aJsonVideojuegos);
 		controlador.setVerjson(verjson);
 		controlador.setJson(accesoJ);
+		controlador.setMontarTablas(montarTablas);
 	}
 }

@@ -18,9 +18,12 @@ public class AccesoJSONRemoto {
 
 	public AccesoJSONRemoto() {
 
+		encargadoPeticiones = new ApiRequests();
+		
 		ReadConfig readConfig = new ReadConfig("Ficheros/Config/jsonCalls.properties");
 		HashMap<String, String> datosConexion;
 		datosConexion = readConfig.getHash();
+		
 		SERVER_PATH = datosConexion.get("SERVER_PATH");
 		GET_GAME = datosConexion.get("GET_GAME");
 		SET_GAME = datosConexion.get("SET_GAME");
