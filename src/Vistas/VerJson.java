@@ -29,12 +29,13 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import Controlador.Controlador;
 import Hibernate.AccesHibernate;
 import Modelo.BaseDeDatos;
+import Modelo.Fichero;
 import json.AccesoJSONRemoto;
 
 public class VerJson extends JFrame{
 
 		private Controlador controlador;
-		private BaseDeDatos json;
+		private Fichero modelo;
 		
 		private JLabel lblTincas;
 		private JPanel panel;
@@ -58,8 +59,8 @@ public class VerJson extends JFrame{
 			return resultado;
 		}
 		
-		public void setModelo(BaseDeDatos modelo) {
-			this.json = modelo;
+		public void setModelo(Fichero modelo) {
+			this.modelo = modelo;
 		}
 		public void setControlador(Controlador controlador) {
 			this.controlador = controlador;
@@ -231,31 +232,31 @@ public class VerJson extends JFrame{
 			addWindowListener(new WindowAdapter() {
 				@Override
 				public void windowActivated(WindowEvent e) {
-					controlador.VerDatosVideojuegosHibernate();
-					table.setModel(json.getTabla());
-					controlador.VerDatosEmpresasHibernate();
-					table_1.setModel(json.getTabla());
+					controlador.VerDatosVideojuegos();
+					table.setModel(modelo.getTabla());
+					controlador.VerDatosEmpresas();
+					table_1.setModel(modelo.getTabla());
 				}
 			});
 			table.addMouseListener(new MouseAdapter() {
 
 				@Override
 				public void mousePressed(MouseEvent e) {
-					String fila = (String) table.getValueAt(table.getSelectedRow(), 0);
+					String fila = (String) table.getValueAt(table.getSelectedRow(), 3);
+					System.out.println(fila);
 					btnEliminarDato.setEnabled(true);
 					btnEliminarDato.addMouseListener(new MouseAdapter() {
 						@Override
 						public void mouseClicked(MouseEvent arg0) {
-							controlador.BorrarDatosHibernate();
 							if (table.getSelectedRow() == -1) {
 								btnEliminarDato.setEnabled(false);
 							}
 							if(isNumeric(fila) && fila != null) {
 								int videojuego = Integer.parseInt(fila);
-								controlador.EliminarDatosBaseDeDatosVideojuegos(videojuego);
+								controlador.EliminarDatosFicheroVideojuegos(videojuego);
 								String tabla = "LeerBBDD";
-								json.MostrarDatos(tabla);
-								table.setModel(json.getTabla());
+								controlador.VerDatosVideojuegos();
+								table.setModel(modelo.getTabla());
 							}else {
 								System.err.println("No se ha podido eliminar la fila");
 							}
@@ -278,10 +279,10 @@ public class VerJson extends JFrame{
 							}
 							if(isNumeric(fila) && fila != null) {
 								int empresa = Integer.parseInt(fila);
-								controlador.EliminarDatosBaseDeDatosEmpresas(empresa);
+								controlador.EliminarDatosFicheroEmpresas(empresa);
 								String tabla = "LeerBBDDEmpresas";
-								json.MostrarDatos(tabla);
-								table_1.setModel(json.getTabla());
+								/*modelo.MostrarDatos(tabla);
+								table_1.setModel(modelo.getTabla());*/
 							}else {
 								System.err.println("No se ha podido eliminar la fila");
 							}

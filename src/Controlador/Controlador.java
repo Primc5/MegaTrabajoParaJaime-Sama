@@ -95,7 +95,6 @@ public class Controlador {
 	
 	public HashMap<Integer, Videojuegos> EliminarDatosFicheroVideojuegos(Integer clave) {
 		return fichero.CopiarDatosVideojuegos(fichero.EliminarDatosVideojuegos(fichero.LeerDatosVideojuegos(fichero.LeerDatosEmpresas()), clave),fichero.LeerDatosEmpresas());
-		
 	}
 	
 	public HashMap<Integer, Empresas> AñadirDatosEmpresas(String id, String nombre, String tamaño, String pais, String capital, String director){

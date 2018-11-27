@@ -9,6 +9,7 @@ import org.json.simple.JSONValue;
 import Objetos.Empresas;
 import Objetos.Videojuegos;
 import auxiliares.ApiRequests;
+import auxiliares.ReadConfig;
 
 public class AccesoJSONRemoto {
 
@@ -17,13 +18,14 @@ public class AccesoJSONRemoto {
 
 	public AccesoJSONRemoto() {
 
-		encargadoPeticiones = new ApiRequests();
-
-		SERVER_PATH = "http://localhost/Pablo/Acceso a Datos/BaloncestoJSONServer/";
-		GET_GAME = "leeJuegos.php";
-		SET_GAME = "escribirJuegos.php";
-		GET_COMPANY = "leeEmpresas.php";
-		SET_COMPANY = "escribirEmpresas.php";
+		ReadConfig readConfig = new ReadConfig("Ficheros/Config/jsonCalls.properties");
+		HashMap<String, String> datosConexion;
+		datosConexion = readConfig.getHash();
+		SERVER_PATH = datosConexion.get("SERVER_PATH");
+		GET_GAME = datosConexion.get("GET_GAME");
+		SET_GAME = datosConexion.get("SET_GAME");
+		GET_COMPANY = datosConexion.get("GET_COMPANY");
+		SET_COMPANY = datosConexion.get("SET_COMPANY");
 
 	}
 
