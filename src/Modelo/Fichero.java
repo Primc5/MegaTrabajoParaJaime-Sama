@@ -43,7 +43,7 @@ public class Fichero implements Interface {
 	// lee videojuegos del fichero 
 	public HashMap<Integer, Videojuegos> LeerDatosVideojuegos(HashMap<Integer, Empresas> datos) {
 		try {
-			fr = new FileReader("src/yo.txt");
+			fr = new FileReader("Ficheros/Datos/yo.txt");
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -97,7 +97,7 @@ public class Fichero implements Interface {
 	// lee empresas del fichero 
 		public HashMap<Integer, Empresas> LeerDatosEmpresas() {
 			try {
-				fr = new FileReader("src/empresas.txt");
+				fr = new FileReader("Ficheros/Datos/empresas.txt");
 			} catch (FileNotFoundException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -165,7 +165,7 @@ public class Fichero implements Interface {
 	// mete en el fichero los valores que le pase por un hashmap de videojuegos
 	public HashMap<Integer, Videojuegos> CopiarDatosVideojuegos(HashMap<Integer, Videojuegos> datos, HashMap<Integer, Empresas> empresas) {
 		try {
-			fw = new FileWriter("src/yo.txt");
+			fw = new FileWriter("Ficheros/Datos/yo.txt");
 			bw = new BufferedWriter(fw);
 			for (Entry<Integer, Videojuegos> valor : datos.entrySet()) {
 				bw.write("ID: " + valor.getValue().getId() + " ");
@@ -186,7 +186,7 @@ public class Fichero implements Interface {
 	// mete en el fichero los valores que le pase por un hashmap de empresas
 		public HashMap<Integer, Empresas> CopiarDatosEmpresas(HashMap<Integer, Empresas> datos) {
 			try {
-				fw = new FileWriter("src/empresas.txt");
+				fw = new FileWriter("Ficheros/Datos/empresas.txt");
 				bw = new BufferedWriter(fw);
 				for (Entry<Integer, Empresas> valor : datos.entrySet()) {
 					bw.write("ID: " + valor.getValue().getId_Empresa() + " ");

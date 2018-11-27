@@ -79,7 +79,7 @@ public class BaseDeDatos implements Interface {
 		InputStream entrada = null;
 		OutputStream salida = null;
 		try {
-			File miConfig = new File("src/Modelo/bbdd_conf.ini");
+			File miConfig = new File("Ficheros/Config/bbdd_conf.ini");
 			if (miConfig.exists()) {
 				entrada = new FileInputStream(miConfig);
 				salida = new FileOutputStream(miConfig);

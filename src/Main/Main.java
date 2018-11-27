@@ -67,7 +67,7 @@ public class Main {
 		aJsonVideojuegos.setControlador(controlador);
 		aJsonEmpresas.setControlador(controlador);
 		verjson.setControlador(controlador);
-		verjson.setModelo(accesoJ);
+		verjson.setModelo(baseDatos);
 		
 
 		controlador.setVerhibernate(verhibernate);

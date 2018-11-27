@@ -34,7 +34,7 @@ import json.AccesoJSONRemoto;
 public class VerJson extends JFrame{
 
 		private Controlador controlador;
-		private AccesoJSONRemoto json;
+		private BaseDeDatos json;
 		
 		private JLabel lblTincas;
 		private JPanel panel;
@@ -58,8 +58,8 @@ public class VerJson extends JFrame{
 			return resultado;
 		}
 		
-		public void setModelo(AccesoJSONRemoto modelo) {
-			this.json = json;
+		public void setModelo(BaseDeDatos modelo) {
+			this.json = modelo;
 		}
 		public void setControlador(Controlador controlador) {
 			this.controlador = controlador;
@@ -232,9 +232,9 @@ public class VerJson extends JFrame{
 				@Override
 				public void windowActivated(WindowEvent e) {
 					controlador.VerDatosVideojuegosHibernate();
-					table.setModel(modelo.getTabla());
+					table.setModel(json.getTabla());
 					controlador.VerDatosEmpresasHibernate();
-					table_1.setModel(modelo.getTabla());
+					table_1.setModel(json.getTabla());
 				}
 			});
 			table.addMouseListener(new MouseAdapter() {
@@ -254,8 +254,8 @@ public class VerJson extends JFrame{
 								int videojuego = Integer.parseInt(fila);
 								controlador.EliminarDatosBaseDeDatosVideojuegos(videojuego);
 								String tabla = "LeerBBDD";
-								modelo.MostrarDatos(tabla);
-								table.setModel(modelo.getTabla());
+								json.MostrarDatos(tabla);
+								table.setModel(json.getTabla());
 							}else {
 								System.err.println("No se ha podido eliminar la fila");
 							}
@@ -280,8 +280,8 @@ public class VerJson extends JFrame{
 								int empresa = Integer.parseInt(fila);
 								controlador.EliminarDatosBaseDeDatosEmpresas(empresa);
 								String tabla = "LeerBBDDEmpresas";
-								modelo.MostrarDatos(tabla);
-								table_1.setModel(modelo.getTabla());
+								json.MostrarDatos(tabla);
+								table_1.setModel(json.getTabla());
 							}else {
 								System.err.println("No se ha podido eliminar la fila");
 							}

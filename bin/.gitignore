@@ -1,16 +1,6 @@
-<<<<<<< HEAD
+/Vistas/
+/interfas/
 /json/
-=======
-/Controlador/
-/Hibernate.cfg.xml
-/Hibernate/
 /Main/
 /Modelo/
-/Objetos/
-/Vistas/
-/empresas.txt
-/interfas/
-/jgoodies-forms-1.8.0-sources.jar
-/jgoodies-forms-1.8.0.jar
-/mysql-connector-java-8.0.11.jar
->>>>>>> 1b7032d0995634872f8124b1d30dae389fcdd527
+/auxiliares/
