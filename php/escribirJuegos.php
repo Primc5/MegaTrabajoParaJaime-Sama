@@ -1,6 +1,6 @@
 <?php
 
-require 'bbdd.php'; // Incluimos fichero en la que está la coenxión con la BBDD
+require 'bbddGames.php'; // Incluimos fichero en la que está la coenxión con la BBDD
 
 /*
  * Se mostrará siempre la información en formato json para que se pueda leer desde un html (via js)
@@ -39,7 +39,7 @@ if(isset($parameters)){
 
 			$arrMensaje["estado"] = "ok";
 			$arrMensaje["mensaje"] = "Juego insertado correctamente";
-			
+
 		}else{ // Se ha producido algún error al ejecutar la query
 
 			$arrMensaje["estado"] = "error";

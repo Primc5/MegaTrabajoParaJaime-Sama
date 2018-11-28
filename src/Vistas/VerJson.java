@@ -114,9 +114,9 @@ public class VerJson extends JFrame{
 					                options,
 					                options[0]);
 					if (n == JOptionPane.YES_OPTION) {
-						controlador.AñadirHibernateVideojuegos();
+						controlador.AnnadirVideojuegosJson();
 					}else if(n == JOptionPane.NO_OPTION) {
-						controlador.AñadirHibernateEmpresas();
+						controlador.AnnadirEmpresasJson();
 					}
 				}
 			});

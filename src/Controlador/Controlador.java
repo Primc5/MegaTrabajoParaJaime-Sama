@@ -49,11 +49,18 @@ public class Controlador {
 	
 	//pedida de datos de vista a modelo(json)
 	public void VerDatosVideojuegosJSon() {
-		montarTablas.MostrarDatosVideojuegos(json.leeVideojuegos(json.leeEmpresas()));
+		montarTablas.MostrarDatosVideojuegos(json.LeerDatosVideojuegos(json.LeerDatosEmpresas()));
 	}
 	public void VerDatosEmpresasJSon() {
-		montarTablas.MostrarDatosEmpresas(json.leeEmpresas());
+		montarTablas.MostrarDatosEmpresas(json.LeerDatosEmpresas());
 	}
+	public HashMap<Integer, Videojuegos> AñadirDatosVideojuegosJson(String id, String nombre, String tipo, String empresa, String creacion){
+		return json.AnadirDatosVideojuegos(json.LeerDatosVideojuegos(json.LeerDatosEmpresas()),json.LeerDatosEmpresas(), id, nombre, tipo, empresa, creacion);
+	}
+	public HashMap<Integer, Empresas> AñadirDatosEmpresasJson(String id, String nombre, String tamaño, String pais, String capital, String director){
+		return json.AnadirDatosEmpresas(json.LeerDatosEmpresas(), id, nombre, tamaño, pais, capital, director);
+	}
+	
 	//pedida de datos de vista a modelo(hibernate)
 	public void VerDatosVideojuegosHibernate(){
 		hibernate.MostrarDatos("LeerVideojuegos");
@@ -72,6 +79,7 @@ public class Controlador {
 		hibernate.borrarDatos();
 		hibernate.cerrarSesion();
 	}
+	
 	//pedida de datos de vista a modelo(base de datos)
 	public HashMap<Integer, Videojuegos> EliminarDatosBaseDeDatosVideojuegos(Integer clave) {
 		return modelo.EliminarDatosVideojuegos(modelo.LeerDatosVideojuegos(modelo.LeerDatosEmpresas()), clave);
@@ -233,6 +241,22 @@ public class Controlador {
 	public void VolverVerFichero() {
 		aFicheroVideojuegos.setVisible(false);
 		verfichero.setVisible(true);
+	}
+	public void VolverAnnadirVideojuegosJson() {
+		aJsonVideojuegos.setVisible(false);
+		verjson.setVisible(true);
+	}
+	public void VolverAnnadirEmpresasJson() {
+		aJsonEmpresas.setVisible(false);
+		verjson.setVisible(true);
+	}
+	public void AnnadirVideojuegosJson() {
+		verjson.setVisible(false);
+		aJsonVideojuegos.setVisible(true);
+	}
+	public void AnnadirEmpresasJson() {
+		verjson.setVisible(false);
+		aJsonEmpresas.setVisible(true);
 	}
 	public void ComprobarFichero() {
 		verbbdd.setVisible(false);

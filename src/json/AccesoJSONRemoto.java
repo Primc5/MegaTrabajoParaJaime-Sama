@@ -11,8 +11,9 @@ import Objetos.Empresas;
 import Objetos.Videojuegos;
 import auxiliares.ApiRequests;
 import auxiliares.ReadConfig;
+import interfas.Interface;
 
-public class AccesoJSONRemoto {
+public class AccesoJSONRemoto implements Interface{
 
 	ApiRequests encargadoPeticiones;
 	private String SERVER_PATH, GET_GAME, SET_GAME, GET_COMPANY, SET_COMPANY; // Datos de la conexion
@@ -33,7 +34,7 @@ public class AccesoJSONRemoto {
 
 	}
 
-	public HashMap<Integer, Videojuegos> leeVideojuegos(HashMap<Integer, Empresas> hmEmpresas) {
+	public HashMap<Integer, Videojuegos> LeerDatosVideojuegos(HashMap<Integer, Empresas> hmEmpresas) {
 
 		HashMap<Integer, Videojuegos> auxhm = new HashMap<Integer, Videojuegos>();
 
@@ -111,7 +112,7 @@ public class AccesoJSONRemoto {
 
 		return auxhm;
 	}
-	public HashMap<Integer, Empresas> leeEmpresas() {
+	public HashMap<Integer, Empresas> LeerDatosEmpresas() {
 
 		HashMap<Integer, Empresas> auxhm = new HashMap<Integer, Empresas>();
 
@@ -191,15 +192,19 @@ public class AccesoJSONRemoto {
 		return auxhm;
 	}
 
-	public void anadirVideojuegosJSON(Videojuegos auxJugador) {
+	public HashMap<Integer, Videojuegos> AnadirDatosVideojuegos(HashMap<Integer, Videojuegos> videojuegos,
+			HashMap<Integer, Empresas> empresas, String id, String nombre, String tipo, String empresa,
+			String Creacion) {
 
 		try {
 			JSONObject objJugador = new JSONObject();
 			JSONObject objPeticion = new JSONObject();
-
-			objJugador.put("nombre", auxJugador.getNombre());
-			objJugador.put("equipo", auxJugador.getEmpresa());
-			objJugador.put("numero", auxJugador.getTipo());
+			
+			objJugador.put("nombre", nombre);
+			objJugador.put("empresa", empresa);
+			objJugador.put("tipo", tipo);
+			objJugador.put("id", id);
+			objJugador.put("creacion", Creacion);
 
 			// Tenemos el jugador como objeto JSON. Lo añadimos a una peticion
 			// Lo transformamos a string y llamamos al
@@ -222,7 +227,7 @@ public class AccesoJSONRemoto {
 			
 			System.out.println("El json que recibimos es: ");
 			
-			//System.out.println(response); // Traza para pruebas
+			System.out.println(response); // Traza para pruebas
 			System.exit(-1);
 			
 			// Parseamos la respuesta y la convertimos en un JSONObject
@@ -261,17 +266,23 @@ public class AccesoJSONRemoto {
 			System.out.println("Fin ejecución");
 			System.exit(-1);
 		}
+		return null;
 
 	}
 	
-	public void anadirEquiposJSON(Videojuegos auxEquipo) {
+	public HashMap<Integer, Empresas> AnadirDatosEmpresas(HashMap<Integer, Empresas> datos, String id, String nombre,
+			String tamaño, String pais, String capital, String director) {
 
 		try {
 			JSONObject objEquipo = new JSONObject();
 			JSONObject objPeticion = new JSONObject();
 
-			objEquipo.put("nombre", auxEquipo.getNombre());
-			objEquipo.put("id", auxEquipo.getTipo());
+			objEquipo.put("nombre", nombre);
+			objEquipo.put("id", id);
+			objEquipo.put("pais", pais);
+			objEquipo.put("tamanno", tamaño);
+			objEquipo.put("capital", capital);
+			objEquipo.put("director", director);
 
 			// Tenemos el jugador como objeto JSON. Lo añadimos a una peticion
 			// Lo transformamos a string y llamamos al
@@ -334,7 +345,32 @@ public class AccesoJSONRemoto {
 			System.out.println("Fin ejecución");
 			System.exit(-1);
 		}
+		return null;
 
+	}
+	@Override
+	public HashMap<Integer, Videojuegos> CopiarDatosVideojuegos(HashMap<Integer, Videojuegos> datos,
+			HashMap<Integer, Empresas> empresas) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public HashMap<Integer, Empresas> CopiarDatosEmpresas(HashMap<Integer, Empresas> datos) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public HashMap<Integer, Videojuegos> EliminarDatosVideojuegos(HashMap<Integer, Videojuegos> datos, Integer clave) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public HashMap<Integer, Empresas> EliminarDatosEmpresas(HashMap<Integer, Empresas> datos, Integer clave) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
