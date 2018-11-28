@@ -47,6 +47,13 @@ public class Controlador {
 	private AñadirFicheroEmpresas aFicheroEmpresas;
 	private MontarTablas montarTablas;
 	
+	//pedida de datos de vista a modelo(json)
+	public void VerDatosVideojuegosJSon() {
+		montarTablas.MostrarDatosVideojuegos(json.leeVideojuegos(json.leeEmpresas()));
+	}
+	public void VerDatosEmpresasJSon() {
+		montarTablas.MostrarDatosEmpresas(json.leeEmpresas());
+	}
 	//pedida de datos de vista a modelo(hibernate)
 	public void VerDatosVideojuegosHibernate(){
 		hibernate.MostrarDatos("LeerVideojuegos");

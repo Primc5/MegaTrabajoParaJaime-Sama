@@ -70,7 +70,7 @@ public class Main {
 		aJsonVideojuegos.setControlador(controlador);
 		aJsonEmpresas.setControlador(controlador);
 		verjson.setControlador(controlador);
-		verjson.setModelo(fichero);
+		verjson.setModelo(accesoJ);
 		verjson.setmTablas(montarTablas);
 		
 

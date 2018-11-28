@@ -1,5 +1,6 @@
 package json;
 
+import java.util.Date;
 import java.util.HashMap;
 
 import org.json.simple.JSONArray;
@@ -32,24 +33,15 @@ public class AccesoJSONRemoto {
 
 	}
 
-	public HashMap<Integer, Videojuegos> leeVideojuegos() {
+	public HashMap<Integer, Videojuegos> leeVideojuegos(HashMap<Integer, Empresas> hmEmpresas) {
 
 		HashMap<Integer, Videojuegos> auxhm = new HashMap<Integer, Videojuegos>();
 
 		try {
-
-			System.out.println("---------- Leemos datos de JSON --------------------");
-
-			System.out.println("Lanzamos peticion JSON para jugadores");
-
 			String url = SERVER_PATH + GET_GAME; // Sacadas de configuracion
 
-			 System.out.println("La url a la que lanzamos la petición es " + url); // Traza para pruebas
-
 			String response = encargadoPeticiones.getRequest(url);
-
-			// System.out.println(response); // Traza para pruebas
-
+			
 			// Parseamos la respuesta y la convertimos en un JSONObject
 			JSONObject respuesta = (JSONObject) JSONValue.parse(response.toString());
 
@@ -63,32 +55,34 @@ public class AccesoJSONRemoto {
 				String estado = (String) respuesta.get("estado"); 
 				// Si ok, obtenemos array de jugadores para recorrer y generar hashmap
 				if (estado.equals("ok")) { 
-					JSONArray array = (JSONArray) respuesta.get("jugadores");
+					JSONArray array = (JSONArray) respuesta.get("juegos");
 
 					if (array.size() > 0) {
 
 						// Declaramos variables
-						Videojuegos nuevoJug;
-						String nombre;
-						int equipo;
-						int numero;
+						Videojuegos nuevoJuego;
+						String nombre, tipo, creacion;
 						int id;
+						Empresas empresa;
 
 						for (int i = 0; i < array.size(); i++) {
+							nuevoJuego = new Videojuegos();
 							JSONObject row = (JSONObject) array.get(i);
 
-							nombre = row.get("nombre").toString();
-							numero = Integer.parseInt(row.get("numero").toString());
-							id = Integer.parseInt(row.get("id").toString());
-							equipo = Integer.parseInt(row.get("equipo").toString());
+							nombre = row.get("Nombre").toString();
+							tipo = row.get("Tipo").toString();
+							id = Integer.parseInt(row.get("Id").toString());
+							empresa = hmEmpresas.get(Integer.parseInt(row.get("Empresa").toString()));
+							creacion = row.get("Creacion").toString();
+							
+							nuevoJuego.setNombre(nombre);
+							nuevoJuego.setTipo(tipo);
+							nuevoJuego.setId(id);
+							nuevoJuego.setEmpresa(empresa);
+							nuevoJuego.setCreación(creacion);
 
-							nuevoJug = new Videojuegos();
-
-							auxhm.put(id, nuevoJug);
+							auxhm.put(id, nuevoJuego);
 						}
-
-						System.out.println("Acceso JSON Remoto - Leidos datos correctamente y generado hashmap");
-						System.out.println();
 
 					} else { // El array de jugadores está vacío
 						System.out.println("Acceso JSON Remoto - No hay datos que tratar");
@@ -122,18 +116,9 @@ public class AccesoJSONRemoto {
 		HashMap<Integer, Empresas> auxhm = new HashMap<Integer, Empresas>();
 
 		try {
-
-			System.out.println("---------- Leemos datos de JSON --------------------");
-
-			System.out.println("Lanzamos peticion JSON para jugadores");
-
 			String url = SERVER_PATH + GET_COMPANY; // Sacadas de configuracion
 
-			 System.out.println("La url a la que lanzamos la petición es " + url); // Traza para pruebas
-
 			String response = encargadoPeticiones.getRequest(url);
-
-			//System.out.println(response); // Traza para pruebas
 
 			// Parseamos la respuesta y la convertimos en un JSONObject
 			JSONObject respuesta = (JSONObject) JSONValue.parse(response.toString());
@@ -154,23 +139,29 @@ public class AccesoJSONRemoto {
 					if (array.size() > 0) {
 
 						// Declaramos variables
-						Empresas nuevoTeam;
-						String nombre;
-						int id;
+						Empresas nuevaEmpresa;
+						String nombre, tamanno, pais, director;
+						int id, capital;
 
 						for (int i = 0; i < array.size(); i++) {
+							nuevaEmpresa = new Empresas();
 							JSONObject row = (JSONObject) array.get(i);
 
-							nombre = row.get("nombre").toString();
-							id = Integer.parseInt(row.get("idTeam").toString());
+							nombre = row.get("Nombre").toString();
+							tamanno = row.get("Tamanno").toString();
+							pais = row.get("Pais").toString();
+							director = row.get("Director").toString();
+							id = Integer.parseInt(row.get("Id").toString());
+							capital = Integer.parseInt(row.get("Capital").toString());
+							nuevaEmpresa.setNombre(nombre);
+							nuevaEmpresa.setTamaño(tamanno);
+							nuevaEmpresa.setPais(pais);
+							nuevaEmpresa.setDirector(director);
+							nuevaEmpresa.setId_Empresa(id);
+							nuevaEmpresa.setCapital(capital);
 
-							nuevoTeam = new Empresas();
-
-							auxhm.put(id, nuevoTeam);
+							auxhm.put(id, nuevaEmpresa);
 						}
-
-						System.out.println("Acceso JSON Remoto - Leidos datos correctamente y generado hashmap");
-						System.out.println();
 
 					} else { // El array de jugadores está vacío
 						System.out.println("Acceso JSON Remoto - No hay datos que tratar");
@@ -219,7 +210,6 @@ public class AccesoJSONRemoto {
 			
 			String json = objPeticion.toJSONString();
 
-			System.out.println("Lanzamos peticion JSON para almacenar un jugador");
 
 			String url = SERVER_PATH + SET_GAME;
 
@@ -232,7 +222,7 @@ public class AccesoJSONRemoto {
 			
 			System.out.println("El json que recibimos es: ");
 			
-			System.out.println(response); // Traza para pruebas
+			//System.out.println(response); // Traza para pruebas
 			System.exit(-1);
 			
 			// Parseamos la respuesta y la convertimos en un JSONObject

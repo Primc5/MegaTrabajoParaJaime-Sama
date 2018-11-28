@@ -36,7 +36,7 @@ import json.AccesoJSONRemoto;
 public class VerJson extends JFrame{
 
 		private Controlador controlador;
-		private Fichero modelo;
+		private AccesoJSONRemoto modelo;
 		private MontarTablas mTablas;
 		
 		private JLabel lblTincas;
@@ -63,7 +63,7 @@ public class VerJson extends JFrame{
 		public void setmTablas(MontarTablas mTablas) {
 			this.mTablas = mTablas;
 		}
-		public void setModelo(Fichero modelo) {
+		public void setModelo(AccesoJSONRemoto modelo) {
 			this.modelo = modelo;
 		}
 		public void setControlador(Controlador controlador) {
@@ -236,9 +236,9 @@ public class VerJson extends JFrame{
 			addWindowListener(new WindowAdapter() {
 				@Override
 				public void windowActivated(WindowEvent e) {
-					controlador.VerDatosVideojuegos();
+					controlador.VerDatosVideojuegosJSon();
 					table.setModel(mTablas.getTabla());
-					controlador.VerDatosEmpresas();
+					controlador.VerDatosEmpresasJSon();
 					table_1.setModel(mTablas.getTabla());
 				}
 			});
