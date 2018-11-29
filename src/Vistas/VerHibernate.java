@@ -85,7 +85,7 @@ public class VerHibernate extends JFrame{
 			btnVolver_CPAlumno.setFont(new Font("Tahoma", Font.PLAIN, 18));
 			btnVolver_CPAlumno.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					controlador.VolverPrincipal();
+					controlador.VolverPrincipal3();
 				}
 			});
 			btnVolver_CPAlumno.setForeground(Color.WHITE);

@@ -1,7 +1,7 @@
 <?php
 
 require 'bbddGames.php'; // Incluimos fichero en la que está la coenxión con la BBDD
-
+require 'jsonEsperadoEmpresa.php';
 /*
  * Se mostrará siempre la información en formato json para que se pueda leer desde un html (via js)
  * o una aplicación móvil o de escritorio realizada en java o en otro lenguajes
@@ -21,23 +21,6 @@ if(isset($parameters)){
 	$mensajeRecibido = json_decode($parameters, true);
 	// Comprobamos que están todos los datos en el json que hemos recibido
 	// Funcion declarada en jsonEsperado.php
-	function JSONCorrectoAnnadir($recibido){
-
-		$auxCorrecto = false;
-
-		if(isset($recibido["peticion"]) && $recibido["peticion"] ="add" && isset($recibido["jugadorAnnadir"])){
-
-			$auxJugador = $recibido["empresaAnnadir"];
-			if(isset($auxJugador["nombre"]) && isset($auxJugador["equipo"]) && isset($auxJugador["numero"])){
-				$auxCorrecto = true;
-			}
-
-		}
-
-
-		return $auxCorrecto;
-
-	}
 	if(JSONCorrectoAnnadir($mensajeRecibido)){
 
 		$empresa = $mensajeRecibido["empresaAnnadir"];

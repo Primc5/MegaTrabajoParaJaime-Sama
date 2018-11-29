@@ -93,7 +93,7 @@ public class VerJson extends JFrame{
 			btnVolver_CPAlumno.setFont(new Font("Tahoma", Font.PLAIN, 18));
 			btnVolver_CPAlumno.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					controlador.VolverPrincipal();
+					controlador.VolverPrincipal4();
 				}
 			});
 			btnVolver_CPAlumno.setForeground(Color.WHITE);
@@ -246,7 +246,7 @@ public class VerJson extends JFrame{
 
 				@Override
 				public void mousePressed(MouseEvent e) {
-					String fila = (String) table.getValueAt(table.getSelectedRow(), 3);
+					int fila = (int) table.getValueAt(table.getSelectedRow(), 0);
 					System.out.println(fila);
 					btnEliminarDato.setEnabled(true);
 					btnEliminarDato.addMouseListener(new MouseAdapter() {
@@ -255,9 +255,8 @@ public class VerJson extends JFrame{
 							if (table.getSelectedRow() == -1) {
 								btnEliminarDato.setEnabled(false);
 							}
-							if(isNumeric(fila) && fila != null) {
-								int videojuego = Integer.parseInt(fila);
-								controlador.EliminarDatosFicheroVideojuegos(videojuego);
+							if(fila != 0) {
+								controlador.EliminarDatosFicheroVideojuegos(fila);
 								String tabla = "LeerBBDD";
 								controlador.VerDatosVideojuegos();
 								table.setModel(mTablas.getTabla());
@@ -273,7 +272,8 @@ public class VerJson extends JFrame{
 
 				@Override
 				public void mousePressed(MouseEvent e) {
-					String fila = (String) table_1.getValueAt(table_1.getSelectedRow(), 0);
+					int fila = (int) table_1.getValueAt(table_1.getSelectedRow(), 0);
+					System.out.println(fila);
 					btnEliminarDato.setEnabled(true);
 					btnEliminarDato.addMouseListener(new MouseAdapter() {
 						@Override
@@ -281,9 +281,8 @@ public class VerJson extends JFrame{
 							if (table_1.getSelectedRow() == -1) {
 								btnEliminarDato.setEnabled(false);
 							}
-							if(isNumeric(fila) && fila != null) {
-								int empresa = Integer.parseInt(fila);
-								controlador.EliminarDatosFicheroEmpresas(empresa);
+							if(fila != 0) {
+								controlador.EliminarDatosFicheroEmpresas(fila);
 								String tabla = "LeerBBDDEmpresas";
 								/*modelo.MostrarDatos(tabla);
 								table_1.setModel(modelo.getTabla());*/

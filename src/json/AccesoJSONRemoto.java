@@ -277,12 +277,11 @@ public class AccesoJSONRemoto implements Interface{
 			JSONObject objEquipo = new JSONObject();
 			JSONObject objPeticion = new JSONObject();
 
-			objEquipo.put("nombre", nombre);
-			objEquipo.put("id", id);
-			objEquipo.put("pais", pais);
-			objEquipo.put("tamanno", tamaño);
-			objEquipo.put("capital", capital);
-			objEquipo.put("director", director);
+			objEquipo.put("Nombre", nombre);
+			objEquipo.put("Tamanno", tamaño);
+			objEquipo.put("Pais", pais);
+			objEquipo.put("Capital", capital);
+			objEquipo.put("Director", director);
 
 			// Tenemos el jugador como objeto JSON. Lo añadimos a una peticion
 			// Lo transformamos a string y llamamos al

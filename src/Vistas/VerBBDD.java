@@ -242,6 +242,7 @@ public class VerBBDD extends JFrame{
 				@Override
 				public void mousePressed(MouseEvent e) {
 					String fila = (String) table.getValueAt(table.getSelectedRow(), 0);
+					System.out.println(fila);
 					btnEliminarDato.setEnabled(true);
 					btnEliminarDato.addMouseListener(new MouseAdapter() {
 						@Override
@@ -268,6 +269,7 @@ public class VerBBDD extends JFrame{
 				@Override
 				public void mousePressed(MouseEvent e) {
 					String fila = (String) table_1.getValueAt(table_1.getSelectedRow(), 0);
+					System.out.println(fila);
 					btnEliminarDato.setEnabled(true);
 					btnEliminarDato.addMouseListener(new MouseAdapter() {
 						@Override

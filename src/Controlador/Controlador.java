@@ -226,6 +226,14 @@ public class Controlador {
 		verfichero.setVisible(false);
 		principal.setVisible(true);
 	}
+	public void VolverPrincipal3() {
+		verhibernate.setVisible(false);
+		principal.setVisible(true);
+	}
+	public void VolverPrincipal4() {
+		verjson.setVisible(false);
+		principal.setVisible(true);
+	}
 	public void AñadirBase() {
 		verbbdd.setVisible(false);
 		aBBDDVideojuegos.setVisible(true);
