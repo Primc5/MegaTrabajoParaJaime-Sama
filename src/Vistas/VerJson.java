@@ -256,9 +256,8 @@ public class VerJson extends JFrame{
 								btnEliminarDato.setEnabled(false);
 							}
 							if(fila != 0) {
-								controlador.EliminarDatosFicheroVideojuegos(fila);
-								String tabla = "LeerBBDD";
-								controlador.VerDatosVideojuegos();
+								controlador.EliminarDatosVideojuegosJson(fila);
+								controlador.VerDatosVideojuegosJSon();
 								table.setModel(mTablas.getTabla());
 							}else {
 								System.err.println("No se ha podido eliminar la fila");
@@ -282,10 +281,9 @@ public class VerJson extends JFrame{
 								btnEliminarDato.setEnabled(false);
 							}
 							if(fila != 0) {
-								controlador.EliminarDatosFicheroEmpresas(fila);
-								String tabla = "LeerBBDDEmpresas";
-								/*modelo.MostrarDatos(tabla);
-								table_1.setModel(modelo.getTabla());*/
+								controlador.EliminarDatosEmpresasJson(fila);
+								controlador.VerDatosEmpresasJSon();
+								table_1.setModel(mTablas.getTabla());
 							}else {
 								System.err.println("No se ha podido eliminar la fila");
 							}

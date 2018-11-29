@@ -7,10 +7,10 @@ $arrJuegoEsperado = array();
 
 $arrEsperado["peticion"] = "add";
 
-$arrJuegoEsperado["nombre"] = "El ultimo de nosotros (Un string)";
 $arrJuegoEsperado["tipo"] = "tres As (Un int)";
 $arrJuegoEsperado["Empresa"] = "perro (Un string)";
-$arrJuegoEsperado["Creacion"] = "2013-06-14 (Una date)";
+$arrJuegoEsperado["Creacion"] = "2013-06-14 (Una date";
+$arrJuegoEsperado["nombre"] = "El ultimo de nosotros (Un string)";
 
 $arrEsperado["juegoAnnadir"] = $arrJuegoEsperado;
 

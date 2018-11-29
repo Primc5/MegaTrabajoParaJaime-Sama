@@ -203,17 +203,16 @@ public class AccesoJSONRemoto implements Interface{
 			JSONObject objPeticion = new JSONObject();
 			
 			objJugador.put("nombre", nombre);
-			objJugador.put("empresa", empresa);
+			objJugador.put("Empresa", empresa);
 			objJugador.put("tipo", tipo);
-			objJugador.put("id", id);
-			objJugador.put("creacion", Creacion);
+			objJugador.put("Creacion", Creacion);
 
 			// Tenemos el jugador como objeto JSON. Lo añadimos a una peticion
 			// Lo transformamos a string y llamamos al
 			// encargado de peticiones para que lo envie al PHP
 
 			objPeticion.put("peticion", "add");
-			objPeticion.put("jugadorAnnadir", objJugador);
+			objPeticion.put("juegoAnnadir", objJugador);
 			
 			String json = objPeticion.toJSONString();
 
@@ -223,14 +222,12 @@ public class AccesoJSONRemoto implements Interface{
 			System.out.println("La url a la que lanzamos la petición es " + url);
 			System.out.println("El json que enviamos es: ");
 			System.out.println(json);
-			//System.exit(-1);
 
 			String response = encargadoPeticiones.postRequest(url, json);
 			
 			System.out.println("El json que recibimos es: ");
 			
 			System.out.println(response); // Traza para pruebas
-			System.exit(-1);
 			
 			// Parseamos la respuesta y la convertimos en un JSONObject
 			
@@ -257,8 +254,6 @@ public class AccesoJSONRemoto implements Interface{
 					System.out.println("Error: " + (String) respuesta.get("error"));
 					System.out.println("Consulta: " + (String) respuesta.get("query"));
 
-					System.exit(-1);
-
 				}
 			}
 		} catch (Exception e) {
@@ -266,7 +261,6 @@ public class AccesoJSONRemoto implements Interface{
 					"Excepcion desconocida. Traza de error comentada en el método 'annadirJugador' de la clase JSON REMOTO");
 			// e.printStackTrace();
 			System.out.println("Fin ejecución");
-			System.exit(-1);
 		}
 		return null;
 
@@ -284,7 +278,6 @@ public class AccesoJSONRemoto implements Interface{
 			objEquipo.put("Pais", pais);
 			objEquipo.put("Capital", capital);
 			objEquipo.put("Director", director);
-			objEquipo.put("id", id);
 			
 
 			// Tenemos el jugador como objeto JSON. Lo añadimos a una peticion
@@ -307,7 +300,6 @@ public class AccesoJSONRemoto implements Interface{
 			System.out.println("El json que recibimos es: ");
 			
 			System.out.println(response); // Traza para pruebas
-			System.exit(-1);
 			
 			// Parseamos la respuesta y la convertimos en un JSONObject
 			
@@ -334,7 +326,6 @@ public class AccesoJSONRemoto implements Interface{
 					System.out.println("Error: " + (String) respuesta.get("error"));
 					System.out.println("Consulta: " + (String) respuesta.get("query"));
 
-					System.exit(-1);
 
 				}
 			}
@@ -367,23 +358,19 @@ public class AccesoJSONRemoto implements Interface{
 			JSONObject objJugador = new JSONObject();
 			JSONObject objPeticion = new JSONObject();
 			
-			/*objJugador.put("", nombre);
-			objJugador.put("", empresa);
-			objJugador.put("", tipo);
-			objJugador.put("", id);
-			objJugador.put("", Creacion);*/
+			objJugador.put("Id", clave);
 
 			// Tenemos el jugador como objeto JSON. Lo añadimos a una peticion
 			// Lo transformamos a string y llamamos al
 			// encargado de peticiones para que lo envie al PHP
 
-			objPeticion.put("peticion", "add");
-			objPeticion.put("jugadorAnnadir", objJugador);
+			objPeticion.put("peticion", "delete");
+			objPeticion.put("juegoBorrar", objJugador);
 			
 			String json = objPeticion.toJSONString();
 
 
-			String url = SERVER_PATH + SET_GAME;
+			String url = SERVER_PATH + DELETE_GAME;
 
 			System.out.println("La url a la que lanzamos la petición es " + url);
 			System.out.println("El json que enviamos es: ");
@@ -395,7 +382,6 @@ public class AccesoJSONRemoto implements Interface{
 			System.out.println("El json que recibimos es: ");
 			
 			System.out.println(response); // Traza para pruebas
-			System.exit(-1);
 			
 			// Parseamos la respuesta y la convertimos en un JSONObject
 			
@@ -422,7 +408,6 @@ public class AccesoJSONRemoto implements Interface{
 					System.out.println("Error: " + (String) respuesta.get("error"));
 					System.out.println("Consulta: " + (String) respuesta.get("query"));
 
-					System.exit(-1);
 
 				}
 			}
@@ -443,18 +428,18 @@ public class AccesoJSONRemoto implements Interface{
 			JSONObject objPeticion = new JSONObject();
 
 			
-			objEquipo.put("id", clave);
+			objEquipo.put("id_Empresa", clave);
 			
 
 			// Tenemos el jugador como objeto JSON. Lo añadimos a una peticion
 			// Lo transformamos a string y llamamos al
 			// encargado de peticiones para que lo envie al PHP
 
-			objPeticion.put("peticion", "add");
-			objPeticion.put("empresaAnnadir", objEquipo);
+			objPeticion.put("peticion", "delete");
+			objPeticion.put("EmpresaBorrar", objEquipo);
 			
 			String json = objPeticion.toJSONString();
-			String url = SERVER_PATH + SET_COMPANY;
+			String url = SERVER_PATH + DELETE_COMPANY;
 
 			System.out.println("La url a la que lanzamos la petición es " + url);
 			System.out.println("El json que enviamos es: ");
@@ -466,7 +451,6 @@ public class AccesoJSONRemoto implements Interface{
 			System.out.println("El json que recibimos es: ");
 			
 			System.out.println(response); // Traza para pruebas
-			System.exit(-1);
 			
 			// Parseamos la respuesta y la convertimos en un JSONObject
 			
@@ -492,8 +476,6 @@ public class AccesoJSONRemoto implements Interface{
 					System.out.println("Acceso JSON REMOTO - Error al almacenar los datos");
 					System.out.println("Error: " + (String) respuesta.get("error"));
 					System.out.println("Consulta: " + (String) respuesta.get("query"));
-
-					System.exit(-1);
 
 				}
 			}

@@ -9,9 +9,9 @@ $arrEsperado["peticion"] = "add";
 
 $arrEmpresaEsperado["Nombre"] = "Bugisos (Un string)";
 $arrEmpresaEsperado["Tamanno"] = "tres Ases (Un int)";
-$arrEmpresaEsperado["Pais"] = "espanita (Un string)";
-$arrEmpresaEsperado["Capital"] = "mucho dinero (Una int)";
 $arrEmpresaEsperado["Director"] = "somos un utopia no necesitamos un lider, porque somos nuestros propios lideres (Una string)";
+$arrEmpresaEsperado["Capital"] = "mucho dinero (Una int)";
+$arrEmpresaEsperado["Pais"] = "espanita (Un string)";
 
 $arrEsperado["empresaAnnadir"] = $arrEmpresaEsperado;
 

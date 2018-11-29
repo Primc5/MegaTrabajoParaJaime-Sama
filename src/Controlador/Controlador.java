@@ -60,6 +60,13 @@ public class Controlador {
 	public HashMap<Integer, Empresas> AñadirDatosEmpresasJson(String id, String nombre, String tamaño, String pais, String capital, String director){
 		return json.AnadirDatosEmpresas(json.LeerDatosEmpresas(), id, nombre, tamaño, pais, capital, director);
 	}
+	public HashMap<Integer, Videojuegos> EliminarDatosVideojuegosJson(Integer clave) {
+		return json.EliminarDatosVideojuegos(json.LeerDatosVideojuegos(json.LeerDatosEmpresas()), clave);
+	}
+	public HashMap<Integer, Empresas> EliminarDatosEmpresasJson(Integer clave) {
+		return json.EliminarDatosEmpresas(json.LeerDatosEmpresas(), clave);
+		
+	}
 	
 	//pedida de datos de vista a modelo(hibernate)
 	public void VerDatosVideojuegosHibernate(){
