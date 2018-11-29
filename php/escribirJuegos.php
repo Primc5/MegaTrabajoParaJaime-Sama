@@ -21,6 +21,23 @@ if(isset($parameters)){
 	$mensajeRecibido = json_decode($parameters, true);
 	// Comprobamos que están todos los datos en el json que hemos recibido
 	// Funcion declarada en jsonEsperado.php
+	function JSONCorrectoAnnadir($recibido){
+
+		$auxCorrecto = false;
+
+		if(isset($recibido["peticion"]) && $recibido["peticion"] ="add" && isset($recibido["jugadorAnnadir"])){
+
+			$auxJugador = $recibido["jugadorAnnadir"];
+			if(isset($auxJugador["nombre"]) && isset($auxJugador["equipo"]) && isset($auxJugador["numero"])){
+				$auxCorrecto = true;
+			}
+
+		}
+
+
+		return $auxCorrecto;
+
+	}
 	if(JSONCorrectoAnnadir($mensajeRecibido)){
 
 		$juego = $mensajeRecibido["juegoAnnadir"];

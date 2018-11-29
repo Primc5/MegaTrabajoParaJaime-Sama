@@ -289,12 +289,9 @@ public class AccesoJSONRemoto implements Interface{
 			// encargado de peticiones para que lo envie al PHP
 
 			objPeticion.put("peticion", "add");
-			objPeticion.put("jugadorAnnadir", objEquipo);
+			objPeticion.put("empresaAnnadir", objEquipo);
 			
 			String json = objPeticion.toJSONString();
-
-			System.out.println("Lanzamos peticion JSON para almacenar un jugador");
-
 			String url = SERVER_PATH + SET_COMPANY;
 
 			System.out.println("La url a la que lanzamos la petición es " + url);
