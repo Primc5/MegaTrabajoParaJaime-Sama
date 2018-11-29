@@ -16,7 +16,8 @@ import interfas.Interface;
 public class AccesoJSONRemoto implements Interface{
 
 	ApiRequests encargadoPeticiones;
-	private String SERVER_PATH, GET_GAME, SET_GAME, GET_COMPANY, SET_COMPANY; // Datos de la conexion
+	private String SERVER_PATH, GET_GAME, SET_GAME, GET_COMPANY, SET_COMPANY, DELETE_GAME, DELETE_COMPANY; // Datos de la conexion
+	private Object Creacion;
 
 	public AccesoJSONRemoto() {
 
@@ -31,7 +32,8 @@ public class AccesoJSONRemoto implements Interface{
 		SET_GAME = datosConexion.get("SET_GAME");
 		GET_COMPANY = datosConexion.get("GET_COMPANY");
 		SET_COMPANY = datosConexion.get("SET_COMPANY");
-
+        DELETE_GAME = datosConexion.get("DELETE_GAME");
+        DELETE_COMPANY = datosConexion.get("DELETE_COMPANY");
 	}
 
 	public HashMap<Integer, Videojuegos> LeerDatosVideojuegos(HashMap<Integer, Empresas> hmEmpresas) {
@@ -277,12 +279,8 @@ public class AccesoJSONRemoto implements Interface{
 			JSONObject objEquipo = new JSONObject();
 			JSONObject objPeticion = new JSONObject();
 
-			objEquipo.put("nombre", nombre);
 			objEquipo.put("id", id);
-			objEquipo.put("pais", pais);
-			objEquipo.put("tamanno", tamaño);
-			objEquipo.put("capital", capital);
-			objEquipo.put("director", director);
+			
 
 			// Tenemos el jugador como objeto JSON. Lo añadimos a una peticion
 			// Lo transformamos a string y llamamos al
@@ -359,14 +357,148 @@ public class AccesoJSONRemoto implements Interface{
 	}
 
 	@Override
-	public HashMap<Integer, Videojuegos> EliminarDatosVideojuegos(HashMap<Integer, Videojuegos> datos, Integer clave) {
-		// TODO Auto-generated method stub
+	public HashMap<Integer, Videojuegos> EliminarDatosVideojuegos(HashMap<Integer, Videojuegos> datos, Integer clave, String nombre, String empresa, String tipo, String id, String Creacion) {
+		try {
+			JSONObject objJugador = new JSONObject();
+			JSONObject objPeticion = new JSONObject();
+			
+			objJugador.put("", nombre);
+			objJugador.put("", empresa);
+			objJugador.put("", tipo);
+			objJugador.put("", id);
+			objJugador.put("", Creacion);
+
+			// Tenemos el jugador como objeto JSON. Lo añadimos a una peticion
+			// Lo transformamos a string y llamamos al
+			// encargado de peticiones para que lo envie al PHP
+
+			objPeticion.put("peticion", "add");
+			objPeticion.put("jugadorAnnadir", objJugador);
+			
+			String json = objPeticion.toJSONString();
+
+
+			String url = SERVER_PATH + SET_GAME;
+
+			System.out.println("La url a la que lanzamos la petición es " + url);
+			System.out.println("El json que enviamos es: ");
+			System.out.println(json);
+			//System.exit(-1);
+
+			String response = encargadoPeticiones.postRequest(url, json);
+			
+			System.out.println("El json que recibimos es: ");
+			
+			System.out.println(response); // Traza para pruebas
+			System.exit(-1);
+			
+			// Parseamos la respuesta y la convertimos en un JSONObject
+			
+
+			JSONObject respuesta = (JSONObject) JSONValue.parse(response.toString());
+
+			if (respuesta == null) { // Si hay algún error de parseo (json
+										// incorrecto porque hay algún caracter
+										// raro, etc.) la respuesta será null
+				System.out.println("El json recibido no es correcto. Finaliza la ejecución");
+				System.exit(-1);
+			} else { // El JSON recibido es correcto
+				
+				// Sera "ok" si todo ha ido bien o "error" si hay algún problema
+				String estado = (String) respuesta.get("estado"); 
+				if (estado.equals("ok")) {
+
+					System.out.println("Almacenado jugador enviado por JSON Remoto");
+
+				} else { // Hemos recibido el json pero en el estado se nos
+							// indica que ha habido algún error
+
+					System.out.println("Acceso JSON REMOTO - Error al borrar los datos");
+					System.out.println("Error: " + (String) respuesta.get("error"));
+					System.out.println("Consulta: " + (String) respuesta.get("query"));
+
+					System.exit(-1);
+
+				}
+			}
+		} catch (Exception e) {
+			System.out.println(
+					"Excepcion desconocida. Traza de error comentada en el método 'annadirJugador' de la clase JSON REMOTO");
+			// e.printStackTrace();
+			System.out.println("Fin ejecución");
+			System.exit(-1);
+		}
 		return null;
 	}
 
 	@Override
-	public HashMap<Integer, Empresas> EliminarDatosEmpresas(HashMap<Integer, Empresas> datos, Integer clave) {
-		// TODO Auto-generated method stub
+	public HashMap<Integer, Empresas> EliminarDatosEmpresas(HashMap<Integer, Empresas> datos, Integer clave, String nombre, String id, String pais, String tamaño, String capital, String director) {
+		try {
+			JSONObject objEquipo = new JSONObject();
+			JSONObject objPeticion = new JSONObject();
+
+			
+			objEquipo.put("id", id);
+			
+
+			// Tenemos el jugador como objeto JSON. Lo añadimos a una peticion
+			// Lo transformamos a string y llamamos al
+			// encargado de peticiones para que lo envie al PHP
+
+			objPeticion.put("peticion", "add");
+			objPeticion.put("empresaAnnadir", objEquipo);
+			
+			String json = objPeticion.toJSONString();
+			String url = SERVER_PATH + SET_COMPANY;
+
+			System.out.println("La url a la que lanzamos la petición es " + url);
+			System.out.println("El json que enviamos es: ");
+			System.out.println(json);
+			//System.exit(-1);
+
+			String response = encargadoPeticiones.postRequest(url, json);
+			
+			System.out.println("El json que recibimos es: ");
+			
+			System.out.println(response); // Traza para pruebas
+			System.exit(-1);
+			
+			// Parseamos la respuesta y la convertimos en un JSONObject
+			
+
+			JSONObject respuesta = (JSONObject) JSONValue.parse(response.toString());
+
+			if (respuesta == null) { // Si hay algún error de parseo (json
+										// incorrecto porque hay algún caracter
+										// raro, etc.) la respuesta será null
+				System.out.println("El json recibido no es correcto. Finaliza la ejecución");
+				System.exit(-1);
+			} else { // El JSON recibido es correcto
+				
+				// Sera "ok" si todo ha ido bien o "error" si hay algún problema
+				String estado = (String) respuesta.get("estado"); 
+				if (estado.equals("ok")) {
+
+					System.out.println("Almacenado jugador enviado por JSON Remoto");
+
+				} else { // Hemos recibido el json pero en el estado se nos
+							// indica que ha habido algún error
+
+					System.out.println("Acceso JSON REMOTO - Error al almacenar los datos");
+					System.out.println("Error: " + (String) respuesta.get("error"));
+					System.out.println("Consulta: " + (String) respuesta.get("query"));
+
+					System.exit(-1);
+
+				}
+			}
+		} catch (Exception e) {
+			System.out.println(
+					"Excepcion desconocida. Traza de error comentada en el método 'annadirJugador' de la clase JSON REMOTO");
+			// e.printStackTrace();
+			System.out.println("Fin ejecución");
+			System.exit(-1);
+		}
 		return null;
 	}
 
