@@ -73,7 +73,6 @@ public class Main {
 		verjson.setModelo(accesoJ);
 		verjson.setmTablas(montarTablas);
 		
-
 		controlador.setVerhibernate(verhibernate);
 		controlador.setHibernateEmpresas(ahibernateEmpresas);
 		controlador.setHibernateVideojuegos(ahibernateVideojuegos);
