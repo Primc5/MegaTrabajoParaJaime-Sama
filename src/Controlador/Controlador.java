@@ -84,7 +84,6 @@ public class Controlador {
 	}
 	public void BorrarDatosHibernate() {
 		hibernate.borrarDatos();
-		hibernate.cerrarSesion();
 	}
 	
 	//pedida de datos de vista a modelo(base de datos)
@@ -134,6 +133,22 @@ public class Controlador {
 	}
 	
 	//intercambiar datos
+	public void PasarDatosJsonAHibernateVideojuegos() {
+		HashMap<Integer, Videojuegos> lista;
+		
+		Interface emisor = new AccesoJSONRemoto();
+		Interface receptor = new AccesHibernate();
+		lista = emisor.LeerDatosVideojuegos(json.LeerDatosEmpresas());
+		receptor.CopiarDatosVideojuegos(lista,json.LeerDatosEmpresas());
+	}
+	public void PasarDatosJsonAFicheroVideojuegos() {
+		HashMap<Integer, Videojuegos> lista;
+		
+		Interface emisor = new AccesoJSONRemoto();
+		Interface receptor = new Fichero();
+		lista = emisor.LeerDatosVideojuegos(json.LeerDatosEmpresas());
+		receptor.CopiarDatosVideojuegos(lista,json.LeerDatosEmpresas());
+	}
 	public void PasarDatosFicheroVideojuegosHiberante() {
 		HashMap<Integer, Videojuegos> lista;
 		
@@ -167,6 +182,22 @@ public class Controlador {
 		receptor.CopiarDatosVideojuegos(lista,fichero.LeerDatosEmpresas());
 	}
 	
+	public void PasarDatosJsonAHibernateEmpresas() {
+		HashMap<Integer, Empresas> lista;
+		
+		Interface emisor = new AccesoJSONRemoto();
+		Interface receptor = new AccesHibernate();
+		lista = emisor.LeerDatosEmpresas();
+		receptor.CopiarDatosEmpresas(lista);
+	}
+	public void PasarDatosJsonAFicheroEmpresas() {
+		HashMap<Integer, Empresas> lista;
+		
+		Interface emisor = new AccesoJSONRemoto();
+		Interface receptor = new Fichero();
+		lista = emisor.LeerDatosEmpresas();
+		receptor.CopiarDatosEmpresas(lista);
+	}
 	public void PasarDatosFicheroEmpresas() {
 		HashMap<Integer, Empresas> lista;
 		
@@ -276,6 +307,18 @@ public class Controlador {
 	public void ComprobarFichero() {
 		verbbdd.setVisible(false);
 		verfichero.setVisible(true);
+	}
+	public void ComprobarFicheroJson() {
+		verjson.setVisible(false);
+		verfichero.setVisible(true);
+	}
+	public void ComprobarBBDDJson() {
+		verjson.setVisible(false);
+		verbbdd.setVisible(true);
+	}
+	public void ComprobarHibernateJson() {
+		verjson.setVisible(false);
+		verhibernate.setVisible(true);
 	}
 	public void AñadirEmpresaBBDD() {
 		verbbdd.setVisible(false);

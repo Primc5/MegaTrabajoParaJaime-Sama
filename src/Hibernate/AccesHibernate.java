@@ -92,14 +92,22 @@ public class AccesHibernate implements Interface{
 	@Override
 	public HashMap<Integer, Videojuegos> CopiarDatosVideojuegos(HashMap<Integer, Videojuegos> datos,
 			HashMap<Integer, Empresas> empresas) {
-		// TODO Auto-generated method stub
-		return null;
+		for (Entry<Integer, Videojuegos> valor : datos.entrySet()) {
+			session.beginTransaction();
+			session.save(datos.get(valor.getKey()));
+			session.getTransaction().commit();
+		}
+		return datos;
 	}
 
 	@Override
 	public HashMap<Integer, Empresas> CopiarDatosEmpresas(HashMap<Integer, Empresas> datos) {
-		// TODO Auto-generated method stub
-		return null;
+		for (Entry<Integer, Empresas> valor : datos.entrySet()) {
+			session.beginTransaction();
+			session.save(datos.get(valor.getKey()));
+			session.getTransaction().commit();
+		}
+		return datos;
 	}
 
 	@Override
@@ -153,58 +161,6 @@ public class AccesHibernate implements Interface{
 		q = session.createQuery("delete from Empresas");
 		q.executeUpdate();
 		session.getTransaction().commit();
-	}
-	public void IntroducirDatos() throws ParseException {
-		Empresas e1 = new Empresas();
-		e1.setId_Empresa(1);
-		e1.setNombre("UTAD TEAM");
-		e1.setTamaño("AAA");
-		e1.setPais("fdasj");
-		e1.setCapital(231);
-		e1.setDirector("fafa");
-		
-		Empresas e2 = new Empresas();
-		e2.setId_Empresa(2);
-		e2.setNombre("DREAM TEAM");
-		e2.setTamaño("AAA");
-		e2.setPais("fdasj");
-		e2.setCapital(231);
-		e2.setDirector("fafa");
-		
-		Videojuegos j1 = new Videojuegos();
-		j1.setNombre("Paco");
-		j1.setId(1);
-		j1.setTipo("tipo");
-		j1.setEmpresa(e1);
-		j1.setCreación("2000-10-10");
-		
-		Videojuegos j2 = new Videojuegos();
-		j2.setNombre("Juan");
-		j2.setId(2);
-		j2.setTipo("tipo");
-		j2.setEmpresa(e2);
-		j2.setCreación("2000-10-10");
-		
-		Videojuegos j3 = new Videojuegos();
-		j3.setNombre("Ana");
-		j3.setId(3);
-		j3.setTipo("tipo");
-		j3.setEmpresa(e1);
-		j3.setCreación("2000-10-10");
-		
-		session.beginTransaction();
-
-		session.save(e1);
-		session.save(e2);
-		
-		session.save(j1);
-		session.save(j2);
-		session.save(j3);
-		
-		session.getTransaction().commit();
-	}
-	public void cerrarSesion() {
-		session.close();
 	}
 
 	public void MostrarDatos(String tabla) {

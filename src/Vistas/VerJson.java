@@ -32,6 +32,8 @@ import Modelo.BaseDeDatos;
 import Modelo.Fichero;
 import auxiliares.MontarTablas;
 import json.AccesoJSONRemoto;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class VerJson extends JFrame{
 
@@ -131,29 +133,6 @@ public class VerJson extends JFrame{
 			btnEliminarDato.setFont(new Font("Tahoma", Font.PLAIN, 18));
 			btnEliminarDato.setBackground(Color.ORANGE);
 			
-			JButton btnCopiarDatosAl = new JButton("Copiar datos al fichero");
-			btnCopiarDatosAl.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					controlador.PasarDatosFicheroVideojuegos();
-					controlador.PasarDatosFicheroEmpresas();
-					Object[] comodidad = {"Si, por favor", "luego"};
-					int eleccion = JOptionPane.showOptionDialog(panel,
-						               "¿Quiéres ver como a quedado tu fichero?",
-						               "Elige una opción",
-						               JOptionPane.YES_NO_OPTION,
-						               JOptionPane.QUESTION_MESSAGE,
-						               null,
-						               comodidad,
-						               comodidad[0]);
-					if (eleccion == JOptionPane.YES_OPTION) {
-						controlador.ComprobarFichero();
-					}
-				}
-			});
-			btnCopiarDatosAl.setForeground(Color.WHITE);
-			btnCopiarDatosAl.setFont(new Font("Tahoma", Font.PLAIN, 18));
-			btnCopiarDatosAl.setBackground(Color.GRAY);
-			
 			JScrollPane scrollPane_1 = new JScrollPane();
 			
 			JLabel lblVideojuegos = new JLabel("Videojuegos:");
@@ -161,24 +140,27 @@ public class VerJson extends JFrame{
 			
 			JLabel lblEmpresas = new JLabel("Empresas:");
 			lblEmpresas.setFont(new Font("Tahoma", Font.PLAIN, 18));
+			
+			JComboBox comboBox = new JComboBox();
+			comboBox.setModel(new DefaultComboBoxModel(new String[] {"Copiar a Base de datos", "Copiar a Ficheros", "Copiar a Hibernate"}));
 			GroupLayout gl_panel = new GroupLayout(panel);
 			gl_panel.setHorizontalGroup(
 				gl_panel.createParallelGroup(Alignment.TRAILING)
 					.addGroup(gl_panel.createSequentialGroup()
 						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-							.addGroup(Alignment.TRAILING, gl_panel.createParallelGroup(Alignment.TRAILING)
+							.addGroup(Alignment.TRAILING, gl_panel.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_panel.createSequentialGroup()
 									.addContainerGap()
 									.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 699, GroupLayout.PREFERRED_SIZE))
-								.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
+								.addGroup(gl_panel.createSequentialGroup()
 									.addContainerGap()
 									.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 699, Short.MAX_VALUE))
 								.addGroup(gl_panel.createSequentialGroup()
 									.addContainerGap()
 									.addComponent(lblsubtitlepanel, GroupLayout.PREFERRED_SIZE, 425, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-									.addComponent(btnCopiarDatosAl, GroupLayout.PREFERRED_SIZE, 233, GroupLayout.PREFERRED_SIZE))
-								.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
+									.addGap(18)
+									.addComponent(comboBox, 0, 256, Short.MAX_VALUE))
+								.addGroup(gl_panel.createSequentialGroup()
 									.addGap(29)
 									.addComponent(btnEliminarDato, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
 									.addGap(18)
@@ -196,20 +178,17 @@ public class VerJson extends JFrame{
 			gl_panel.setVerticalGroup(
 				gl_panel.createParallelGroup(Alignment.LEADING)
 					.addGroup(gl_panel.createSequentialGroup()
-						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-							.addGroup(gl_panel.createSequentialGroup()
-								.addContainerGap()
-								.addComponent(btnCopiarDatosAl, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE))
-							.addGroup(gl_panel.createSequentialGroup()
-								.addGap(28)
-								.addComponent(lblsubtitlepanel)))
+						.addGap(28)
+						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+							.addComponent(lblsubtitlepanel)
+							.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 						.addGap(5)
 						.addComponent(lblVideojuegos, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.RELATED)
 						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 217, GroupLayout.PREFERRED_SIZE)
-						.addGap(5)
-						.addComponent(lblEmpresas, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(lblEmpresas, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
+						.addGap(5)
 						.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 234, GroupLayout.PREFERRED_SIZE)
 						.addGap(18)
 						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
@@ -292,5 +271,63 @@ public class VerJson extends JFrame{
 					
 				}
 			});
+			comboBox.addActionListener(new ActionListener() {
+	            public void actionPerformed(ActionEvent event) {
+	                // Get the source of the component, which is our combo
+	                // box.
+	                JComboBox comboBox = (JComboBox) event.getSource();
+
+	                // Print the selected items and the action command.
+	                Object selected = comboBox.getSelectedItem();
+	                System.out.println("Selected Item  = " + selected);
+	                String command = event.getActionCommand();
+	                System.out.println("Action Command = " + command);
+	                if(selected.equals("Copiar a Base de datos")) {
+	                	Object[] comodidad = {"Si, por favor", "luego"};
+						int eleccion = JOptionPane.showOptionDialog(panel,
+							               "¿Quiéres ver como a quedado tu Base de datos?",
+							               "Elige una opción",
+							               JOptionPane.YES_NO_OPTION,
+							               JOptionPane.QUESTION_MESSAGE,
+							               null,
+							               comodidad,
+							               comodidad[0]);
+						if (eleccion == JOptionPane.YES_OPTION) {
+							controlador.ComprobarBBDDJson();
+						}
+	                }else if(selected.equals("Copiar a Ficheros")) {
+	                	controlador.PasarDatosJsonAFicheroEmpresas();
+	                	controlador.PasarDatosJsonAFicheroVideojuegos();
+	                	Object[] comodidad = {"Si, por favor", "luego"};
+						int eleccion = JOptionPane.showOptionDialog(panel,
+							               "¿Quiéres ver como a quedado tu fichero?",
+							               "Elige una opción",
+							               JOptionPane.YES_NO_OPTION,
+							               JOptionPane.QUESTION_MESSAGE,
+							               null,
+							               comodidad,
+							               comodidad[0]);
+						if (eleccion == JOptionPane.YES_OPTION) {
+							controlador.ComprobarFicheroJson();
+						}
+	                }else if(selected.equals("Copiar a Hibernate")) {
+	                	controlador.PasarDatosJsonAHibernateVideojuegos();
+	                	controlador.PasarDatosJsonAHibernateEmpresas();
+	                	Object[] comodidad = {"Si, por favor", "luego"};
+						int eleccion = JOptionPane.showOptionDialog(panel,
+							               "¿Quiéres ver como a quedado tu Hibernate?",
+							               "Elige una opción",
+							               JOptionPane.YES_NO_OPTION,
+							               JOptionPane.QUESTION_MESSAGE,
+							               null,
+							               comodidad,
+							               comodidad[0]);
+						if (eleccion == JOptionPane.YES_OPTION) {
+							controlador.ComprobarHibernateJson();
+						}
+	                }
+	           
+	            }
+	        });
 		}
 }

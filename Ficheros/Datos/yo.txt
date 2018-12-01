@@ -1,25 +1,25 @@
 ID: 1 
-Nombre: The Last Of Us                      
-Tipo: Aventura                      
+Nombre: The Last of Us 
+Tipo: AAA 
 Empresa: 1 
-Creación: 2013-06-14
+Creación: 2000-10-10 
 ID: 2 
-Nombre: Horizon Zero Dawn                      
-Tipo: Aventura                      
+Nombre: HorizonZeroDawn 
+Tipo: Aventura 
 Empresa: 2 
-Creación: 2017-02-28
+Creación: 2017-02-28 
 ID: 3 
-Nombre: Uncharted 4                      
-Tipo: Aventura                      
+Nombre: Uncharted4 
+Tipo: AAA 
 Empresa: 1 
-Creación: 2016-05-10
+Creación: 2000-10-10 
 ID: 4 
-Nombre: CupHead                      
-Tipo: Arcade                      
-Empresa: 4 
-Creación: 2017-09-29
+Nombre: CupHead 
+Tipo: Arcade 
+Empresa: 3 
+Creación: 2017-09-29 
 ID: 5 
-Nombre: trwe        
-Tipo: wter        
+Nombre: fasd 
+Tipo: AAA 
 Empresa: 2 
-Creación: 1000-10-10
+Creación: 2000-10-10 
