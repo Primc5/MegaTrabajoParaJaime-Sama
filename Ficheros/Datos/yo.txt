@@ -23,3 +23,8 @@ Nombre: fasd
 Tipo: AAA 
 Empresa: 2 
 Creación: 2000-10-10 
+ID: 10 
+Nombre: dfas 
+Tipo: fasd 
+Empresa: 2 
+Creación: 0000-00-00 

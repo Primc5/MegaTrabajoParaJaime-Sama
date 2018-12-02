@@ -31,7 +31,7 @@ if(isset($parameters)){
 		$capital = $empresa["Capital"];
 		$director = $empresa["Director"];
 
-		$query  = "INSERT INTO  empresas (Nombre, Tamanno, Pais, Capital, Director) ";
+		$query  = "INSERT INTO  empresas (Nombre,Tamanno,Pais,Capital,Director) ";
 		$query .= "VALUES ('$nombre','$tamanno','$pais','$capital','$director')";
 
 		$result = $conn->query ( $query );

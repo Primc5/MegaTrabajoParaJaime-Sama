@@ -142,7 +142,7 @@ public class VerJson extends JFrame{
 			lblEmpresas.setFont(new Font("Tahoma", Font.PLAIN, 18));
 			
 			JComboBox comboBox = new JComboBox();
-			comboBox.setModel(new DefaultComboBoxModel(new String[] {"Copiar a Base de datos", "Copiar a Ficheros", "Copiar a Hibernate"}));
+			comboBox.setModel(new DefaultComboBoxModel(new String[] {"Copiar a Ficheros", "Copiar a Hibernate"}));
 			GroupLayout gl_panel = new GroupLayout(panel);
 			gl_panel.setHorizontalGroup(
 				gl_panel.createParallelGroup(Alignment.TRAILING)
@@ -282,20 +282,7 @@ public class VerJson extends JFrame{
 	                System.out.println("Selected Item  = " + selected);
 	                String command = event.getActionCommand();
 	                System.out.println("Action Command = " + command);
-	                if(selected.equals("Copiar a Base de datos")) {
-	                	Object[] comodidad = {"Si, por favor", "luego"};
-						int eleccion = JOptionPane.showOptionDialog(panel,
-							               "¿Quiéres ver como a quedado tu Base de datos?",
-							               "Elige una opción",
-							               JOptionPane.YES_NO_OPTION,
-							               JOptionPane.QUESTION_MESSAGE,
-							               null,
-							               comodidad,
-							               comodidad[0]);
-						if (eleccion == JOptionPane.YES_OPTION) {
-							controlador.ComprobarBBDDJson();
-						}
-	                }else if(selected.equals("Copiar a Ficheros")) {
+	               if(selected.equals("Copiar a Ficheros")) {
 	                	controlador.PasarDatosJsonAFicheroEmpresas();
 	                	controlador.PasarDatosJsonAFicheroVideojuegos();
 	                	Object[] comodidad = {"Si, por favor", "luego"};

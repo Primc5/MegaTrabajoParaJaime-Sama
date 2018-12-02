@@ -31,7 +31,7 @@ if(isset($parameters)){
 		$nombre = $juego["nombre"];
 
 		$query  = "INSERT INTO  ficheritos (tipo,Empresa,Creacion,nombre) ";
-		$query .= "VALUES ('$tipo','$empresa',$creacion,'$nombre')";
+		$query .= "VALUES ('$tipo','$empresa','$creacion','$nombre')";
 
 		$result = $conn->query ( $query );
 

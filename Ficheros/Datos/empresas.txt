@@ -1,0 +1,24 @@
+ID: 1 
+Nombre: Naughty Dog 
+Tamaño: AAA 
+Pais: Noruega 
+Capital: 323200 
+Director: Noruego 
+ID: 2 
+Nombre: GuerrillaGames 
+Tamaño: AAA 
+Pais: PaisesBajos 
+Capital: 130000 
+Director: HermenHulst 
+ID: 3 
+Nombre: StudioMDHR 
+Tamaño: Indie 
+Pais: EEUU 
+Capital: 10000 
+Director: JaredMoldenhauer 
+ID: 4 
+Nombre: fads 
+Tamaño: fdas 
+Pais: fasd 
+Capital: 432 
+Director: fasd 

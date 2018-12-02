@@ -162,6 +162,9 @@ public class AccesHibernate implements Interface{
 		q.executeUpdate();
 		session.getTransaction().commit();
 	}
+	public void cerrarSesion() {
+		session.close();
+	}
 
 	public void MostrarDatos(String tabla) {
 		int numColumnas = 5, fil = 0;

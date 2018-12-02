@@ -84,6 +84,7 @@ public class Controlador {
 	}
 	public void BorrarDatosHibernate() {
 		hibernate.borrarDatos();
+		hibernate.cerrarSesion();
 	}
 	
 	//pedida de datos de vista a modelo(base de datos)
