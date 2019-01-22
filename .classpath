@@ -18,5 +18,14 @@
 	<classpathentry kind="lib" path="Librerias/json/okhttp-2.6.0.jar"/>
 	<classpathentry kind="lib" path="Librerias/json/okio-1.6.0.jar"/>
 	<classpathentry kind="src" path="/Ejemplo_JSON_Remoto"/>
+	<classpathentry kind="lib" path="D:/Users/Pablo_Hdez/git/MegaTrabajoParaJaime-Sama/Librerias/mongo/bson-3.0.1.jar"/>
+	<classpathentry kind="lib" path="D:/Users/Pablo_Hdez/git/MegaTrabajoParaJaime-Sama/Librerias/mongo/mongodb-driver-3.3.0.jar"/>
+	<classpathentry kind="lib" path="D:/Users/Pablo_Hdez/git/MegaTrabajoParaJaime-Sama/Librerias/mongo/mongodb-driver-3.3.0-javadoc.jar"/>
+	<classpathentry kind="lib" path="D:/Users/Pablo_Hdez/git/MegaTrabajoParaJaime-Sama/Librerias/mongo/mongodb-driver-3.3.0-sources.jar"/>
+	<classpathentry kind="lib" path="D:/Users/Pablo_Hdez/git/MegaTrabajoParaJaime-Sama/Librerias/mongo/mongodb-driver-async-3.3.0.jar"/>
+	<classpathentry kind="lib" path="D:/Users/Pablo_Hdez/git/MegaTrabajoParaJaime-Sama/Librerias/mongo/mongodb-driver-core-3.3.0.jar"/>
+	<classpathentry kind="lib" path="D:/Users/Pablo_Hdez/git/MegaTrabajoParaJaime-Sama/Librerias/mongo/mongo-java-driver-3.3.0.jar"/>
+	<classpathentry kind="lib" path="D:/Users/Pablo_Hdez/git/MegaTrabajoParaJaime-Sama/Librerias/mongo/morphia-1.2.1.jar"/>
+	<classpathentry kind="lib" path="D:/Users/Pablo_Hdez/git/MegaTrabajoParaJaime-Sama/Librerias/mongo/morphia-1.2.1-javadoc.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
