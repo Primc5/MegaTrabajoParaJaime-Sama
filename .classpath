@@ -27,5 +27,8 @@
 	<classpathentry kind="lib" path="D:/Users/Pablo_Hdez/git/MegaTrabajoParaJaime-Sama/Librerias/mongo/mongo-java-driver-3.3.0.jar"/>
 	<classpathentry kind="lib" path="D:/Users/Pablo_Hdez/git/MegaTrabajoParaJaime-Sama/Librerias/mongo/morphia-1.2.1.jar"/>
 	<classpathentry kind="lib" path="D:/Users/Pablo_Hdez/git/MegaTrabajoParaJaime-Sama/Librerias/mongo/morphia-1.2.1-javadoc.jar"/>
+	<classpathentry kind="lib" path="D:/Users/Pablo_Hdez/git/MegaTrabajoParaJaime-Sama/Librerias/json/json_simple-1.1.jar"/>
+	<classpathentry kind="lib" path="D:/Users/Pablo_Hdez/git/MegaTrabajoParaJaime-Sama/Librerias/json/okhttp-2.6.0.jar"/>
+	<classpathentry kind="lib" path="D:/Users/Pablo_Hdez/git/MegaTrabajoParaJaime-Sama/Librerias/json/okio-1.6.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

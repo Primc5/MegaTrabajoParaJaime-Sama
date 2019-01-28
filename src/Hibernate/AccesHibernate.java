@@ -19,7 +19,7 @@ import org.hibernate.Session;
 
 import Objetos.Empresas;
 import Objetos.Videojuegos;
-import interfas.Interface;
+import interfaz.Interface;
 
 public class AccesHibernate implements Interface{
 

@@ -19,11 +19,11 @@ import Vistas.AñadirHibernateEmpresas;
 import Vistas.AñadirHibernateVideojuegos;
 import Vistas.AñadirJsonEmpresas;
 import Vistas.AñadirJsonVideojuegos;
-import interfas.Interface;
 import json.AccesoJSONRemoto;
 import Vistas.VerHibernate;
 import Vistas.VerJson;
 import auxiliares.MontarTablas;
+import interfaz.Interface;
 
 public class Controlador {
 	private AccesHibernate hibernate;

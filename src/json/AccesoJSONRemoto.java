@@ -11,7 +11,7 @@ import Objetos.Empresas;
 import Objetos.Videojuegos;
 import auxiliares.ApiRequests;
 import auxiliares.ReadConfig;
-import interfas.Interface;
+import interfaz.Interface;
 
 public class AccesoJSONRemoto implements Interface{
 

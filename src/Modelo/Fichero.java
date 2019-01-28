@@ -25,7 +25,7 @@ import javax.swing.table.DefaultTableModel;
 
 import Objetos.Empresas;
 import Objetos.Videojuegos;
-import interfas.Interface;
+import interfaz.Interface;
 
 public class Fichero implements Interface {
 	
