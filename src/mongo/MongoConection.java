@@ -43,6 +43,7 @@ public class MongoConection {
     private static JSONObject obj;
     private static JSONArray arr;
 
+    
     public MongoConection() {
         //Conexión con MongoDB
         try {
@@ -59,6 +60,8 @@ public class MongoConection {
 
     }
 
+    
+    //-------------Leer Datos---------------
     public ArrayList<Empresas> verMongoEmpresas() {
     	String id, nombre, tamano, pais, capital, director;
         ArrayList<Empresas> empresa = new ArrayList<Empresas>();
@@ -107,6 +110,9 @@ public class MongoConection {
         return videojuego;
     }
 
+    
+    
+    //-------------Insertar Datos---------------
     public boolean guardarEmpresa(Empresas empresas, String username){
         try {
             BasicDBObject match = new BasicDBObject();
@@ -126,6 +132,9 @@ public class MongoConection {
         }
     }
 
+    
+    
+    //-------------Eliminar Datos---------------
     public boolean eliminarContacto(String nombreContacto, String username){
 
         try {
@@ -146,27 +155,9 @@ public class MongoConection {
         }
     }
 
-    public boolean borrarContactos(String username){
-        try {
-            ArrayList<Empresas> contactos = new ArrayList<Empresas>();
-            contactos = verMongoEmpresas();
-            BasicDBObject whereQuery = new BasicDBObject();
-            whereQuery.put("nombre", username);
-            for (Empresas contactin : contactos) {
-                BasicDBObject contact = new BasicDBObject();
-                contact.put( "nombre", contactin.getNombre());
-
-                BasicDBObject update = new BasicDBObject();
-                update.put( "$pull", new BasicDBObject("contacto", contact));
-                collection.updateOne( whereQuery, update );
-            }
-            return true;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return false;
-        }
-    }
-
+    
+    
+    //-------------Modificar Datos---------------
     public boolean modificarContacto(String username, Empresas contacto, String nombreActual){
         try{
             eliminarContacto(nombreActual,username);
