@@ -106,7 +106,7 @@ public class Principal extends JFrame{
 		panel_1 = new JPanel();
 		panel_1.setLayout(null);
 		panel_1.setBackground(Color.WHITE);
-		panel_1.setBounds(22, 328, 333, 194);
+		panel_1.setBounds(22, 288, 333, 126);
 		getContentPane().add(panel_1);
 		
 		txtpnRealizarOperacionesDel = new JTextPane();
@@ -114,7 +114,7 @@ public class Principal extends JFrame{
 		txtpnRealizarOperacionesDel.setForeground(Color.BLACK);
 		txtpnRealizarOperacionesDel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtpnRealizarOperacionesDel.setBackground(Color.WHITE);
-		txtpnRealizarOperacionesDel.setBounds(12, 13, 784, 57);
+		txtpnRealizarOperacionesDel.setBounds(12, 13, 784, 35);
 		panel_1.add(txtpnRealizarOperacionesDel);
 		
 		btnHibernate = new JButton("Hibernate");
@@ -126,13 +126,13 @@ public class Principal extends JFrame{
 		btnHibernate.setForeground(Color.BLACK);
 		btnHibernate.setFont(new Font("Tahoma", Font.PLAIN, 42));
 		btnHibernate.setBackground(Color.ORANGE);
-		btnHibernate.setBounds(12, 124, 309, 57);
+		btnHibernate.setBounds(12, 50, 309, 57);
 		panel_1.add(btnHibernate);
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setLayout(null);
 		panel_3.setBackground(Color.WHITE);
-		panel_3.setBounds(479, 328, 333, 194);
+		panel_3.setBounds(479, 288, 333, 126);
 		getContentPane().add(panel_3);
 		
 		JTextPane txtpnRealizarOperacionesDe = new JTextPane();
@@ -140,7 +140,7 @@ public class Principal extends JFrame{
 		txtpnRealizarOperacionesDe.setForeground(Color.BLACK);
 		txtpnRealizarOperacionesDe.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtpnRealizarOperacionesDe.setBackground(Color.WHITE);
-		txtpnRealizarOperacionesDe.setBounds(12, 13, 309, 57);
+		txtpnRealizarOperacionesDe.setBounds(12, 13, 309, 28);
 		panel_3.add(txtpnRealizarOperacionesDe);
 		
 		JButton btnJson = new JButton("Json");
@@ -152,8 +152,29 @@ public class Principal extends JFrame{
 		btnJson.setForeground(Color.BLACK);
 		btnJson.setFont(new Font("Tahoma", Font.PLAIN, 42));
 		btnJson.setBackground(Color.ORANGE);
-		btnJson.setBounds(12, 124, 309, 57);
+		btnJson.setBounds(12, 51, 309, 57);
 		panel_3.add(btnJson);
+		
+		JPanel panel_4 = new JPanel();
+		panel_4.setLayout(null);
+		panel_4.setBackground(Color.WHITE);
+		panel_4.setBounds(22, 427, 333, 136);
+		getContentPane().add(panel_4);
+		
+		JTextPane txtpnRealizarOperacionesDe_1 = new JTextPane();
+		txtpnRealizarOperacionesDe_1.setText("Realizar operaciones de Mongo");
+		txtpnRealizarOperacionesDe_1.setForeground(Color.BLACK);
+		txtpnRealizarOperacionesDe_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		txtpnRealizarOperacionesDe_1.setBackground(Color.WHITE);
+		txtpnRealizarOperacionesDe_1.setBounds(12, 13, 784, 34);
+		panel_4.add(txtpnRealizarOperacionesDe_1);
+		
+		JButton btnMongo = new JButton("Mongo");
+		btnMongo.setForeground(Color.BLACK);
+		btnMongo.setFont(new Font("Tahoma", Font.PLAIN, 42));
+		btnMongo.setBackground(Color.ORANGE);
+		btnMongo.setBounds(12, 50, 309, 57);
+		panel_4.add(btnMongo);
 		setBounds(50, 100, 860, 660);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
