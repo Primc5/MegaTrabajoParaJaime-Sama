@@ -542,6 +542,7 @@ public class Controlador {
 	public void setaJsonEmpresas(AñadirJsonEmpresas aJsonEmpresas) {
 		this.aJsonEmpresas = aJsonEmpresas;
 	}
+
 	public void setMongo(MongoConection mongo) {
 		this.mongo = mongo;
 	}
@@ -557,7 +558,6 @@ public class Controlador {
 	public void setaMongoEmpresas(AñadirMongoEmpresas aMongoEmpresas) {
 		this.aMongoEmpresas = aMongoEmpresas;
 	}
-	
 
 	public void setMontarTablas(MontarTablas montarTablas) {
 		this.montarTablas = montarTablas;
