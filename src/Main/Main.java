@@ -18,11 +18,14 @@ import Vistas.AñadirHibernateEmpresas;
 import Vistas.AñadirHibernateVideojuegos;
 import Vistas.AñadirJsonEmpresas;
 import Vistas.AñadirJsonVideojuegos;
+import Vistas.AñadirMongoEmpresas;
+import Vistas.AñadirMongoVideojuegos;
 import Vistas.Principal;
 import Vistas.VerBBDD;
 import Vistas.VerFichero;
 import Vistas.VerHibernate;
 import Vistas.VerJson;
+import Vistas.VerMongo;
 import auxiliares.MontarTablas;
 import json.AccesoJSONRemoto;
 import mongo.MongoConection;
@@ -35,7 +38,7 @@ public class Main {
 		Fichero fichero = new Fichero();
 		AccesHibernate accesoh = new AccesHibernate();
 		AccesoJSONRemoto accesoJ = new AccesoJSONRemoto();
-		MongoConection mongoconection = new MongoConection();
+		MongoConection mongo = new MongoConection();
 		Controlador controlador = new Controlador();
 		MontarTablas montarTablas = new MontarTablas();
 
@@ -52,7 +55,12 @@ public class Main {
 		VerJson verjson = new VerJson();
 		AñadirJsonVideojuegos aJsonVideojuegos = new AñadirJsonVideojuegos();
 		AñadirJsonEmpresas aJsonEmpresas = new AñadirJsonEmpresas();
+		VerMongo verMongo = new VerMongo();
+		AñadirMongoVideojuegos aMongoVideojuegos = new AñadirMongoVideojuegos();
+		AñadirMongoEmpresas aMongoEmpresas = new AñadirMongoEmpresas();
 
+		aMongoEmpresas.setControlador(controlador);
+		aMongoVideojuegos.setControlador(controlador);
 		ahibernateVideojuegos.setControlador(controlador);
 		ahibernateEmpresas.setControlador(controlador);
 		aFicheroVideojuegos.setControlador(controlador);
@@ -74,7 +82,11 @@ public class Main {
 		verjson.setControlador(controlador);
 		verjson.setModelo(accesoJ);
 		verjson.setmTablas(montarTablas);
-		
+
+		controlador.setaMongoEmpresas(aMongoEmpresas);
+		controlador.setaMongoVideojuegos(aMongoVideojuegos);
+		controlador.setMongo(mongo);
+		controlador.setVerMongo(verMongo);
 		controlador.setVerhibernate(verhibernate);
 		controlador.setHibernateEmpresas(ahibernateEmpresas);
 		controlador.setHibernateVideojuegos(ahibernateVideojuegos);
