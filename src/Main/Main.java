@@ -25,6 +25,7 @@ import Vistas.VerHibernate;
 import Vistas.VerJson;
 import auxiliares.MontarTablas;
 import json.AccesoJSONRemoto;
+import mongo.MongoConection;
 
 public class Main {
 
@@ -34,6 +35,7 @@ public class Main {
 		Fichero fichero = new Fichero();
 		AccesHibernate accesoh = new AccesHibernate();
 		AccesoJSONRemoto accesoJ = new AccesoJSONRemoto();
+		MongoConection mongoconection = new MongoConection();
 		Controlador controlador = new Controlador();
 		MontarTablas montarTablas = new MontarTablas();
 
