@@ -53,7 +53,6 @@ public class MongoConection {
             collection = db.getCollection("games");
             //dbCollection = database.getCollection("games");
             System.out.println("connected");
-            verMongoEmpresas();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -62,7 +61,7 @@ public class MongoConection {
 
     
     //-------------Leer Datos---------------
-    public ArrayList<Empresas> verMongoEmpresas() {
+    public ArrayList<Empresas> LeerDatosEmpresas() {
     	String id, nombre, tamano, pais, capital, director;
         ArrayList<Empresas> empresa = new ArrayList<Empresas>();
         for (Document document : collection.find()) {
@@ -86,7 +85,7 @@ public class MongoConection {
         return empresa;
     }
     
-    public ArrayList<Videojuegos> verMongoVideojuegos() {
+    public ArrayList<Videojuegos> LeerDatosVideojuegos() {
         ArrayList<Videojuegos> videojuego = new ArrayList<Videojuegos>();
         for (Document document : collection.find()) {
             obj = (JSONObject) JSONValue.parse(document.toJson().toString());
@@ -113,13 +112,34 @@ public class MongoConection {
     
     
     //-------------Insertar Datos---------------
-    public boolean insertarEmpresasMongo(Empresas empresas, String username){
+    public boolean AnadirDatosEmpresas(Empresas empresas, String username){
         try {
             BasicDBObject match = new BasicDBObject();
-            match.put( "nombre", username);
+            match.put( "id", username);
 
             BasicDBObject contact = new BasicDBObject();
             contact.put( "nombre", empresas.getNombre());
+
+            BasicDBObject update = new BasicDBObject();
+            update.put( "$push", new BasicDBObject("videojuegos", contact));
+            collection.updateOne( match, update );
+
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+    public boolean AnadirDatosVideojuegos(Videojuegos videojuegos, String username){
+        try {
+            BasicDBObject match = new BasicDBObject();
+            match.put( "id", username);
+
+            BasicDBObject contact = new BasicDBObject();
+            contact.put( "id", videojuegos.getId());
+            contact.put( "nombre", videojuegos.getNombre());
+            contact.put( "tipo", videojuegos.getTipo());
+            contact.put( "creacion", videojuegos.getCreación());
 
             BasicDBObject update = new BasicDBObject();
             update.put( "$push", new BasicDBObject("videojuegos", contact));
@@ -135,11 +155,30 @@ public class MongoConection {
     
     
     //-------------Eliminar Datos---------------
-    public boolean eliminarContacto(String nombreContacto, String username){
+    public boolean EliminarDatosEmpresas(String nombreContacto, String username){
 
         try {
             BasicDBObject match = new BasicDBObject();
-            match.put( "nombre", username);
+            match.put( "id", username);
+
+            BasicDBObject contact = new BasicDBObject();
+            contact.put( "nombre", nombreContacto);
+
+            BasicDBObject update = new BasicDBObject();
+            update.put( "$pull", new BasicDBObject("videojuegos", contact));
+            collection.updateOne( match, update );
+
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+    public boolean EliminarDatosVideojuegos(String nombreContacto, String username){
+
+        try {
+            BasicDBObject match = new BasicDBObject();
+            match.put( "id", username);
 
             BasicDBObject contact = new BasicDBObject();
             contact.put( "nombre", nombreContacto);
@@ -158,10 +197,17 @@ public class MongoConection {
     
     
     //-------------Modificar Datos---------------
-    public boolean modificarContacto(String username, Empresas contacto, String nombreActual){
+    public boolean modificarEmpresaMongo(String username, Empresas contacto, String nombreActual){
         try{
-            eliminarContacto(nombreActual,username);
-            insertarEmpresasMongo(contacto,username);
+            return true;
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return false;
+        }
+
+    }
+    public boolean modificarVideojuegoMongo(String username, Empresas contacto, String nombreActual){
+        try{
             return true;
         }catch(Exception e){
             System.out.println(e.getMessage());

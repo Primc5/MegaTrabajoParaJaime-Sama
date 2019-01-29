@@ -32,13 +32,15 @@ import Modelo.BaseDeDatos;
 import Modelo.Fichero;
 import auxiliares.MontarTablas;
 import json.AccesoJSONRemoto;
+import mongo.MongoConection;
+
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
 public class VerMongo extends JFrame{
 
 		private Controlador controlador;
-		private AccesoJSONRemoto modelo;
+		private MongoConection modelo;
 		private MontarTablas mTablas;
 		
 		private JLabel lblTincas;
@@ -65,7 +67,7 @@ public class VerMongo extends JFrame{
 		public void setmTablas(MontarTablas mTablas) {
 			this.mTablas = mTablas;
 		}
-		public void setModelo(AccesoJSONRemoto modelo) {
+		public void setModelo(MongoConection modelo) {
 			this.modelo = modelo;
 		}
 		public void setControlador(Controlador controlador) {
@@ -95,7 +97,7 @@ public class VerMongo extends JFrame{
 			btnVolver_CPAlumno.setFont(new Font("Tahoma", Font.PLAIN, 18));
 			btnVolver_CPAlumno.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					controlador.VolverPrincipal4();
+					controlador.VolverPrincipal5();
 				}
 			});
 			btnVolver_CPAlumno.setForeground(Color.WHITE);
@@ -116,9 +118,9 @@ public class VerMongo extends JFrame{
 					                options,
 					                options[0]);
 					if (n == JOptionPane.YES_OPTION) {
-						controlador.AnnadirVideojuegosJson();
+						controlador.AnnadirVideojuegosMongo();
 					}else if(n == JOptionPane.NO_OPTION) {
-						controlador.AnnadirEmpresasJson();
+						controlador.AnnadirEmpresasMongo();
 					}
 				}
 			});
@@ -208,9 +210,9 @@ public class VerMongo extends JFrame{
 			addWindowListener(new WindowAdapter() {
 				@Override
 				public void windowActivated(WindowEvent e) {
-					controlador.VerDatosVideojuegosJSon();
+					controlador.VerDatosVideojuegosMongo();
 					table.setModel(mTablas.getTabla());
-					controlador.VerDatosEmpresasJSon();
+					controlador.VerDatosEmpresasMongo();
 					table_1.setModel(mTablas.getTabla());
 				}
 			});

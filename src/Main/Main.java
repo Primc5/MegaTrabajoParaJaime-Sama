@@ -82,6 +82,9 @@ public class Main {
 		verjson.setControlador(controlador);
 		verjson.setModelo(accesoJ);
 		verjson.setmTablas(montarTablas);
+		verMongo.setControlador(controlador);
+		verMongo.setModelo(mongo);
+		verMongo.setmTablas(montarTablas);
 
 		controlador.setaMongoEmpresas(aMongoEmpresas);
 		controlador.setaMongoVideojuegos(aMongoVideojuegos);

@@ -138,13 +138,13 @@ public class AñadirMongoVideojuegos extends JFrame{
 			btnAnadir.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					if(isNumeric(textField.getText()) && isNumeric(textField_3.getText()) && isDateValid(textField_4.getText())) {
-					controlador.AñadirDatosVideojuegos(textField.getText(), textField_1.getText(), textField_2.getText(), textField_3.getText(), textField_4.getText());
+					controlador.AñadirDatosVideojuegosMongo(textField.getText(), textField_1.getText(), textField_2.getText(), textField_3.getText(), textField_4.getText());
 					textField.setText("");
 					textField_1.setText("");
 					textField_2.setText("");
 					textField_3.setText("");
 					textField_4.setText("");
-					controlador.VolverVerFichero();
+					controlador.VolverAnnadirVideojuegosMongo();
 					}else {
 						System.out.println("El id y empresa deben ser numéricos y la creacion de tipo date (yyyy-MM-dd)");
 					}
@@ -160,7 +160,7 @@ public class AñadirMongoVideojuegos extends JFrame{
 					textField_2.setText("");
 					textField_3.setText("");
 					textField_4.setText("");
-					controlador.VolverVerFichero();
+					controlador.VolverAnnadirVideojuegosMongo();
 				}
 			});
 			

@@ -56,30 +56,30 @@ public class Controlador {
 
 	// pedida de datos de vista a modelo(mongoDB)
 	public void VerDatosVideojuegosMongo() {
-		montarTablas.MostrarDatosVideojuegos(json.LeerDatosVideojuegos(json.LeerDatosEmpresas()));
+		montarTablas.MostrarDatosVideojuegosMongo(mongo.LeerDatosVideojuegos());
 	}
 
 	public void VerDatosEmpresasMongo() {
-		montarTablas.MostrarDatosEmpresas(json.LeerDatosEmpresas());
+		montarTablas.MostrarDatosEmpresasMongo(mongo.LeerDatosEmpresas());
 	}
 
 	public HashMap<Integer, Videojuegos> AñadirDatosVideojuegosMongo(String id, String nombre, String tipo,
 			String empresa, String creacion) {
-		return json.AnadirDatosVideojuegos(json.LeerDatosVideojuegos(json.LeerDatosEmpresas()),
-				json.LeerDatosEmpresas(), id, nombre, tipo, empresa, creacion);
+		return mongo.AnadirDatosVideojuegos(mongo.LeerDatosVideojuegos(mongo.LeerDatosEmpresas()),
+				mongo.LeerDatosEmpresas(), id, nombre, tipo, empresa, creacion);
 	}
 
 	public HashMap<Integer, Empresas> AñadirDatosEmpresasMongo(String id, String nombre, String tamaño, String pais,
 			String capital, String director) {
-		return json.AnadirDatosEmpresas(json.LeerDatosEmpresas(), id, nombre, tamaño, pais, capital, director);
+		return mongo.AnadirDatosEmpresas(mongo.LeerDatosEmpresas(), id, nombre, tamaño, pais, capital, director);
 	}
 
 	public HashMap<Integer, Videojuegos> EliminarDatosVideojuegosMongo(Integer clave) {
-		return json.EliminarDatosVideojuegos(json.LeerDatosVideojuegos(json.LeerDatosEmpresas()), clave);
+		return mongo.EliminarDatosVideojuegos(mongo.LeerDatosVideojuegos(mongo.LeerDatosEmpresas()), clave);
 	}
 
 	public HashMap<Integer, Empresas> EliminarDatosEmpresasMongo(Integer clave) {
-		return json.EliminarDatosEmpresas(json.LeerDatosEmpresas(), clave);
+		return mongo.EliminarDatosEmpresas(mongo.LeerDatosEmpresas(), clave);
 
 	}
 
@@ -393,6 +393,11 @@ public class Controlador {
 		verjson.setVisible(false);
 		principal.setVisible(true);
 	}
+	
+	public void VolverPrincipal5() {
+		verMongo.setVisible(false);
+		principal.setVisible(true);
+	}
 
 	public void AñadirBase() {
 		verbbdd.setVisible(false);
@@ -423,6 +428,15 @@ public class Controlador {
 		aJsonEmpresas.setVisible(false);
 		verjson.setVisible(true);
 	}
+	
+	public void VolverAnnadirEmpresasMongo() {
+		aMongoEmpresas.setVisible(false);
+		verMongo.setVisible(true);
+	}
+	public void VolverAnnadirVideojuegosMongo() {
+		aMongoVideojuegos.setVisible(false);
+		verMongo.setVisible(true);
+	}
 
 	public void AnnadirVideojuegosJson() {
 		verjson.setVisible(false);
@@ -432,6 +446,16 @@ public class Controlador {
 	public void AnnadirEmpresasJson() {
 		verjson.setVisible(false);
 		aJsonEmpresas.setVisible(true);
+	}
+	
+	public void AnnadirVideojuegosMongo() {
+		verMongo.setVisible(false);
+		aMongoVideojuegos.setVisible(true);
+	}
+
+	public void AnnadirEmpresasMongo() {
+		verMongo.setVisible(false);
+		aMongoEmpresas.setVisible(true);
 	}
 
 	public void ComprobarFichero() {
