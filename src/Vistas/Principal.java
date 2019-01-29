@@ -20,7 +20,7 @@ import java.awt.event.ActionEvent;
 import java.awt.Font;
 import javax.swing.ImageIcon;
 
-public class Principal extends JFrame{
+public class Principal extends JFrame {
 
 	private Controlador controlador;
 	private JPanel panel;
@@ -33,8 +33,7 @@ public class Principal extends JFrame{
 	private JPanel panel_1;
 	private JTextPane txtpnRealizarOperacionesDel;
 	private JButton btnHibernate;
-	
-	
+
 	public void setControlador(Controlador controlador) {
 		this.controlador = controlador;
 	}
@@ -170,6 +169,11 @@ public class Principal extends JFrame{
 		panel_4.add(txtpnRealizarOperacionesDe_1);
 		
 		JButton btnMongo = new JButton("Mongo");
+		btnMongo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controlador.VerMongo();
+			}
+		});
 		btnMongo.setForeground(Color.BLACK);
 		btnMongo.setFont(new Font("Tahoma", Font.PLAIN, 42));
 		btnMongo.setBackground(Color.ORANGE);
