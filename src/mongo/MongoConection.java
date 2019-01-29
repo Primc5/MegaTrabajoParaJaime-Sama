@@ -113,7 +113,7 @@ public class MongoConection {
     
     
     //-------------Insertar Datos---------------
-    public boolean guardarEmpresa(Empresas empresas, String username){
+    public boolean insertarEmpresasMongo(Empresas empresas, String username){
         try {
             BasicDBObject match = new BasicDBObject();
             match.put( "nombre", username);
@@ -122,7 +122,7 @@ public class MongoConection {
             contact.put( "nombre", empresas.getNombre());
 
             BasicDBObject update = new BasicDBObject();
-            update.put( "$push", new BasicDBObject("contacto", contact));
+            update.put( "$push", new BasicDBObject("videojuegos", contact));
             collection.updateOne( match, update );
 
             return true;
@@ -145,7 +145,7 @@ public class MongoConection {
             contact.put( "nombre", nombreContacto);
 
             BasicDBObject update = new BasicDBObject();
-            update.put( "$pull", new BasicDBObject("contacto", contact));
+            update.put( "$pull", new BasicDBObject("videojuegos", contact));
             collection.updateOne( match, update );
 
             return true;
@@ -161,7 +161,7 @@ public class MongoConection {
     public boolean modificarContacto(String username, Empresas contacto, String nombreActual){
         try{
             eliminarContacto(nombreActual,username);
-            guardarEmpresa(contacto,username);
+            insertarEmpresasMongo(contacto,username);
             return true;
         }catch(Exception e){
             System.out.println(e.getMessage());
