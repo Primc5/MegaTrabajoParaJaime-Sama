@@ -52,43 +52,59 @@ public class MongoConection {
             collection = db.getCollection("games");
             //dbCollection = database.getCollection("games");
             System.out.println("connected");
+            verMongoEmpresas();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
     }
 
-    public ArrayList<Empresas> verMongoEmpresas(String username) {
+    public ArrayList<Empresas> verMongoEmpresas() {
+    	String id, nombre, tamano, pais, capital, director;
         ArrayList<Empresas> empresa = new ArrayList<Empresas>();
-
-        BasicDBObject whereQuery = new BasicDBObject();
-        whereQuery.put("nombre", username);
-        for (Document document : collection.find(whereQuery)) {
+        for (Document document : collection.find()) {
             obj = (JSONObject) JSONValue.parse(document.toJson().toString());
-            arr = (JSONArray) obj.get("contacto");
-
-            for (int i = 0; i < arr.size(); i++) {
-                empresas = new Empresas();
-                JSONObject row = (JSONObject) arr.get(i);
-                String id = row.get("id").toString();
-                String nombre = row.get("nombre").toString();
-                String tamano = row.get("tamano").toString();
-                String pais = row.get("pais").toString();
-                String capital = row.get("capital").toString();
-                String director = row.get("director").toString();
-
-                //metiendo los datos en el ArrayList
-                empresas.setId_Empresa(Integer.parseInt(id));
-                empresas.setNombre(nombre);
-                empresas.setTamaño(tamano);
-                empresas.setPais(pais);
-                empresas.setCapital(Integer.parseInt(capital));
-                empresas.setDirector(director);
-                empresas.setCapital(Integer.parseInt(capital));
-                empresa.add(empresas);
-            }
+            Empresas empresas = new Empresas();
+            id = (String) obj.get("id");
+            nombre = (String) obj.get("nombre");
+            tamano = (String) obj.get("tamano");
+            pais = (String) obj.get("pais");
+            capital = (String) obj.get("capital");
+            director = (String) obj.get("director");
+            
+            empresas.setId_Empresa(Integer.parseInt(id));
+            empresas.setNombre(nombre);
+            empresas.setTamaño(tamano);
+            empresas.setPais(pais);
+            empresas.setCapital(Integer.parseInt(capital));
+            empresas.setDirector(director);
+            empresa.add(empresas);
         }
         return empresa;
+    }
+    
+    public ArrayList<Videojuegos> verMongoVideojuegos() {
+        ArrayList<Videojuegos> videojuego = new ArrayList<Videojuegos>();
+        for (Document document : collection.find()) {
+            obj = (JSONObject) JSONValue.parse(document.toJson().toString());
+            arr = (JSONArray) obj.get("videojuegos");
+            for (int i = 0; i < arr.size(); i++) {
+                videojuegos = new Videojuegos();
+                JSONObject row = (JSONObject) arr.get(i);
+                String idGame = row.get("id").toString();
+                String nombreGame = row.get("nombre").toString();
+                String tipoGame = row.get("tipo").toString();
+                String creacionGame = row.get("creacion").toString();
+
+                //metiendo los datos en el ArrayList
+                videojuegos.setId(Integer.parseInt(idGame));
+                videojuegos.setNombre(nombreGame);
+                videojuegos.setTipo(tipoGame);
+                videojuegos.setCreación(creacionGame);
+                videojuego.add(videojuegos);
+            }
+        }
+        return videojuego;
     }
 
     public boolean guardarEmpresa(Empresas empresas, String username){
@@ -97,9 +113,7 @@ public class MongoConection {
             match.put( "nombre", username);
 
             BasicDBObject contact = new BasicDBObject();
-            contact.put( "nombre", contacto.getNombre());
-            contact.put( "direccion", contacto.getDireccion());
-            contact.put( "telefono", contacto.getTelefono());
+            contact.put( "nombre", empresas.getNombre());
 
             BasicDBObject update = new BasicDBObject();
             update.put( "$push", new BasicDBObject("contacto", contact));
@@ -112,7 +126,6 @@ public class MongoConection {
         }
     }
 
-    @Override
     public boolean eliminarContacto(String nombreContacto, String username){
 
         try {
@@ -133,14 +146,13 @@ public class MongoConection {
         }
     }
 
-    @Override
     public boolean borrarContactos(String username){
         try {
-            ArrayList<Contacto> contactos = new ArrayList<Contacto>();
-            contactos = crearListaContactos(username);
+            ArrayList<Empresas> contactos = new ArrayList<Empresas>();
+            contactos = verMongoEmpresas();
             BasicDBObject whereQuery = new BasicDBObject();
             whereQuery.put("nombre", username);
-            for (Contacto contactin : contactos) {
+            for (Empresas contactin : contactos) {
                 BasicDBObject contact = new BasicDBObject();
                 contact.put( "nombre", contactin.getNombre());
 
@@ -155,11 +167,10 @@ public class MongoConection {
         }
     }
 
-    @Override
-    public boolean modificarContacto(String username, Contacto contacto, String nombreActual){
+    public boolean modificarContacto(String username, Empresas contacto, String nombreActual){
         try{
             eliminarContacto(nombreActual,username);
-            guardarContacto(contacto,username);
+            guardarEmpresa(contacto,username);
             return true;
         }catch(Exception e){
             System.out.println(e.getMessage());

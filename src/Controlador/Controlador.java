@@ -20,6 +20,7 @@ import Vistas.AñadirHibernateVideojuegos;
 import Vistas.AñadirJsonEmpresas;
 import Vistas.AñadirJsonVideojuegos;
 import json.AccesoJSONRemoto;
+import mongo.MongoConection;
 import Vistas.VerHibernate;
 import Vistas.VerJson;
 import Vistas.VerMongo;
@@ -31,6 +32,7 @@ public class Controlador {
 	private BaseDeDatos modelo;
 	private Fichero fichero;
 	private AccesoJSONRemoto json;
+	private MongoConection mongo;
 	
 	
 	private VerJson verjson; 
@@ -48,6 +50,26 @@ public class Controlador {
 	private AñadirFicheroEmpresas aFicheroEmpresas;
 	private MontarTablas montarTablas;
 	
+	//pedida de datos de vista a modelo(mongoDB)
+		public void VerDatosVideojuegosMongo() {
+			montarTablas.MostrarDatosVideojuegos(json.LeerDatosVideojuegos(json.LeerDatosEmpresas()));
+		}
+		public void VerDatosEmpresasMongo() {
+			montarTablas.MostrarDatosEmpresas(json.LeerDatosEmpresas());
+		}
+		public HashMap<Integer, Videojuegos> AñadirDatosVideojuegosMongo(String id, String nombre, String tipo, String empresa, String creacion){
+			return json.AnadirDatosVideojuegos(json.LeerDatosVideojuegos(json.LeerDatosEmpresas()),json.LeerDatosEmpresas(), id, nombre, tipo, empresa, creacion);
+		}
+		public HashMap<Integer, Empresas> AñadirDatosEmpresasMongo(String id, String nombre, String tamaño, String pais, String capital, String director){
+			return json.AnadirDatosEmpresas(json.LeerDatosEmpresas(), id, nombre, tamaño, pais, capital, director);
+		}
+		public HashMap<Integer, Videojuegos> EliminarDatosVideojuegosMongo(Integer clave) {
+			return json.EliminarDatosVideojuegos(json.LeerDatosVideojuegos(json.LeerDatosEmpresas()), clave);
+		}
+		public HashMap<Integer, Empresas> EliminarDatosEmpresasMongo(Integer clave) {
+			return json.EliminarDatosEmpresas(json.LeerDatosEmpresas(), clave);
+			
+		}
 	//pedida de datos de vista a modelo(json)
 	public void VerDatosVideojuegosJSon() {
 		montarTablas.MostrarDatosVideojuegos(json.LeerDatosVideojuegos(json.LeerDatosEmpresas()));
