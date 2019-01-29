@@ -22,6 +22,7 @@ import Vistas.AñadirJsonVideojuegos;
 import json.AccesoJSONRemoto;
 import Vistas.VerHibernate;
 import Vistas.VerJson;
+import Vistas.VerMongo;
 import auxiliares.MontarTablas;
 import interfaz.Interface;
 
