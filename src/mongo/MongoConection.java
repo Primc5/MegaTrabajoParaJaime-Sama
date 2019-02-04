@@ -2,6 +2,7 @@ package mongo;
 
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.bson.Document;
@@ -33,186 +34,172 @@ import com.mongodb.ServerAddress;
 public class MongoConection {
 
 	private static MongoClient mongoClient;
-    private static MongoDatabase db;
-    private static DB database;
-    private static MongoCollection<Document> collection;
-    private static MongoCursor<Document> cursor;
-    private static DBCollection dbCollection;
-    private static Empresas empresas;
-    private static Videojuegos videojuegos;
-    private static JSONObject obj;
-    private static JSONArray arr;
+	private static MongoDatabase db;
+	private static DB database;
+	private static MongoCollection<Document> collection;
+	private static MongoCursor<Document> cursor;
+	private static DBCollection dbCollection;
+	private static Empresas empresas;
+	private static Videojuegos videojuegos;
+	private static JSONObject obj;
+	private static JSONArray arr;
 
-    
-    public MongoConection() {
-        //Conexión con MongoDB
-        try {
-            mongoClient = new MongoClient("localhost", 27017);
-            db = mongoClient.getDatabase("games");
-            //database = (DB) mongoClient.getDatabase("games");
-            collection = db.getCollection("games");
-            //dbCollection = database.getCollection("games");
-            System.out.println("connected");
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+	public MongoConection() {
+		// Conexión con MongoDB
+		try {
+			mongoClient = new MongoClient("localhost", 27017);
+			db = mongoClient.getDatabase("games");
+			// database = (DB) mongoClient.getDatabase("games");
+			collection = db.getCollection("games");
+			// dbCollection = database.getCollection("games");
+			System.out.println("connected");
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 
-    }
+	}
 
-    
-    //-------------Leer Datos---------------
-    public ArrayList<Empresas> LeerDatosEmpresas() {
-    	String id, nombre, tamano, pais, capital, director;
-        ArrayList<Empresas> empresa = new ArrayList<Empresas>();
-        for (Document document : collection.find()) {
-            obj = (JSONObject) JSONValue.parse(document.toJson().toString());
-            Empresas empresas = new Empresas();
-            id = (String) obj.get("id");
-            nombre = (String) obj.get("nombre");
-            tamano = (String) obj.get("tamano");
-            pais = (String) obj.get("pais");
-            capital = (String) obj.get("capital");
-            director = (String) obj.get("director");
-            
-            empresas.setId_Empresa(Integer.parseInt(id));
-            empresas.setNombre(nombre);
-            empresas.setTamaño(tamano);
-            empresas.setPais(pais);
-            empresas.setCapital(Integer.parseInt(capital));
-            empresas.setDirector(director);
-            empresa.add(empresas);
-        }
-        return empresa;
-    }
-    
-    public ArrayList<Videojuegos> LeerDatosVideojuegos() {
-        ArrayList<Videojuegos> videojuego = new ArrayList<Videojuegos>();
-        for (Document document : collection.find()) {
-            obj = (JSONObject) JSONValue.parse(document.toJson().toString());
-            arr = (JSONArray) obj.get("videojuegos");
-            for (int i = 0; i < arr.size(); i++) {
-                videojuegos = new Videojuegos();
-                JSONObject row = (JSONObject) arr.get(i);
-                String idGame = row.get("id").toString();
-                String nombreGame = row.get("nombre").toString();
-                String tipoGame = row.get("tipo").toString();
-                String creacionGame = row.get("creacion").toString();
+	// -------------Leer Datos---------------
+	public ArrayList<Empresas> LeerDatosEmpresas() {
+		String id, nombre, tamano, pais, capital, director;
+		ArrayList<Empresas> empresa = new ArrayList<Empresas>();
+		for (Document document : collection.find()) {
+			obj = (JSONObject) JSONValue.parse(document.toJson().toString());
+			Empresas empresas = new Empresas();
+			id = (String) obj.get("id");
+			nombre = (String) obj.get("nombre");
+			tamano = (String) obj.get("tamano");
+			pais = (String) obj.get("pais");
+			capital = (String) obj.get("capital");
+			director = (String) obj.get("director");
 
-                //metiendo los datos en el ArrayList
-                videojuegos.setId(Integer.parseInt(idGame));
-                videojuegos.setNombre(nombreGame);
-                videojuegos.setTipo(tipoGame);
-                videojuegos.setCreación(creacionGame);
-                videojuego.add(videojuegos);
-            }
-        }
-        return videojuego;
-    }
+			empresas.setId_Empresa(Integer.parseInt(id));
+			empresas.setNombre(nombre);
+			empresas.setTamaño(tamano);
+			empresas.setPais(pais);
+			empresas.setCapital(Integer.parseInt(capital));
+			empresas.setDirector(director);
+			empresa.add(empresas);
+		}
+		return empresa;
+	}
 
-    
-    
-    //-------------Insertar Datos---------------
-    public boolean AnadirDatosEmpresas(Empresas empresas, String username){
-        try {
-            BasicDBObject match = new BasicDBObject();
-            match.put( "id", username);
+	public ArrayList<Videojuegos> LeerDatosVideojuegos() {
+		ArrayList<Videojuegos> videojuego = new ArrayList<Videojuegos>();
+		for (Document document : collection.find()) {
+			obj = (JSONObject) JSONValue.parse(document.toJson().toString());
+			arr = (JSONArray) obj.get("videojuegos");
+			for (int i = 0; i < arr.size(); i++) {
+				videojuegos = new Videojuegos();
+				JSONObject row = (JSONObject) arr.get(i);
+				String idGame = row.get("id").toString();
+				String nombreGame = row.get("nombre").toString();
+				String tipoGame = row.get("tipo").toString();
+				String creacionGame = row.get("creacion").toString();
 
-            BasicDBObject contact = new BasicDBObject();
-            contact.put( "nombre", empresas.getNombre());
+				// metiendo los datos en el ArrayList
+				videojuegos.setId(Integer.parseInt(idGame));
+				videojuegos.setNombre(nombreGame);
+				videojuegos.setTipo(tipoGame);
+				videojuegos.setCreación(creacionGame);
+				videojuego.add(videojuegos);
+			}
+		}
+		return videojuego;
+	}
 
-            BasicDBObject update = new BasicDBObject();
-            update.put( "$push", new BasicDBObject("videojuegos", contact));
-            collection.updateOne( match, update );
+	// -------------Insertar Datos---------------
+	public boolean AnadirDatosEmpresas(String id, String nombre, String tamano, String pais, String capital,
+			String director) {
+		Document user = new Document();
+		JSONArray array = new JSONArray();
 
-            return true;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return false;
-        }
-    }
-    public boolean AnadirDatosVideojuegos(Videojuegos videojuegos, String username){
-        try {
-            BasicDBObject match = new BasicDBObject();
-            match.put( "id", username);
+		user.append("id", id).append("nombre", nombre).append("tamano", tamano).append("pais", pais)
+				.append("capital", capital).append("director", director).append("videojuegos", array);
 
-            BasicDBObject contact = new BasicDBObject();
-            contact.put( "id", videojuegos.getId());
-            contact.put( "nombre", videojuegos.getNombre());
-            contact.put( "tipo", videojuegos.getTipo());
-            contact.put( "creacion", videojuegos.getCreación());
+		collection.insertOne(user);
+		return false;
+	}
 
-            BasicDBObject update = new BasicDBObject();
-            update.put( "$push", new BasicDBObject("videojuegos", contact));
-            collection.updateOne( match, update );
+	public boolean AnadirDatosVideojuegos(String id, String nombre, String tipo, String creacion, String empresa) {
+		try {
+			BasicDBObject match = new BasicDBObject();
+			match.put("id", id);
 
-            return true;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return false;
-        }
-    }
+			BasicDBObject video = new BasicDBObject();
+			video.put("id", id);
+			video.put("nombre", nombre);
+			video.put("tipo", tipo);
+			video.put("creacion", creacion);
 
-    
-    
-    //-------------Eliminar Datos---------------
-    public boolean EliminarDatosEmpresas(String nombreContacto, String username){
+			BasicDBObject update = new BasicDBObject();
+			update.put("$push", new BasicDBObject("videojuegos", video));
+			collection.updateOne(match, update);
 
-        try {
-            BasicDBObject match = new BasicDBObject();
-            match.put( "id", username);
+			return true;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+	}
 
-            BasicDBObject contact = new BasicDBObject();
-            contact.put( "nombre", nombreContacto);
+	// -------------Eliminar Datos---------------
+	public boolean EliminarDatosEmpresas(ArrayList<Empresas> empresas, int clave) {
+		try {
+			Document user = new Document();
+			JSONArray array = new JSONArray();
 
-            BasicDBObject update = new BasicDBObject();
-            update.put( "$pull", new BasicDBObject("videojuegos", contact));
-            collection.updateOne( match, update );
+			user.append("id", empresas.get(clave).getId_Empresa()).append("nombre", empresas.get(clave).getNombre())
+					.append("tamano", empresas.get(clave).getTamaño()).append("pais", empresas.get(clave).getPais())
+					.append("capital", empresas.get(clave).getCapital())
+					.append("director", empresas.get(clave).getDirector()).append("videojuegos", array);
 
-            return true;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return false;
-        }
-    }
-    public boolean EliminarDatosVideojuegos(String nombreContacto, String username){
+			collection.deleteOne(user);
+			return true;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+	}
 
-        try {
-            BasicDBObject match = new BasicDBObject();
-            match.put( "id", username);
+	public boolean EliminarDatosVideojuegos(String nombreContacto, String username) {
 
-            BasicDBObject contact = new BasicDBObject();
-            contact.put( "nombre", nombreContacto);
+		try {
+			BasicDBObject match = new BasicDBObject();
+			match.put("id", username);
 
-            BasicDBObject update = new BasicDBObject();
-            update.put( "$pull", new BasicDBObject("videojuegos", contact));
-            collection.updateOne( match, update );
+			BasicDBObject contact = new BasicDBObject();
+			contact.put("nombre", nombreContacto);
 
-            return true;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return false;
-        }
-    }
+			BasicDBObject update = new BasicDBObject();
+			update.put("$pull", new BasicDBObject("videojuegos", contact));
+			collection.updateOne(match, update);
 
-    
-    
-    //-------------Modificar Datos---------------
-    public boolean modificarEmpresaMongo(String username, Empresas contacto, String nombreActual){
-        try{
-            return true;
-        }catch(Exception e){
-            System.out.println(e.getMessage());
-            return false;
-        }
+			return true;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+	}
 
-    }
-    public boolean modificarVideojuegoMongo(String username, Empresas contacto, String nombreActual){
-        try{
-            return true;
-        }catch(Exception e){
-            System.out.println(e.getMessage());
-            return false;
-        }
+	// -------------Modificar Datos---------------
+	public boolean modificarEmpresaMongo(String username, Empresas contacto, String nombreActual) {
+		try {
+			return true;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
 
-    }
+	}
+
+	public boolean modificarVideojuegoMongo(String username, Empresas contacto, String nombreActual) {
+		try {
+			return true;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+
+	}
 }

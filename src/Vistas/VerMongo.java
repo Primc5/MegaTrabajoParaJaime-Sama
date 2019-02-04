@@ -230,8 +230,8 @@ public class VerMongo extends JFrame{
 								btnEliminarDato.setEnabled(false);
 							}
 							if(fila != 0) {
-								controlador.EliminarDatosVideojuegosJson(fila);
-								controlador.VerDatosVideojuegosJSon();
+								controlador.EliminarDatosVideojuegosMongo(fila);
+								controlador.VerDatosVideojuegosMongo();
 								table.setModel(mTablas.getTabla());
 							}else {
 								System.err.println("No se ha podido eliminar la fila");
@@ -255,8 +255,8 @@ public class VerMongo extends JFrame{
 								btnEliminarDato.setEnabled(false);
 							}
 							if(fila != 0) {
-								controlador.EliminarDatosEmpresasJson(fila);
-								controlador.VerDatosEmpresasJSon();
+								controlador.EliminarDatosEmpresasMongo(fila);
+								controlador.VerDatosEmpresasMongo();
 								table_1.setModel(mTablas.getTabla());
 							}else {
 								System.err.println("No se ha podido eliminar la fila");

@@ -63,22 +63,21 @@ public class Controlador {
 		montarTablas.MostrarDatosEmpresasMongo(mongo.LeerDatosEmpresas());
 	}
 
-	public HashMap<Integer, Videojuegos> AñadirDatosVideojuegosMongo(String id, String nombre, String tipo,
+	public boolean AñadirDatosVideojuegosMongo(String id, String nombre, String tipo,
 			String empresa, String creacion) {
-		return mongo.AnadirDatosVideojuegos(mongo.LeerDatosVideojuegos(mongo.LeerDatosEmpresas()),
-				mongo.LeerDatosEmpresas(), id, nombre, tipo, empresa, creacion);
+		return mongo.AnadirDatosVideojuegos(id, nombre, tipo, creacion, empresa);
 	}
 
-	public HashMap<Integer, Empresas> AñadirDatosEmpresasMongo(String id, String nombre, String tamaño, String pais,
+	public boolean AñadirDatosEmpresasMongo(String id, String nombre, String tamaño, String pais,
 			String capital, String director) {
-		return mongo.AnadirDatosEmpresas(mongo.LeerDatosEmpresas(), id, nombre, tamaño, pais, capital, director);
+		return mongo.AnadirDatosEmpresas(id, nombre, tamaño, pais, capital, director);
 	}
 
 	public HashMap<Integer, Videojuegos> EliminarDatosVideojuegosMongo(Integer clave) {
 		return mongo.EliminarDatosVideojuegos(mongo.LeerDatosVideojuegos(mongo.LeerDatosEmpresas()), clave);
 	}
 
-	public HashMap<Integer, Empresas> EliminarDatosEmpresasMongo(Integer clave) {
+	public boolean EliminarDatosEmpresasMongo(Integer clave) {
 		return mongo.EliminarDatosEmpresas(mongo.LeerDatosEmpresas(), clave);
 
 	}

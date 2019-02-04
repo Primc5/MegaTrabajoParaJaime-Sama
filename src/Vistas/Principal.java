@@ -72,8 +72,8 @@ public class Principal extends JFrame {
 		btnEscribirFeedback.setBounds(12, 125, 309, 56);
 		panel_2.add(btnEscribirFeedback);
 
-		lblNewLabel = new JLabel("Ficheros, BBDD, Hibernate, Json");
-		lblNewLabel.setBounds(197, 13, 456, 37);
+		lblNewLabel = new JLabel("Ficheros, BBDD, Hibernate, Json, Mongo");
+		lblNewLabel.setBounds(145, 13, 543, 37);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		lblNewLabel.setForeground(Color.WHITE);
 		panel.setLayout(null);
