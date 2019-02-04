@@ -15,7 +15,7 @@ public class MontarTablas {
 	
 	//Montado de tablas con base de datos irrelacionales
 	public void MostrarDatosVideojuegosMongo(ArrayList<Videojuegos> datos) {
-		int numColumnas = 4;
+		int numColumnas = 5;
 		int numFilas = datos.size();
 
 		String[] cabecera = new String[numColumnas];
@@ -25,6 +25,7 @@ public class MontarTablas {
 		cabecera[1] = "nombre";
 		cabecera[2] = "tipo";
 		cabecera[3] = "Creacion";
+		cabecera[4] = "Empresa";
 		int fila = 0, col;
 		for (int i = 0; i < datos.size(); i++) {
 			col = 0;
@@ -35,6 +36,8 @@ public class MontarTablas {
 			contenido[fila][col] = datos.get(i).getTipo();
 			col++;
 			contenido[fila][col] = datos.get(i).getCreación();
+			fila++;
+			contenido[fila][col] = datos.get(i).getEmpresa().getId_Empresa();
 			fila++;
 			}
 		miTabla = new DefaultTableModel(contenido, cabecera);
