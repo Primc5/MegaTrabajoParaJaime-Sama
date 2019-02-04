@@ -142,6 +142,11 @@ public class VerMongo extends JFrame{
 			
 			JLabel lblEmpresas = new JLabel("Empresas:");
 			lblEmpresas.setFont(new Font("Tahoma", Font.PLAIN, 18));
+			
+			JComboBox comboBox = new JComboBox();
+			comboBox.setModel(new DefaultComboBoxModel(new String[] {"Copiar a Ficheros", "Copiar a Hibernate", "Copiar a Json"}));
+			
+			
 			GroupLayout gl_panel = new GroupLayout(panel);
 			gl_panel.setHorizontalGroup(
 				gl_panel.createParallelGroup(Alignment.TRAILING)
@@ -156,7 +161,9 @@ public class VerMongo extends JFrame{
 									.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 699, Short.MAX_VALUE))
 								.addGroup(gl_panel.createSequentialGroup()
 									.addContainerGap()
-									.addComponent(lblsubtitlepanel, GroupLayout.PREFERRED_SIZE, 425, GroupLayout.PREFERRED_SIZE))
+									.addComponent(lblsubtitlepanel, GroupLayout.PREFERRED_SIZE, 425, GroupLayout.PREFERRED_SIZE)
+									.addGap(18)
+									.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 256, GroupLayout.PREFERRED_SIZE))
 								.addGroup(gl_panel.createSequentialGroup()
 									.addGap(29)
 									.addComponent(btnEliminarDato, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
@@ -176,7 +183,9 @@ public class VerMongo extends JFrame{
 				gl_panel.createParallelGroup(Alignment.LEADING)
 					.addGroup(gl_panel.createSequentialGroup()
 						.addGap(28)
-						.addComponent(lblsubtitlepanel)
+						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+							.addComponent(lblsubtitlepanel)
+							.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 						.addGap(5)
 						.addComponent(lblVideojuegos, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.RELATED)

@@ -140,7 +140,6 @@ public class VerJson extends JFrame{
 			
 			JLabel lblEmpresas = new JLabel("Empresas:");
 			lblEmpresas.setFont(new Font("Tahoma", Font.PLAIN, 18));
-			
 			JComboBox comboBox = new JComboBox();
 			comboBox.setModel(new DefaultComboBoxModel(new String[] {"Copiar a Ficheros", "Copiar a Hibernate"}));
 			GroupLayout gl_panel = new GroupLayout(panel);
