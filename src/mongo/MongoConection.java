@@ -133,8 +133,7 @@ public class MongoConection {
 		return empresa;
 	}
 
-	public ArrayList<Videojuegos> LeerDatosVideojuegos(ArrayList<Empresas> empresas) {
-		System.out.println("COÑO");
+	public ArrayList<Videojuegos> LeerDatosVideojuegos() {
 		ArrayList<Videojuegos> videojuego = new ArrayList<Videojuegos>();
 		for (Document document : collection.find()) {
 			obj = (JSONObject) JSONValue.parse(document.toJson().toString());
@@ -145,15 +144,12 @@ public class MongoConection {
 				String idGame = row.get("id").toString();
 				String nombreGame = row.get("nombre").toString();
 				String tipoGame = row.get("tipo").toString();
-				Empresas empresaGame = empresas.get(i);
-				System.out.println("DAME LA PUTA IDDDD" + empresaGame.getId_Empresa());
 				String creacionGame = row.get("creacion").toString();
 
 				// metiendo los datos en el ArrayList
 				videojuegos.setId(Integer.parseInt(idGame));
 				videojuegos.setNombre(nombreGame);
 				videojuegos.setTipo(tipoGame);
-				videojuegos.setEmpresa(empresaGame);
 				videojuegos.setCreación(creacionGame);
 				videojuego.add(videojuegos);
 			}
@@ -197,15 +193,15 @@ public class MongoConection {
 	}
 
 	// -------------Eliminar Datos---------------
-	public boolean EliminarDatosEmpresas(ArrayList<Empresas> empresas, int clave) {
+	public boolean EliminarDatosEmpresas(ArrayList<Empresas> empresas, String clave) {
 		try {
 			Document user = new Document();
 			JSONArray array = new JSONArray();
 
-			user.append("id", empresas.get(clave).getId_Empresa()).append("nombre", empresas.get(clave).getNombre())
-					.append("tamano", empresas.get(clave).getTamaño()).append("pais", empresas.get(clave).getPais())
-					.append("capital", empresas.get(clave).getCapital())
-					.append("director", empresas.get(clave).getDirector()).append("videojuegos", array);
+			user.append("id", empresas.get(Integer.parseInt(clave)).getId_Empresa()).append("nombre", empresas.get(Integer.parseInt(clave)).getNombre())
+					.append("tamano", empresas.get(Integer.parseInt(clave)).getTamaño()).append("pais", empresas.get(Integer.parseInt(clave)).getPais())
+					.append("capital", empresas.get(Integer.parseInt(clave)).getCapital())
+					.append("director", empresas.get(Integer.parseInt(clave)).getDirector()).append("videojuegos", array);
 
 			collection.deleteOne(user);
 			return true;

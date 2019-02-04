@@ -255,7 +255,8 @@ public class VerMongo extends JFrame{
 
 				@Override
 				public void mousePressed(MouseEvent e) {
-					int fila = (int) table_1.getValueAt(table_1.getSelectedRow(), 0);
+					String fila = (String) table_1.getValueAt(table_1.getSelectedRow(), 0);
+					String empresa = (String) table_1.getValueAt(table_1.getSelectedRow(), 3);
 					System.out.println(fila);
 					btnEliminarDato.setEnabled(true);
 					btnEliminarDato.addMouseListener(new MouseAdapter() {
@@ -264,8 +265,8 @@ public class VerMongo extends JFrame{
 							if (table_1.getSelectedRow() == -1) {
 								btnEliminarDato.setEnabled(false);
 							}
-							if(fila != 0) {
-								controlador.EliminarDatosEmpresasMongo(fila);
+							if(fila.equals("0")) {
+								controlador.EliminarDatosEmpresasMongo(fila, empresa);
 								controlador.VerDatosEmpresasMongo();
 								table_1.setModel(mTablas.getTabla());
 							}else {

@@ -77,7 +77,7 @@ public class Controlador {
 		return mongo.EliminarDatosVideojuegos(nombre, clave);
 	}
 
-	public boolean EliminarDatosEmpresasMongo(Integer clave) {
+	public boolean EliminarDatosEmpresasMongo(String nombre, String clave) {
 		return mongo.EliminarDatosEmpresas(mongo.LeerDatosEmpresas(), clave);
 
 	}
