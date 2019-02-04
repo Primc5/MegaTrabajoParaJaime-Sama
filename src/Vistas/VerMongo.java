@@ -230,7 +230,7 @@ public class VerMongo extends JFrame{
 								btnEliminarDato.setEnabled(false);
 							}
 							if(fila != 0) {
-								controlador.EliminarDatosVideojuegosMongo(fila);
+//								controlador.EliminarDatosVideojuegosMongo(fila);
 								controlador.VerDatosVideojuegosMongo();
 								table.setModel(mTablas.getTabla());
 							}else {

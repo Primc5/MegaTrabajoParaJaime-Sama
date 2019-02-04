@@ -19,7 +19,7 @@ import com.mongodb.client.MongoDatabase;
 import Objetos.Empresas;
 import Objetos.Videojuegos;
 
-import com.mongodb.BasicDBObject;
+
 import com.mongodb.BulkWriteOperation;
 import com.mongodb.BulkWriteResult;
 import com.mongodb.Cursor;
@@ -123,17 +123,19 @@ public class MongoConection {
 
 	public boolean AnadirDatosVideojuegos(String id, String nombre, String tipo, String creacion, String empresa) {
 		try {
-			BasicDBObject match = new BasicDBObject();
+			Document match = new Document();
 			match.put("id", id);
 
-			BasicDBObject video = new BasicDBObject();
+			
+			
+			Document video = new Document();
 			video.put("id", id);
 			video.put("nombre", nombre);
 			video.put("tipo", tipo);
 			video.put("creacion", creacion);
 
-			BasicDBObject update = new BasicDBObject();
-			update.put("$push", new BasicDBObject("videojuegos", video));
+			Document update = new Document();
+			update.put("$push", new Document("videojuegos", video));
 			collection.updateOne(match, update);
 
 			return true;
@@ -165,14 +167,14 @@ public class MongoConection {
 	public boolean EliminarDatosVideojuegos(String nombreContacto, String username) {
 
 		try {
-			BasicDBObject match = new BasicDBObject();
+			Document match = new Document();
 			match.put("id", username);
 
-			BasicDBObject contact = new BasicDBObject();
+			Document contact = new Document();
 			contact.put("nombre", nombreContacto);
 
-			BasicDBObject update = new BasicDBObject();
-			update.put("$pull", new BasicDBObject("videojuegos", contact));
+			Document update = new Document();
+			update.put("$pull", new Document("videojuegos", contact));
 			collection.updateOne(match, update);
 
 			return true;

@@ -73,9 +73,9 @@ public class Controlador {
 		return mongo.AnadirDatosEmpresas(id, nombre, tamaño, pais, capital, director);
 	}
 
-	public HashMap<Integer, Videojuegos> EliminarDatosVideojuegosMongo(Integer clave) {
-		return mongo.EliminarDatosVideojuegos(mongo.LeerDatosVideojuegos(mongo.LeerDatosEmpresas()), clave);
-	}
+//	public HashMap<Integer, Videojuegos> EliminarDatosVideojuegosMongo(Integer clave) {
+//		//return mongo.EliminarDatosVideojuegos(mongo.LeerDatosVideojuegos(mongo.LeerDatosEmpresas()), clave);
+//	}
 
 	public boolean EliminarDatosEmpresasMongo(Integer clave) {
 		return mongo.EliminarDatosEmpresas(mongo.LeerDatosEmpresas(), clave);
