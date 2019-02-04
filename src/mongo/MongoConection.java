@@ -1,9 +1,16 @@
 package mongo;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Properties;
 
 import org.bson.Document;
 import org.json.simple.JSONArray;
@@ -32,7 +39,8 @@ import com.mongodb.ParallelScanOptions;
 import com.mongodb.ServerAddress;
 
 public class MongoConection {
-
+	private String mongodb, col;
+	private String port;
 	private static MongoClient mongoClient;
 	private static MongoDatabase db;
 	private static DB database;
@@ -46,17 +54,58 @@ public class MongoConection {
 
 	public MongoConection() {
 		// Conexión con MongoDB
+		getMongoInit();
 		try {
-			mongoClient = new MongoClient("localhost", 27017);
-			db = mongoClient.getDatabase("games");
+			mongoClient = new MongoClient("localhost", Integer.parseInt(port));
+			db = mongoClient.getDatabase(mongodb);
 			// database = (DB) mongoClient.getDatabase("games");
-			collection = db.getCollection("games");
+			collection = db.getCollection(col);
 			// dbCollection = database.getCollection("games");
 			System.out.println("connected");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 
+	}
+
+	public void getMongoInit() {
+		Properties propiedades = new Properties();
+		InputStream entrada = null;
+		OutputStream salida = null;
+		try {
+			File miConfig = new File("Ficheros/Config/mongo_conf.ini");
+			if (miConfig.exists()) {
+				entrada = new FileInputStream(miConfig);
+				salida = new FileOutputStream(miConfig);
+				// cargamos el archivo de propiedades
+				propiedades.load(entrada);
+				if (miConfig.length() == 0) {
+					propiedades.setProperty("DataBase", "games");
+					propiedades.setProperty("collection", "games");
+					propiedades.setProperty("puerto", "27017");
+					propiedades.store(salida, "Archivo de Configuración de Mongo");
+				} else {
+					System.out.println(miConfig.lastModified() + "\n" + miConfig.length());
+				}
+
+				// obtenemos las propiedades y las imprimimos
+				mongodb = propiedades.getProperty("DataBase");
+				col = propiedades.getProperty("collection");
+				port = propiedades.getProperty("puerto");
+
+			} else
+				System.err.println("Fichero no encontrado");
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} finally {
+			if (entrada != null) {
+				try {
+					entrada.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 
 	// -------------Leer Datos---------------
