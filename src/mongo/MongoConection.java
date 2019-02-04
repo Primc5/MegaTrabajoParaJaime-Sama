@@ -84,7 +84,8 @@ public class MongoConection {
 		return empresa;
 	}
 
-	public ArrayList<Videojuegos> LeerDatosVideojuegos() {
+	public ArrayList<Videojuegos> LeerDatosVideojuegos(ArrayList<Empresas> empresas) {
+		System.out.println("COÑO");
 		ArrayList<Videojuegos> videojuego = new ArrayList<Videojuegos>();
 		for (Document document : collection.find()) {
 			obj = (JSONObject) JSONValue.parse(document.toJson().toString());
@@ -95,12 +96,15 @@ public class MongoConection {
 				String idGame = row.get("id").toString();
 				String nombreGame = row.get("nombre").toString();
 				String tipoGame = row.get("tipo").toString();
+				Empresas empresaGame = empresas.get(i);
+				System.out.println("DAME LA PUTA IDDDD" + empresaGame.getId_Empresa());
 				String creacionGame = row.get("creacion").toString();
 
 				// metiendo los datos en el ArrayList
 				videojuegos.setId(Integer.parseInt(idGame));
 				videojuegos.setNombre(nombreGame);
 				videojuegos.setTipo(tipoGame);
+				videojuegos.setEmpresa(empresaGame);
 				videojuegos.setCreación(creacionGame);
 				videojuego.add(videojuegos);
 			}

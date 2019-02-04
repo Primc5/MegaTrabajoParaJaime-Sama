@@ -56,7 +56,7 @@ public class Controlador {
 
 	// pedida de datos de vista a modelo(mongoDB)
 	public void VerDatosVideojuegosMongo() {
-		montarTablas.MostrarDatosVideojuegosMongo(mongo.LeerDatosVideojuegos());
+		montarTablas.MostrarDatosVideojuegosMongo(mongo.LeerDatosVideojuegos(mongo.LeerDatosEmpresas()));
 	}
 
 	public void VerDatosEmpresasMongo() {
