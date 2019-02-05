@@ -135,16 +135,18 @@ public class MongoConection {
 
 	public ArrayList<Videojuegos> LeerDatosVideojuegos(ArrayList<Empresas> empresas) {
 		ArrayList<Videojuegos> videojuego = new ArrayList<Videojuegos>();
+		int contador = 0;
 		for (Document document : collection.find()) {
 			obj = (JSONObject) JSONValue.parse(document.toJson().toString());
 			arr = (JSONArray) obj.get("videojuegos");
+			Empresas empresaGame = empresas.get(contador);
+			contador++;
 			for (int i = 0; i < arr.size(); i++) {
 				videojuegos = new Videojuegos();
 				JSONObject row = (JSONObject) arr.get(i);
 				String idGame = row.get("id").toString();
 				String nombreGame = row.get("nombre").toString();
 				String tipoGame = row.get("tipo").toString();
-				Empresas empresaGame = empresas.get(0);
 				String creacionGame = row.get("creacion").toString();
 
 				// metiendo los datos en el ArrayList
@@ -174,16 +176,16 @@ public class MongoConection {
 
 	public boolean AnadirDatosVideojuegos(String id, String nombre, String tipo, String creacion, String empresa) {
 		try {
-			BasicDBObject match = new BasicDBObject();
+			Document match = new Document();
 			match.put("id", id);
 
-			BasicDBObject video = new BasicDBObject();
+			Document video = new Document();
 			video.put("id", id);
 			video.put("nombre", nombre);
 			video.put("tipo", tipo);
 			video.put("creacion", creacion);
 
-			BasicDBObject update = new BasicDBObject();
+			Document update = new Document();
 			update.put("$push", new BasicDBObject("videojuegos", video));
 			collection.updateOne(match, update);
 
