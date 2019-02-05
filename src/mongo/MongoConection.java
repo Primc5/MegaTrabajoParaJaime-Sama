@@ -197,15 +197,11 @@ public class MongoConection {
 	}
 
 	// -------------Eliminar Datos---------------
-	public boolean EliminarDatosEmpresas(ArrayList<Empresas> empresas, String clave) {
+	public boolean EliminarDatosEmpresas(int fila) {
 		try {
 			Document user = new Document();
 			JSONArray array = new JSONArray();
 
-			user.append("id", empresas.get(Integer.parseInt(clave)).getId_Empresa()).append("nombre", empresas.get(Integer.parseInt(clave)).getNombre())
-					.append("tamano", empresas.get(Integer.parseInt(clave)).getTamaño()).append("pais", empresas.get(Integer.parseInt(clave)).getPais())
-					.append("capital", empresas.get(Integer.parseInt(clave)).getCapital())
-					.append("director", empresas.get(Integer.parseInt(clave)).getDirector()).append("videojuegos", array);
 
 			collection.deleteOne(user);
 			return true;
@@ -215,14 +211,14 @@ public class MongoConection {
 		}
 	}
 
-	public boolean EliminarDatosVideojuegos(String nombreContacto, String username) {
+	public boolean EliminarDatosVideojuegos(int fila, int empresa) {
 
 		try {
 			BasicDBObject match = new BasicDBObject();
-			match.put("id", username);
+			match.put("id", empresa);
 
 			BasicDBObject contact = new BasicDBObject();
-			contact.put("nombre", nombreContacto);
+			contact.put("nombre", fila);
 
 			BasicDBObject update = new BasicDBObject();
 			update.put("$pull", new BasicDBObject("videojuegos", contact));

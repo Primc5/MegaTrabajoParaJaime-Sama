@@ -73,12 +73,12 @@ public class Controlador {
 		return mongo.AnadirDatosEmpresas(id, nombre, tamaño, pais, capital, director);
 	}
 
-	public boolean EliminarDatosVideojuegosMongo(String nombre, String clave) {
-		return mongo.EliminarDatosVideojuegos(nombre, clave);
+	public boolean EliminarDatosVideojuegosMongo(int fila, int empresa) {
+		return mongo.EliminarDatosVideojuegos(fila, empresa);
 	}
 
-	public boolean EliminarDatosEmpresasMongo(String nombre, String clave) {
-		return mongo.EliminarDatosEmpresas(mongo.LeerDatosEmpresas(), clave);
+	public boolean EliminarDatosEmpresasMongo(int fila) {
+		return mongo.EliminarDatosEmpresas(fila);
 
 	}
 

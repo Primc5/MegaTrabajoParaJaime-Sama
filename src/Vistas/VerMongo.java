@@ -229,9 +229,9 @@ public class VerMongo extends JFrame{
 
 				@Override
 				public void mousePressed(MouseEvent e) {
-					String fila = (String) table.getValueAt(table.getSelectedRow(), 0);
-					String empresa = (String) table.getValueAt(table.getSelectedRow(), 3);
-					System.out.println(fila);
+					int fila = (int) table.getValueAt(table.getSelectedRow(), 0);
+					int empresa = (int) table.getValueAt(table.getSelectedRow(), 3);
+					System.out.println(fila + " : " + empresa);
 					btnEliminarDato.setEnabled(true);
 					btnEliminarDato.addMouseListener(new MouseAdapter() {
 						@Override
@@ -239,7 +239,7 @@ public class VerMongo extends JFrame{
 							if (table.getSelectedRow() == -1) {
 								btnEliminarDato.setEnabled(false);
 							}
-							if(!fila.equals("0")) {
+							if(fila != 0) {
 								controlador.EliminarDatosVideojuegosMongo(fila, empresa);
 								controlador.VerDatosVideojuegosMongo();
 								table.setModel(mTablas.getTabla());
@@ -255,8 +255,7 @@ public class VerMongo extends JFrame{
 
 				@Override
 				public void mousePressed(MouseEvent e) {
-					String fila = (String) table_1.getValueAt(table_1.getSelectedRow(), 0);
-					String empresa = (String) table_1.getValueAt(table_1.getSelectedRow(), 3);
+					int fila = (int) table_1.getValueAt(table_1.getSelectedRow(), 0);
 					System.out.println(fila);
 					btnEliminarDato.setEnabled(true);
 					btnEliminarDato.addMouseListener(new MouseAdapter() {
@@ -265,8 +264,9 @@ public class VerMongo extends JFrame{
 							if (table_1.getSelectedRow() == -1) {
 								btnEliminarDato.setEnabled(false);
 							}
-							if(fila.equals("0")) {
-								controlador.EliminarDatosEmpresasMongo(fila, empresa);
+							if(fila != 0) {
+								
+								controlador.EliminarDatosEmpresasMongo(fila);
 								controlador.VerDatosEmpresasMongo();
 								table_1.setModel(mTablas.getTabla());
 							}else {
