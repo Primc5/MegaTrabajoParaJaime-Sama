@@ -76,6 +76,7 @@ public class Controlador {
 	public boolean EliminarDatosVideojuegosMongo(int fila, int empresa) {
 		boolean siii = mongo.EliminarDatosVideojuegos(fila, empresa);
 		VerDatosVideojuegosMongo();
+		VerDatosEmpresasMongo();
 		return siii;
 		
 	}
@@ -83,6 +84,7 @@ public class Controlador {
 	public boolean EliminarDatosEmpresasMongo(int fila) {
 		boolean siii = mongo.EliminarDatosEmpresas(fila);
 		VerDatosEmpresasMongo();
+		VerDatosVideojuegosMongo();
 		return siii;
 
 	}

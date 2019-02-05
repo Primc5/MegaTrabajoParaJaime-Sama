@@ -200,8 +200,13 @@ public class MongoConection {
 	public boolean EliminarDatosEmpresas(int fila) {
 		try {
 			Document user = new Document();
-			user.get(fila);
+
+			System.out.println("Elimando Empresa!!");
+			String id = Integer.toString(fila);
+			user.append("id", id);
+			
 			collection.deleteOne(user);
+			
 			return true;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -212,15 +217,19 @@ public class MongoConection {
 	public boolean EliminarDatosVideojuegos(int fila, int empresa) {
 
 		try {
+			String id = Integer.toString(fila);
+			String company = Integer.toString(empresa);
 			Document match = new Document();
-			match.put("id", "" + empresa + "");
+			match.put("id", company);
 			
 			for (Document document : collection.find(match)) {
 				System.out.println("collouns");
 			}
+			
+			System.out.println("Elimando Videojuego!!");
 
 			Document contact = new Document();
-			contact.put("nombre", fila);
+			contact.put("id", id);
 
 			Document update = new Document();
 			update.put("$pull", new BasicDBObject("videojuegos", contact));
