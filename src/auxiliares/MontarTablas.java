@@ -24,8 +24,8 @@ public class MontarTablas {
 		cabecera[0] = "id";
 		cabecera[1] = "nombre";
 		cabecera[2] = "tipo";
-		cabecera[3] = "Creacion";
-		cabecera[4] = "Empresa";
+		cabecera[3] = "Empresa";
+		cabecera[4] = "Creacion";
 		int fila = 0, col;
 		for (int i = 0; i < datos.size(); i++) {
 			col = 0;
@@ -35,9 +35,9 @@ public class MontarTablas {
 			col++;
 			contenido[fila][col] = datos.get(i).getTipo();
 			col++;
-			contenido[fila][col] = datos.get(i).getCreación();
-			fila++;
 			contenido[fila][col] = datos.get(i).getEmpresa().getId_Empresa();
+			col++;
+			contenido[fila][col] = datos.get(i).getCreación();
 			fila++;
 			}
 		miTabla = new DefaultTableModel(contenido, cabecera);
