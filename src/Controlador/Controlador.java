@@ -74,11 +74,16 @@ public class Controlador {
 	}
 
 	public boolean EliminarDatosVideojuegosMongo(int fila, int empresa) {
-		return mongo.EliminarDatosVideojuegos(fila, empresa);
+		boolean siii = mongo.EliminarDatosVideojuegos(fila, empresa);
+		VerDatosVideojuegosMongo();
+		return siii;
+		
 	}
 
 	public boolean EliminarDatosEmpresasMongo(int fila) {
-		return mongo.EliminarDatosEmpresas(fila);
+		boolean siii = mongo.EliminarDatosEmpresas(fila);
+		VerDatosEmpresasMongo();
+		return siii;
 
 	}
 

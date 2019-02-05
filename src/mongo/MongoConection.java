@@ -200,9 +200,7 @@ public class MongoConection {
 	public boolean EliminarDatosEmpresas(int fila) {
 		try {
 			Document user = new Document();
-			JSONArray array = new JSONArray();
-
-
+			user.get(fila);
 			collection.deleteOne(user);
 			return true;
 		} catch (Exception e) {
@@ -214,13 +212,17 @@ public class MongoConection {
 	public boolean EliminarDatosVideojuegos(int fila, int empresa) {
 
 		try {
-			BasicDBObject match = new BasicDBObject();
-			match.put("id", empresa);
+			Document match = new Document();
+			match.put("id", "" + empresa + "");
+			
+			for (Document document : collection.find(match)) {
+				System.out.println("collouns");
+			}
 
-			BasicDBObject contact = new BasicDBObject();
+			Document contact = new Document();
 			contact.put("nombre", fila);
 
-			BasicDBObject update = new BasicDBObject();
+			Document update = new Document();
 			update.put("$pull", new BasicDBObject("videojuegos", contact));
 			collection.updateOne(match, update);
 
