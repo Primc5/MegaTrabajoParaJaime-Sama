@@ -1,7 +1,5 @@
 package Vistas;
 
-
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -32,7 +30,7 @@ import Controlador.Controlador;
 import Modelo.BaseDeDatos;
 
 @SuppressWarnings("serial")
-public class AñadirMongoEmpresas extends JFrame{	
+public class ModificarMongoEmpresas extends JFrame{	
 		private BaseDeDatos modelo;
 		private Controlador controlador;
 		private JTextField textField;
@@ -52,7 +50,7 @@ public class AñadirMongoEmpresas extends JFrame{
 		final static String DATE_FORMAT = "yyyy-MM-dd";
 		private JTextField textField_4;
 		
-		public AñadirMongoEmpresas(){
+		public ModificarMongoEmpresas(){
 			initialize();
 		}
 		public static boolean isNumeric(String cadena) {
@@ -75,7 +73,16 @@ public class AñadirMongoEmpresas extends JFrame{
 		public void setControlador(Controlador controlador) {
 			this.controlador = controlador;
 		}
-		
+
+		public void llenarDatosModificar(int id, String nombre, String tamaño, String pais, int capital,
+				String director) {
+			textField.setText(Integer.toString(id));
+			textField_1.setText(nombre);
+			textField_2.setText(tamaño);
+			textField_3.setText(pais);
+			textField_4.setText(Integer.toString(capital));
+			textField_5.setText(director);
+		}
 		private void VisibleAnadir() {
 			if (!textField_1.getText().equals("") && !textField_2.getText().equals("") && !textField_3.getText().equals("") && !textField_5.getText().equals("")) {
 				btnAnadir.setEnabled(true);
@@ -87,8 +94,8 @@ public class AñadirMongoEmpresas extends JFrame{
 			setBounds(50, 100, 860, 660);
 			getContentPane().setBackground(new Color(102, 153, 204));
 			
-			lblEstadoEntrevista = new JLabel("A\u00D1ADIR DATOS EMPRESAS");
-			lblEstadoEntrevista.setBounds(293, 84, 300, 34);
+			lblEstadoEntrevista = new JLabel("MODIFICAR DATOS EMPRESAS");
+			lblEstadoEntrevista.setBounds(275, 84, 348, 34);
 			lblEstadoEntrevista.setForeground(Color.WHITE);
 			lblEstadoEntrevista.setFont(new Font("Georgia", Font.PLAIN, 23));
 			
@@ -130,14 +137,14 @@ public class AñadirMongoEmpresas extends JFrame{
 			btnAnadir.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					if(isNumeric(textField.getText()) && isNumeric(textField_4.getText())) {
-					controlador.AñadirDatosEmpresasMongo(textField.getText(), textField_1.getText(), textField_2.getText(), textField_3.getText(), textField_4.getText(), textField_5.getText());
+					controlador.ModificarDatosEmpresasMongo(textField.getText(), textField_1.getText(), textField_2.getText(), textField_3.getText(), textField_4.getText(), textField_5.getText());
 					textField.setText("");
 					textField_1.setText("");
 					textField_2.setText("");
 					textField_3.setText("");
 					textField_4.setText("");
 					textField_5.setText("");
-					controlador.VolverAnnadirEmpresasMongo();
+					controlador.VolverModificarEmpresasMongo();
 					}else {
 						System.out.println("El id y capital deben ser numéricos");
 					}
@@ -154,7 +161,7 @@ public class AñadirMongoEmpresas extends JFrame{
 					textField_3.setText("");
 					textField_4.setText("");
 					textField_5.setText("");
-					controlador.VolverAnnadirEmpresasMongo();
+					controlador.VolverModificarEmpresasMongo();
 				}
 			});
 			

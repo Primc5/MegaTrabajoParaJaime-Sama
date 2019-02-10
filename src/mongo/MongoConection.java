@@ -222,10 +222,6 @@ public class MongoConection {
 			Document match = new Document();
 			match.put("id", company);
 			
-			for (Document document : collection.find(match)) {
-				System.out.println("collouns");
-			}
-			
 			System.out.println("Elimando Videojuego!!");
 
 			Document contact = new Document();
@@ -243,8 +239,21 @@ public class MongoConection {
 	}
 
 	// -------------Modificar Datos---------------
-	public boolean modificarEmpresaMongo(String username, Empresas contacto, String nombreActual) {
+	public boolean modificarEmpresaMongo(String id, String nombre, String tamaño, String pais,
+			String capital, String director) {
 		try {
+			Document carrier = new Document();
+			Document query = new Document();
+			query.put("id", id);
+
+			Document set = new Document("$set", carrier);
+			carrier.put("nombre", nombre);
+			carrier.put("tamano", tamaño); 
+			carrier.put("pais", pais); 
+			carrier.put("capital", capital); 
+			carrier.put("director", director); 
+			collection.updateMany(query, set);
+			
 			return true;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -253,8 +262,23 @@ public class MongoConection {
 
 	}
 
-	public boolean modificarVideojuegoMongo(String username, Empresas contacto, String nombreActual) {
+	public boolean modificarVideojuegoMongo(String id, String nombre, String tipo, String empresa, String creacion) {
 		try {
+			Document match = new Document();
+			match.put("id", empresa);
+			
+			System.out.println("Modificando Videojuego!!");
+
+			Document contact = new Document();
+			contact.put("id", id);
+			contact.put("nombre", nombre);
+			contact.put("tipo", tipo);
+			contact.put("creacion", creacion);
+
+			Document update = new Document();
+			update.put("$set", new BasicDBObject("videojuegos", contact));
+			collection.updateMany(match, update);
+
 			return true;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

@@ -1,7 +1,5 @@
 package Vistas;
 
-
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -15,7 +13,6 @@ import java.awt.event.WindowEvent;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -32,7 +29,7 @@ import Controlador.Controlador;
 import Modelo.BaseDeDatos;
 
 @SuppressWarnings("serial")
-public class AñadirMongoEmpresas extends JFrame{	
+public class ModificarMongoVideojuegos extends JFrame{	
 		private BaseDeDatos modelo;
 		private Controlador controlador;
 		private JTextField textField;
@@ -47,14 +44,25 @@ public class AñadirMongoEmpresas extends JFrame{
 		private JPanel panel;
 		private JLabel lblFechaCurso;
 		private JTextField textField_3;
-		private JTextField textField_5;
-		
-		final static String DATE_FORMAT = "yyyy-MM-dd";
 		private JTextField textField_4;
 		
-		public AñadirMongoEmpresas(){
+		final static String DATE_FORMAT = "yyyy-MM-dd";
+		
+		public ModificarMongoVideojuegos(){
 			initialize();
 		}
+		public static boolean isDateValid(String date) 
+		{
+		        try {
+		            DateFormat df = new SimpleDateFormat(DATE_FORMAT);
+		            df.setLenient(false);
+		            df.parse(date);
+		            return true;
+		        } catch (ParseException e) {
+		            return false;
+		        }
+		}
+		
 		public static boolean isNumeric(String cadena) {
 
 			boolean resultado;
@@ -68,16 +76,24 @@ public class AñadirMongoEmpresas extends JFrame{
 
 			return resultado;
 		}
-
+		
 		public void setModelo(BaseDeDatos modelo) {
 			this.modelo = modelo;
 		}
 		public void setControlador(Controlador controlador) {
 			this.controlador = controlador;
 		}
-		
+
+		public void llenarDatosModificar(int id, String nombre, String tipo,
+				int empresa, String creacion) {
+			textField.setText(Integer.toString(id));
+			textField_1.setText(nombre);
+			textField_2.setText(tipo);
+			textField_3.setText(Integer.toString(empresa));
+			textField_4.setText(creacion);
+		}
 		private void VisibleAnadir() {
-			if (!textField_1.getText().equals("") && !textField_2.getText().equals("") && !textField_3.getText().equals("") && !textField_5.getText().equals("")) {
+			if (!textField_1.getText().equals("") && !textField_2.getText().equals("") && !textField_3.getText().equals("") && !textField_4.getText().equals("")) {
 				btnAnadir.setEnabled(true);
 			} else
 				btnAnadir.setEnabled(false);
@@ -87,8 +103,8 @@ public class AñadirMongoEmpresas extends JFrame{
 			setBounds(50, 100, 860, 660);
 			getContentPane().setBackground(new Color(102, 153, 204));
 			
-			lblEstadoEntrevista = new JLabel("A\u00D1ADIR DATOS EMPRESAS");
-			lblEstadoEntrevista.setBounds(293, 84, 300, 34);
+			lblEstadoEntrevista = new JLabel("MODIFICAR DATOS VIDEOJUEGOS");
+			lblEstadoEntrevista.setBounds(252, 84, 385, 34);
 			lblEstadoEntrevista.setForeground(Color.WHITE);
 			lblEstadoEntrevista.setFont(new Font("Georgia", Font.PLAIN, 23));
 			
@@ -113,13 +129,13 @@ public class AñadirMongoEmpresas extends JFrame{
 			
 			
 			
-			lblFecha_convenio = new JLabel("Tama\u00F1o:");
+			lblFecha_convenio = new JLabel("Tipo:");
 			lblFecha_convenio.setFont(new Font("Georgia", Font.PLAIN, 15));
 			
 			textField_3 = new JTextField();
 			textField_3.setColumns(10);
 			
-			lblFechaCurso = new JLabel("Pa\u00EDs:");
+			lblFechaCurso = new JLabel("Empresa:");
 			lblFechaCurso.setFont(new Font("Georgia", Font.PLAIN, 15));
 			
 			
@@ -129,17 +145,16 @@ public class AñadirMongoEmpresas extends JFrame{
 			btnAnadir.setFont(new Font("Georgia", Font.BOLD, 15));
 			btnAnadir.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					if(isNumeric(textField.getText()) && isNumeric(textField_4.getText())) {
-					controlador.AñadirDatosEmpresasMongo(textField.getText(), textField_1.getText(), textField_2.getText(), textField_3.getText(), textField_4.getText(), textField_5.getText());
+					if(isNumeric(textField.getText()) && isNumeric(textField_3.getText()) && isDateValid(textField_4.getText())) {
+					controlador.ModificarDatosVideojuegosMongo(textField.getText(), textField_1.getText(), textField_2.getText(), textField_3.getText(), textField_4.getText());
 					textField.setText("");
 					textField_1.setText("");
 					textField_2.setText("");
 					textField_3.setText("");
 					textField_4.setText("");
-					textField_5.setText("");
-					controlador.VolverAnnadirEmpresasMongo();
+					controlador.VolverAnnadirVideojuegosMongo();
 					}else {
-						System.out.println("El id y capital deben ser numéricos");
+						System.out.println("El id y empresa deben ser numéricos y la creacion de tipo date (yyyy-MM-dd)");
 					}
 				}
 			});
@@ -153,18 +168,17 @@ public class AñadirMongoEmpresas extends JFrame{
 					textField_2.setText("");
 					textField_3.setText("");
 					textField_4.setText("");
-					textField_5.setText("");
-					controlador.VolverAnnadirEmpresasMongo();
+					controlador.VolverAnnadirVideojuegosMongo();
 				}
 			});
 			
 			btnCancelar.setBackground(Color.ORANGE);
 			
-			JLabel lblCaracteristica = new JLabel("Director:");
+			JLabel lblCaracteristica = new JLabel("Creaci\u00F3n:");
 			lblCaracteristica.setFont(new Font("Georgia", Font.PLAIN, 15));
 			
-			textField_5 = new JTextField();
-			textField_5.setColumns(10);
+			textField_4 = new JTextField();
+			textField_4.setColumns(10);
 			
 			textField.addKeyListener(new KeyAdapter() {
 				@Override
@@ -190,18 +204,14 @@ public class AñadirMongoEmpresas extends JFrame{
 					VisibleAnadir();
 				}
 			});
-			textField_5.addKeyListener(new KeyAdapter() {
+			textField_4.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyReleased(KeyEvent e) {
 					VisibleAnadir();
 				}
 			});
 			
-			JLabel lblCapital = new JLabel("Capital:");
-			lblCapital.setFont(new Font("Georgia", Font.PLAIN, 15));
-			
-			textField_4 = new JTextField();
-			textField_4.setColumns(10);
+			JLabel lblFormato = new JLabel("Formato: YYYY-MM-DD");
 			GroupLayout gl_panel = new GroupLayout(panel);
 			gl_panel.setHorizontalGroup(
 				gl_panel.createParallelGroup(Alignment.LEADING)
@@ -215,29 +225,29 @@ public class AñadirMongoEmpresas extends JFrame{
 						.addGap(44)
 						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 							.addGroup(gl_panel.createSequentialGroup()
-								.addComponent(lblFechaCurso)
+								.addComponent(lblCaracteristica)
 								.addContainerGap())
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_panel.createSequentialGroup()
-									.addComponent(lblFecha_convenio)
+									.addComponent(lblFechaCurso)
 									.addContainerGap())
-								.addGroup(gl_panel.createSequentialGroup()
-									.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-										.addComponent(lblNuevaEmpresa)
-										.addComponent(lblNumero_convenio)
-										.addComponent(lblCaracteristica))
-									.addGap(73)
-									.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-										.addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
-										.addComponent(textField, GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
-										.addComponent(textField_2, GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
-										.addComponent(textField_3, GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
-										.addComponent(textField_5, GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
-										.addComponent(textField_4, GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE))
-									.addGap(103)))
-							.addGroup(gl_panel.createSequentialGroup()
-								.addComponent(lblCapital)
-								.addContainerGap())))
+								.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+									.addComponent(lblFecha_convenio)
+									.addGroup(gl_panel.createSequentialGroup()
+										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+											.addComponent(lblNuevaEmpresa)
+											.addComponent(lblNumero_convenio))
+										.addGap(77)
+										.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+											.addComponent(textField, GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
+											.addComponent(textField_3, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
+											.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
+												.addPreferredGap(ComponentPlacement.UNRELATED)
+												.addComponent(textField_2, GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE))
+											.addComponent(textField_1, Alignment.LEADING, 227, 254, Short.MAX_VALUE)
+											.addComponent(textField_4, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
+											.addComponent(lblFormato, Alignment.LEADING))
+										.addGap(103))))))
 			);
 			gl_panel.setVerticalGroup(
 				gl_panel.createParallelGroup(Alignment.LEADING)
@@ -246,27 +256,25 @@ public class AñadirMongoEmpresas extends JFrame{
 						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 							.addComponent(lblNuevaEmpresa)
 							.addComponent(textField, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE))
-						.addGap(18)
+						.addGap(28)
 						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 							.addComponent(lblNumero_convenio)
 							.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE))
-						.addGap(18)
-						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGap(40)
+						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 							.addComponent(lblFecha_convenio)
 							.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE))
-						.addGap(18)
+						.addGap(28)
 						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 							.addComponent(lblFechaCurso)
 							.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE))
 						.addGap(18)
+						.addComponent(lblFormato)
+						.addGap(1)
 						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-							.addComponent(lblCapital, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE)
+							.addComponent(lblCaracteristica, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE)
 							.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE))
-						.addGap(18)
-						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-							.addComponent(textField_5, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
-							.addComponent(lblCaracteristica, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE))
-						.addPreferredGap(ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+						.addPreferredGap(ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
 						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 							.addComponent(btnAnadir, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)
 							.addComponent(btnCancelar, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE))
@@ -282,5 +290,5 @@ public class AñadirMongoEmpresas extends JFrame{
 			getContentPane().add(lblNewLabel_1);
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		}
-		
 	}
+

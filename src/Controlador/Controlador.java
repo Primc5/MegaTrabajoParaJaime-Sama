@@ -21,6 +21,8 @@ import Vistas.AñadirJsonEmpresas;
 import Vistas.AñadirJsonVideojuegos;
 import Vistas.AñadirMongoEmpresas;
 import Vistas.AñadirMongoVideojuegos;
+import Vistas.ModificarMongoEmpresas;
+import Vistas.ModificarMongoVideojuegos;
 import json.AccesoJSONRemoto;
 import mongo.MongoConection;
 import Vistas.VerHibernate;
@@ -39,6 +41,8 @@ public class Controlador {
 	private VerMongo verMongo;
 	private AñadirMongoVideojuegos aMongoVideojuegos;
 	private AñadirMongoEmpresas aMongoEmpresas;
+	private ModificarMongoVideojuegos vMongoVideojuegos;
+	private ModificarMongoEmpresas vMongoEmpresas;
 	private VerJson verjson;
 	private AñadirJsonVideojuegos aJsonVideojuegos;
 	private AñadirJsonEmpresas aJsonEmpresas;
@@ -71,6 +75,16 @@ public class Controlador {
 	public boolean AñadirDatosEmpresasMongo(String id, String nombre, String tamaño, String pais,
 			String capital, String director) {
 		return mongo.AnadirDatosEmpresas(id, nombre, tamaño, pais, capital, director);
+	}
+	
+	public boolean ModificarDatosVideojuegosMongo(String id, String nombre, String tipo,
+			String empresa, String creacion) {
+		return mongo.modificarVideojuegoMongo(id, nombre, tipo, empresa, creacion);
+	}
+	
+	public boolean ModificarDatosEmpresasMongo(String id, String nombre, String tamaño, String pais,
+			String capital, String director) {
+		return mongo.modificarEmpresaMongo(id, nombre, tamaño, pais, capital, director);
 	}
 
 	public boolean EliminarDatosVideojuegosMongo(int fila, int empresa) {
@@ -443,6 +457,15 @@ public class Controlador {
 		aMongoVideojuegos.setVisible(false);
 		verMongo.setVisible(true);
 	}
+	
+	public void VolverModificarEmpresasMongo() {
+		vMongoEmpresas.setVisible(false);
+		verMongo.setVisible(true);
+	}
+	public void VolverModificarVideojuegosMongo() {
+		vMongoVideojuegos.setVisible(false);
+		verMongo.setVisible(true);
+	}
 
 	public void AnnadirVideojuegosJson() {
 		verjson.setVisible(false);
@@ -462,6 +485,19 @@ public class Controlador {
 	public void AnnadirEmpresasMongo() {
 		verMongo.setVisible(false);
 		aMongoEmpresas.setVisible(true);
+	}
+	
+	public void ModificarVideojuegosMongo(int id, String nombre, String tipo,
+			int empresa, String creacion) {
+		verMongo.setVisible(false);
+		vMongoVideojuegos.setVisible(true);
+		vMongoVideojuegos.llenarDatosModificar(id, nombre, tipo, empresa, creacion);
+	}
+
+	public void ModificarEmpresasMongo(int id, String nombre, String tamaño, String pais, int capital, String director) {
+		verMongo.setVisible(false);
+		vMongoEmpresas.setVisible(true);
+		vMongoEmpresas.llenarDatosModificar(id, nombre, tamaño, pais, capital, director);
 	}
 
 	public void ComprobarFichero() {
@@ -591,6 +627,14 @@ public class Controlador {
 
 	public void setMontarTablas(MontarTablas montarTablas) {
 		this.montarTablas = montarTablas;
+	}
+
+	public void setvMongoVideojuegos(ModificarMongoVideojuegos vMongoVideojuegos) {
+		this.vMongoVideojuegos = vMongoVideojuegos;
+	}
+
+	public void setvMongoEmpresas(ModificarMongoEmpresas vMongoEmpresas) {
+		this.vMongoEmpresas = vMongoEmpresas;
 	}
 
 }

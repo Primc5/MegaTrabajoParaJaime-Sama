@@ -20,6 +20,8 @@ import Vistas.AñadirJsonEmpresas;
 import Vistas.AñadirJsonVideojuegos;
 import Vistas.AñadirMongoEmpresas;
 import Vistas.AñadirMongoVideojuegos;
+import Vistas.ModificarMongoEmpresas;
+import Vistas.ModificarMongoVideojuegos;
 import Vistas.Principal;
 import Vistas.VerBBDD;
 import Vistas.VerFichero;
@@ -58,7 +60,11 @@ public class Main {
 		VerMongo verMongo = new VerMongo();
 		AñadirMongoVideojuegos aMongoVideojuegos = new AñadirMongoVideojuegos();
 		AñadirMongoEmpresas aMongoEmpresas = new AñadirMongoEmpresas();
+		ModificarMongoVideojuegos vMongoVideojuegos = new ModificarMongoVideojuegos();
+		ModificarMongoEmpresas vMongoEmpresas = new ModificarMongoEmpresas();
 
+		vMongoEmpresas.setControlador(controlador);
+		vMongoVideojuegos.setControlador(controlador);
 		aMongoEmpresas.setControlador(controlador);
 		aMongoVideojuegos.setControlador(controlador);
 		ahibernateVideojuegos.setControlador(controlador);
@@ -86,6 +92,8 @@ public class Main {
 		verMongo.setModelo(mongo);
 		verMongo.setmTablas(montarTablas);
 
+		controlador.setvMongoEmpresas(vMongoEmpresas);
+		controlador.setvMongoVideojuegos(vMongoVideojuegos);
 		controlador.setaMongoEmpresas(aMongoEmpresas);
 		controlador.setaMongoVideojuegos(aMongoVideojuegos);
 		controlador.setMongo(mongo);
